@@ -1,0 +1,9 @@
+# QLoRA学習に必要な依存関係
+transformers>=4.43.0
+peft>=0.8.0
+accelerate>=0.24.0
+bitsandbytes>=0.41.0
+datasets>=2.14.0
+trl>=0.7.0
+torch>=2.0.0
+huggingface-hub>=0.19.0

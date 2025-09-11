@@ -1,0 +1,1057 @@
+% vim: set foldmarker=[[[,]]]
+\documentclass[reqno]{amsart}
+%\usepackage{xcolor}
+\usepackage{mathtools,amssymb, xcolor}
+\mathtoolsset{showonlyrefs}
+%[[[ env setting
+\newtheorem{Theorem}{Theorem}[section]
+\newtheorem{Definition}[Theorem]{Definition}
+\newtheorem{Corollary}[Theorem]{Corollary}
+\newtheorem{Lemma}[Theorem]{Lemma}
+\newtheorem{Proposition}[Theorem]{Proposition}
+\newtheorem{Remark}{Remark}[section]
+%\addtolength{\textwidth}{5.cm}
+%\addtolength{\textheight}{4cm}
+%]]]
+
+\begin{document}
+%[[[ metadata
+\title{Global existence for DWQ caused by Sign changing  phenomena}
+\author[K.Fujiwara]{Kazumasa Fujiwara }
+\address[K. Fujiwara]{
+	Faculty of Advanced Science and Technology,
+	Ryukoku University,
+	1-5 Yokotani,Seta Oe-cho,Otsu,Shiga,
+	520-2194, Japan
+}
+
+\email{fujiwara.kazumasa@math.ryukoku.ac.jp}
+
+\author[V.Georgiev]{Vladimir Georgiev}
+\address[V.Georgiev]{
+Department of Mathematics,
+University of Pisa,
+Largo Bruno Pontecorvo 5,
+I - 56127 Pisa, Italy}
+\address{
+Faculty of Science and Engineering, Waseda University,
+3-4-1, Okubo, Shinjuku-ku, Tokyo 169-8555, Japan}
+\address{
+Institute of Mathematics and Informatics,  Bulgarian Academy of Sciences, Acad. Georgi Bonchev Str., Block 8, Sofia, 1113, Bulgaria
+}
+\email{georgiev@dm.unipi.it}
+
+\subjclass{35B40,35B33, 35B51}
+\keywords{
+damped wave equations,
+Fujita  critical exponent,
+power-type nonlinearity,
+decay estimate
+}
+%]]]
+
+\begin{abstract}
+In this manuscript, we study initial data
+that guarantee global-in-time solutions to the Cauchy problem
+for the semilinear damped wave equation
+with a power-type nonlinearity.
+Our proof relies on a comparison principle derived from
+fundamental properties of wave equations.
+In particular, we exhibit initial data
+with negative position and positive velocity
+that produce global solutions through a sign-changing mechanism,
+even though these data do not satisfy
+the standard assumptions of the comparison argument.
+\end{abstract}
+
+\maketitle
+
+%[[[ \section{Introduction}
+\section{Introduction}
+
+%[[[ In this note,
+In this note,
+we consider the behavior of solutions
+to the Cauchy problem for the semilinear damped wave equation
+	\begin{align}\label{eq:DW}
+	\begin{cases}
+    \partial_t^2 u+\partial_t u-\Delta u=|u|^p, & t>0, x \in \mathbb R^n, \\
+    u(0)=u_0, \partial_t u(0)=u_1, & x \in \mathbb R^n .
+	\end{cases}
+	\end{align}
+The aim of this manuscript
+is to establish the global existence of solutions
+under the initial conditions
+	\begin{align}\label{eq:initial_condition}
+    & \left(u_0, u_1\right)=\left(\varepsilon_0 \varphi, \varepsilon_1 \varphi\right), \\
+    & 0 < \varepsilon_0 < |\varepsilon_1| = - \varepsilon_1.
+	\end{align}
+with $n = 1$, $\left(\varepsilon_0, \varepsilon_1\right) \in \mathbb{R}^2$ small,
+and $\varphi$ being a regular non-negative function.
+%]]]
+
+%[[[ The Cauchy problem \eqref{eq:DW} has been extensively studied.
+The Cauchy problem \eqref{eq:DW} has been extensively studied
+(see
+	\cite{M76},
+	\cite{TY01},
+	\cite{N03},
+	\cite{MN03},
+	\cite{HKN04},
+	\cite{INZ06},
+	\cite{DA15},
+	\cite{DLR15}
+	\cite{IIOW19},
+	\cite{FIW19},
+	\cite{LT19},
+	\cite{IS19},
+	\cite{CR21},
+	\cite{KK22},
+and references therein).
+A key step for analyzing the nonlinear problem \eqref{eq:DW} is to first
+understand the corresponding linear (free) problem:
+	\begin{align}
+	\begin{cases}
+	\partial_t^2 u + \partial_t u - \Delta u = 0,\\
+	u(0) = u_0,
+	\partial_t u(0) = u_1.
+	\end{cases}
+	\label{eq:linear_damped_wave}
+	\end{align}
+%]]]
+ 
+%[[[ An explicit representation of solutions to \eqref{eq:linear_damped_wave}
+An explicit representation of solutions to \eqref{eq:linear_damped_wave}
+is derived through the substitution $u(t,x)=e^{-t/2}w(t,x)$,
+which transforms
+\eqref{eq:linear_damped_wave} into the wave-type equation
+	\begin{align}
+	\partial_t^2 w - \Delta w = \frac{1}{4} w,
+	\label{eq:transformed_wave_equation}
+	\end{align}
+which highlights the wave structure; for details, see Chapter VI, Section 6 in  \cite{CH89}.
+In particular, \eqref{eq:transformed_wave_equation} yields the following
+comparison principle for \eqref{eq:DW} in one and two dimensional case:
+if $\overline{u_0} \geq \underline{u_0} $
+and $\overline{u_1} + \overline{u_0}/2 \geq \underline{u_1} + \underline{u_0}/2$,
+then the solutions $\overline{u}$ of \eqref{eq:DW}
+with $\overline{u_0}, \overline{u_1}$
+and $\underline{u}$ with $\underline{u_0}, \underline{u_1}$
+satisfy $\overline{u}(t,x) \geq \underline{u}(t,x)$ for all $t \geq 0$ and $x$.
+This comparison principle will be a key tool in what follows.
+Hereafter, we denote by $S(t)f$ the solution to \eqref{eq:linear_damped_wave}
+corresponding to the data $(u_0,u_1)=(0,f)$.
+%]]]
+
+%[[[ Owing to the damping term $\partial_t u$,
+Owing to the damping term $\partial_t u$,
+the free solution to \eqref{eq:DW} is
+asymptotically equivalent to the solution of the free heat equation:
+	\begin{align}
+	\begin{cases}
+	\partial_t v - \Delta v = 0,\\
+	v(0) = u_0 + u_1.
+	\end{cases}
+	\label{eq:free_heat}
+	\end{align}
+For simplicity, we denote by $e^{t \Delta} f$
+the solution to \eqref{eq:free_heat} corresponding to the data $v(0)=f$.
+Marcati and Nishihara \cite{MN03} and Nishihara \cite{N03}
+established the asymptotic equivalence
+in the one- and three-dimensional cases, respectively.
+Namely, for a sufficiently regular function $f$,
+the following asymptotic relation holds:
+	\begin{align}
+	S(t) f
+	\sim e^{t \Delta} f + e^{-t/2} W(t) f.
+	\label{eq:asymptotic_equivalence}
+	\end{align}
+We refer to \cite{IIOW19} for more general results.
+We note that, even before the explicit proofs by Marcati and Nishihara,
+this idea had been used in the perturbative analysis of solutions to \eqref{eq:DW};
+see, for example, \cite{LZ95}.
+%]]]
+
+%[[[ Returning to the Cauchy problem \eqref{eq:DW},
+Returning to the Cauchy problem \eqref{eq:DW},
+the local existence of solutions to \eqref{eq:DW}
+is known under standard regularity assumptions.
+For example, a classical result can be found in \cite{s90}.
+Moreover, the discussion in \cite{MN03} implies that
+$S(t)$ satisfies the same $L^p$–$L^q$ type estimates
+as $e^{t \Delta}$.
+Therefore, the following local existence result holds:
+\begin{Lemma}[Local existence]\label{lemma:local_existence}
+Assume that
+$(u_0,u_1) \in W^{1,\infty} \cap W^{1,1} \times L^\infty \cap L^1$ and $p > 1$ and $n =1$.
+There exists
+$T_1=T_1(u_0,u_1)$
+such that \eqref{eq:DW} possesses a unique mild solution
+$u \in C\left(\left[0, T_1\right) ;W^{1,\infty} \cap W^{1,1}\right)$
+satisfying the estimate
+	\begin{align}\label{eq2}
+	\sup _{0 \leq t \leq T_1} \|u(t) \|_{ L^{\infty}}
+	\lesssim ( \|u_0 \|_{L^\infty} + \|u_1 \|_{L^\infty}).
+	\end{align}
+\end{Lemma}
+\noindent
+Here
+$W^{1,q}$ for $1 \leq q \leq \infty$ denotes the usual Sobolev space,
+a collection of measurable functions $f$
+such that both $f$ and its weak derivative $f^\prime$
+belong to $L^q$.
+We also note that $p=1+2/n$ is the so-called Fujita critical exponent,
+which gives the threshold for blow-up of positive solutions to \eqref{eq:DW}
+and for the existence of global solutions to the Fujita-type heat equation:
+	\begin{align}
+	\partial_t v - \Delta v = |v|^p.
+	\label{eq:fujita_equation}
+	\end{align}
+For details, see \cite{F66,H73,KST77}.
+We also remark that when $n \in \mathbb N$, $p > 1+2/n$,
+and the initial data are sufficiently small,
+then solutions to \eqref{eq:DW} exist globally in time.
+Our subsequent analysis is based on Lemma \ref{lemma:local_existence}.
+%]]]
+
+%[[[ Although the solution to \eqref{eq:linear_damped_wave}
+Although the solution to \eqref{eq:linear_damped_wave}
+can be constructed explicitly from \eqref{eq:transformed_wave_equation},
+the asymptotic equivalence \eqref{eq:asymptotic_equivalence}
+is a powerful tool for analyzing solutions to \eqref{eq:DW}.
+Roughly speaking, one may analyze solutions $u$ to \eqref{eq:DW}
+by treating $u$ as if it were $e^{t \Delta}(u_0 + u_1)$—that is,
+as if $u$ behaved like the heat flow generated by the initial mass $u_0+u_1$.
+For example, Li and Zhou \cite{LZ95} showed that
+when $n = 1, 2$ and $1 < p \leq 3$,
+if
+	\begin{align}
+	\int u_0 + u_1 dx > 0,
+	\label{eq:initial_mean_condition}
+	\end{align}
+then, irrespective of the size of the initial data,
+the solution $u$ to \eqref{eq:DW} blows up in finite time.
+Moreover, they derived sharp estimates for the lifespan in terms of the size of the initial data.
+In \cite{LZ95}, the authors rigorously estimated the infimum of the solution $u$ in a parabolic region,
+as if, roughly speaking, $u$ behaved like $e^{t \Delta} (u_0 + u_1)$,
+and introduced an ODE governing the infimum of $u$.
+Later,
+Zhang \cite{Z01},
+Ikeda and Wakasugi \cite{IW15},
+and Ikeda and Sobajima \cite{IS19}
+proved finite-time blow-up of
+the spatial mean of solutions to \eqref{eq:DW}
+and derived lifespan estimates
+in more general spatial settings,
+still under the initial condition \eqref{eq:initial_mean_condition}.
+Their approach is based on the weak formulation of \eqref{eq:DW}
+and is more closely tied to the scaling properties of \eqref{eq:DW}
+than to the asymptotic equivalence \eqref{eq:asymptotic_equivalence}.
+Recently, the present authors \cite{FG25a}
+showed the finite-time blow-up of solutions to \eqref{eq:DW}
+and obtained sharp lifespan estimates
+under the mean-zero initial condition
+	\begin{align}
+	\int u_0 + u_1 dx = 0,
+	\quad
+	u_0, u_1 \not\equiv 0.
+	\label{eq:initial_mean_condition_ours}
+	\end{align}
+The approach of \cite{FG25a} is inspired by that of Li and Zhou \cite{LZ95}.
+We note that
+the mean-zero condition \eqref{eq:initial_mean_condition_ours}
+cannot be handled by a direct application of a weak formulation approach.
+We also refer to \cite{IO16, FIW19, IS19} for related topics.
+%]]]
+
+%[[[ The arguments above do not yield
+The arguments above do not yield
+the sharp initial conditions for blow-up.
+In particular, for any $\mu_0, \mu_1 \in \mathbb{R}$,
+by combining the finite propagation speed
+with the arguments above,
+for any $\mu_0, \mu_1 \in \mathbb{R}$,
+there exist smooth initial data $(u_0, u_1)$
+satisfying
+	\[
+	\int u_0 dx = \mu_0,
+	\quad
+	\int u_1 dx = \mu_1,
+	\]
+such that the corresponding solution blows up in finite time.
+More precisely,
+let $\psi$ be a smooth function supported in a compact set
+and its integral is $1$.
+Let $L$ be a large positive number.
+If
+	\begin{align*}
+	u_0(x) &= \psi(x) + (\mu_0-1) \psi(x-L), \\
+	u_1(x) &= \mu_1 \psi(x-L),
+	\end{align*}
+then one can show $u(t,x) = u_b(t,x) + u_g(t,x-L)$ till some time,
+where $u_b$ is the blow-up solution with initial data $(u_0, u_1) = (\psi,0)$
+and $u_g$ is the solution with initial data $(u_0, u_1) = ((\mu_0-1)\psi, \mu_1 \psi)$.
+Since the argument above implies that
+$\int u_b + \partial_t u_b dx$ blows up in finite time
+and $\int u_g + \partial_t u_g dx$ is increasing,
+there exists a time $t_0$ such that
+	\[
+	\int u(t_0) + \partial_t u(t_0) dx
+	= \int u_b(t_0) + \partial_t u_b(t_0) dx + \int u_g(t_0) + \partial_t u_g(t_0) dx
+	> 0.
+	\]
+Therefore, the solution $u$ blows up in finite time
+by the same argument from $t=t_0$.
+%]]]
+
+%[[[ Nevertheless,
+Nevertheless,
+it is also known that
+there exist nontrivial global solutions to \eqref{eq:DW}.
+Li and Zhou \cite{LZ95} also showed that,
+when $n = 1, 2$ and even when $1 < p \leq 3$,
+global existence for small initial data holds for \eqref{eq:DW}
+under the following pointwise condition (for all $x$):
+	\begin{align}
+	u_0(x) = 0,
+	\quad
+	u_1(x) \leq 0.
+	\label{eq:initial_condition_Li_Zhou}
+	\end{align}
+This was further extended to
+	\begin{align}
+	u_0(x) \leq 0,
+	u_1(x) + \frac 1 2 u_0(x) \leq 0.
+	\label{eq:initial_condition_Li_Zhou_general}
+	\end{align}
+For details, see \cite{FG25b}.
+The conditions \eqref{eq:initial_condition_Li_Zhou}
+and \eqref{eq:initial_condition_Li_Zhou_general}
+are used to implement a comparison argument
+based on the nonlinear version of
+the transformation associated with \eqref{eq:transformed_wave_equation}.
+Indeed, under \eqref{eq:initial_condition_Li_Zhou}
+and \eqref{eq:initial_condition_Li_Zhou_general},
+solutions are shown to be negative at any time and point.
+On the other hand, in other cases,
+it is unclear whether
+there is an initial condition
+with which global solutions exist.
+%]]]
+
+%[[[ The expectation of global existence for \eqref{eq:DW},
+The expectation of global existence for \eqref{eq:DW},
+even with a positive initial position,
+may be supported by a result of Pinsky \cite{P16}.
+In \cite{P16}, it is shown that
+there exist both global and blow-up solutions of \eqref{eq:fujita_equation}
+for certain sign-changing initial data.
+The proof relies on a comparison argument
+that is not directly applicable to \eqref{eq:DW}
+without imposing the initial condition \eqref{eq:initial_condition_Li_Zhou_general}.
+On the other hand,
+since global solutions to \eqref{eq:DW}
+are known to behave similarly to global solutions of \eqref{eq:fujita_equation}
+under certain initial conditions,
+the gap in the assumptions required by the comparison argument
+appears to be merely technical.
+%]]]
+
+%[[[ The aim of this manuscript
+The aim of this manuscript
+is to generalize a sufficient condition
+for global existence of solutions to \eqref{eq:DW}.
+For simplicity, we restrict our attention to the one-dimensional case.
+In particular,
+we show that the blow-up conditions based on the spatial integrals of the initial data,
+namely \eqref{eq:initial_mean_condition} and \eqref{eq:initial_mean_condition_ours},
+cannot be relaxed without taking into account the shape of the initial data,
+provided that the spatial integral of the initial position is positive.
+More precisely, we ask the following question:
+Does there exist a constant $c_0 > 0$ such that, for
+	\[
+	0 < \varepsilon_0 < c_0 |\varepsilon_1| \ll 1,
+	\]
+there exists a smooth, positive function $\varphi$ such that
+the solution with initial data
+$(u_0,u_1) = (\varepsilon_0 \varphi, \varepsilon_1 \varphi)$
+exists globally in time?
+To the best of the authors' knowledge,
+global existence for \eqref{eq:DW}
+has only been established via comparison arguments.
+Accordingly, we employ the following simple sufficient condition for global existence:
+there exist a constant $c_0 > 0$ and a smooth, positive function $\varphi$ such that, for
+	\[
+	\varepsilon_0 < c_0 |\varepsilon_1| \ll 1,
+	\]
+the solution $u$ with initial data
+$(u_0,u_1) = (\varepsilon_0 \varphi, \varepsilon_1 \varphi)$
+satisfies
+	\begin{align}
+	u(t,x) \leq 0,\ \ \partial_t u(t,x) + \frac{1}{2}u(t,x) \leq 0
+	\label{eq:aim}
+	\end{align}
+for all $x$ at some time $t$.
+Once \eqref{eq:aim} is verified,
+Theorem 1.2 in \cite{FG25a} yields global existence.
+Decay in this case is studied in \cite{FG25b}.
+
+The following is the main statement of this manuscript,
+answering the question above:
+\begin{Theorem}\label{theorem:main}
+Let
+	\begin{align}
+	0 < \varepsilon_0 < -\varepsilon_1 \ll 1.
+	\label{eq:condition_ratio}
+	\end{align}
+Then there exists a sufficiently small number $\rho$ and
+a positive function $\varphi \in W^{2,1} \cap W^{2,\infty}$
+satisfying the following pointwise control
+	\begin{align}\label{eq:shape_assumption} \tag{H1}
+	|\varphi^\prime(x)| + |\varphi^{\prime\prime} (x)| \leq \rho  \varphi(x) , \ \ \forall x \geq 0
+	\end{align}
+and the mild solution $u \in C([0,T_0) \times \mathbb{R})$ to \eqref{eq:DW}
+with initial data $(u_0,u_1) = (\varepsilon_0 \varphi, \varepsilon_1 \varphi)$
+exists and satisfies the pointwise estimates \eqref{eq:aim}
+at time
+	\[
+	t(\varepsilon_0/|\varepsilon_1|)+\delta \in (0,2),
+	\]
+where $\delta>0$ is sufficiently small
+and $t=t(\varepsilon_0/|\varepsilon_1|)$ is the unique positive solution 
+of 
+	\begin{align}\label{eq.deft}
+	\frac{\varepsilon_0}{|\varepsilon_1|} =  \frac{4t}{(4-t)(2+t)}.
+	\end{align}
+\end{Theorem}
+
+We give some remarks on Theorem \ref{theorem:main}.
+First,
+the condition \eqref{eq:condition_ratio} is optimal.
+Indeed, for $\varepsilon_0 + \varepsilon_1 \geq 0$,
+we can apply Theorem 1.1 in \cite{FG25a} and deduce blow-up.
+Second,
+for any positive $\rho$,
+there exists a function $\varphi \in W^{2,1} \cap W^{2,\infty}$
+satisfying \eqref{eq:shape_assumption}.
+Indeed, let $N$ be an integer, $a >1$, and
+	\[
+	\varphi(x) = (N^2+x^2)^{-a/2}
+	\]
+then $\varphi \in W^{2,1} \cap W^{2,\infty}$ and
+	\begin{align*}
+	|\varphi^\prime(x)| &\leq \frac{a}{N} \varphi(x),\\
+	|\varphi^{\prime\prime}(x)| &\leq \frac{a(a+1)}{N^2} \varphi(x),
+	\end{align*}
+so $\rho = a/N + a(a+1)/N^2 \to 0$ as $N \to \infty.$
+Third,
+the condition \eqref{eq:shape_assumption} plays an important role
+in obtaining the pointwise estimate \eqref{eq:aim}.
+In particular, \eqref{eq:shape_assumption} implies that
+solutions $u$ are estimated by $\varphi$ pointwisely up to a certain time,
+and this pointwise control implies the conclusion.
+Finally,
+the function
+	\[
+	a(t) = \frac{4t}{(4-t)(2+t)}
+	\]
+is strictly increasing for $t \in (0,2)$, with $a(0)=0$ and $a(2)=1$.
+Therefore, the unique positive solution $t \in (0,2)$ of \eqref{eq.deft} is well-defined.
+The smallness of $\delta$ is determined by
+	\[
+	\delta < b(t)-a(t),
+	\]
+where
+	\[
+	b(t) = \frac{8t}{(2+t)^2}.
+	\]
+The proof that $b(t)>a(t)$ for $t \in (0,2)$ is elementary
+and can be found at the end of the proof of Theorem \ref{theorem:main}.
+
+We note that
+it is still unclear whether
+there exists a global solution to \eqref{eq:DW}
+in the case where $(u_0,u_1) = (\varepsilon_0 \varphi, \varepsilon_1 \varphi)$
+with smooth positive $\varphi$
+and $\varepsilon_0$ and $\varepsilon_1$ are sufficiently small and satisfy
+	\[
+	\varepsilon_0 < 0,\quad
+	\varepsilon_1 > 0,\quad
+	\varepsilon_0 + \varepsilon_1 < 0,\quad
+	\mbox{and} \
+	\varepsilon_1 + \varepsilon_0/2 > 0.
+	\]
+
+In the next section, we collect some preliminary estimates.
+Theorem \ref{theorem:main} is shown in the last section.
+%]]]
+
+\section{Preliminary}
+
+We, at first, show the estimate
+for the solution to the Cauchy problem for a nonhomogeneous wave equation.
+
+\begin{Lemma}\label{lemma:estimate_of_transformed_wave}
+Let $g \in W^{1,\infty}$ and $f, w \in L^\infty(0,2;L^\infty)$.
+Then there exists a unique $L^\infty$ valued mild solution $v$
+to the following Cauchy problem:
+	\[
+	\begin{cases}
+	\partial_t^2 v + \partial_t v - \partial_x^2 v  = f w+g \partial_x w,\\
+	v(0,x)= \varepsilon_0,\\
+	\partial_t v(0,x)= \varepsilon_1.
+	\end{cases}
+	\]
+Moreover, $v$ enjoys the following estimate:
+	\begin{align}
+	\|v(t)\|_{L^\infty}
+	& \leq \varepsilon_0 e^{-t} + (\varepsilon_0 + \varepsilon_1) (1-e^{-t})\\
+	& + C t \bigg(
+		\|f\|_{L^\infty(0,t; L^\infty)} + \| g \|_{W^{1,\infty}}
+	\bigg) \|w\|_{L^\infty(0,t; L^\infty)}.
+	\label{1dmax}
+	\end{align}
+\end{Lemma}
+
+\begin{proof}
+We recall that a standard Duhamel formula implies that
+	\begin{align*}
+	v(t,x)
+	&= \varepsilon_0 e^{-t}
+	+ ( \varepsilon_0 + \varepsilon_1 )(1-e^{-t})\\
+	&+ \int_0^t S(t-\tau) f(\tau) w(\tau)(x) d\tau
+	+ \int_0^t S(t-\tau) g \partial_x w(\tau,x) d\tau,
+	\end{align*}
+where
+	\[
+	S(t) h(x)
+	= \frac{1}{2} e^{-t/2} \int_{-t}^{t} I_0 \bigg( \frac{\sqrt{t^2-y^2}}{2} \bigg) h(x+y) d y.
+	\]
+We note that by denoting $\omega = \sqrt{t^2-y^2}$ we have
+	\[
+	e^{-t/2} I_0 \bigg( \frac{\omega}{2} \bigg)
+	\leq \langle \omega \rangle^{-1/2} e^{(\omega - t/2)}
+	\leq C \langle t \rangle^{-1/2} e^{-y^2/8t}.
+	\]
+Therfore, a straightforward calculation shows that
+	\[
+	\| S(t-\tau) f(\tau) w(\tau) \|_{L^\infty}
+	\leq C \| f(\tau) \|_{L^\infty} \| w(\tau) \|_{L^\infty}.
+	\]
+We note that by writing $\sigma = t-\tau$ we have
+	\begin{align*}
+	e^{\sigma/2} S(\sigma) g \partial_x w(\tau)(x)
+	&= \int_{-\sigma}^{\sigma} I_0 \bigg( \frac{\sqrt{\sigma^2-y^2}}{2} \bigg) g(x+y) \partial_x w(\tau, x+y) dy\\
+	&= g(x+\sigma) w(\tau,x+\sigma) - g(x-\sigma) w(\tau,x-\sigma)\\
+	&- \int_{-\sigma}^{\sigma} I_0 \bigg( \frac{\sqrt{\sigma^2-y^2}}{2} \bigg) \dot g(x+y) w(\tau,x+y) dy\\
+	&+ \int_{-\sigma}^{\sigma} I_1 \bigg( \frac{\sqrt{\sigma^2-y^2}}{2} \bigg) \frac{y}{\sqrt{\sigma^2-y^2}} g(x+y) w(\tau,x+y) dy.
+	\end{align*}
+We note that by writing $\omega = \sqrt{\sigma^2-y^2}$,
+we have
+	\[
+	\bigg| e^{-\sigma/2} \frac{y}{\omega} I_1(\omega/2) \bigg|
+	\leq C \frac{y}{\langle \omega \rangle^{3/2}} e^{(\omega - \sigma)/2}
+	\leq C \langle \sigma \rangle^{-1/2} e^{-y^2/8\sigma}.
+	\]
+Thereore, we have
+	\[
+	\| S(t-\tau) g(\tau) \partial_x w(\tau) \|_{L^\infty}
+	\leq C \| g \|_{W^{1,\infty}} \| w(\tau) \|_{L^\infty}
+	\]
+and this implies \eqref{1dmax}.
+\end{proof}
+
+By using Lemma \ref{lemma:estimate_of_transformed_wave},
+we mesure the difference between $u(t)$ and initial position $\varphi$
+under a certain condition by using their ratio.
+
+\begin{Lemma}[Refined local estimates]
+\label{lemma:estaimte_of_u_devided}
+Let $\varepsilon_0$ and $\varepsilon_1$ are real constans sufficiently close to $0$
+satisfying $0 < \varepsilon_0 < - \varepsilon_1$.
+Let $t \in (0,T_0)$ and $\rho >0$ satisfy
+	\begin{align}
+	C ( |\varepsilon_1|^{p-1} + \rho ) t < 1
+	\label{eq:condition_for_u_devided}
+	\end{align}
+with a positive constant $C$.
+Assume that $\varphi \in W^{2,1} \cap W^{2,\infty}$
+satisfy \eqref{eq:shape_assumption}.
+If the mild solution $u$ of Lemma \ref{lemma:local_existence}
+with initial data $(u_0,u_1) = (\varepsilon_0,\varepsilon_1)$
+satsify 
+	\[
+	\| |u|^{p-2}u\|_{L^\infty(0,T_0; L^\infty)}
+	+ \bigg\|\frac{\ddot \varphi}{\varphi} \bigg\|_{L^\infty}
+	+ \bigg\|\frac{\dot \varphi^2}{\varphi^2} \bigg\|_{L^\infty}
+	\leq C ( \varepsilon_1^{p-1} + \rho ).
+	\]
+Then $u$ enjoys the following estimate for $t \in (0,T_0)$:
+	\begin{align}\label{eq2mm}
+	\left\| \frac{u(t)}{\varphi} \right\|_{ L^{\infty}}
+	\leq \frac{|\varepsilon_0 e^{-t} + (\varepsilon_1 + \varepsilon_0)(1-e^{-t})|}{1-C ( |\varepsilon_1|^{p-1} + \rho ) t}.
+	\end{align}
+\end{Lemma}
+
+\begin{proof}
+We make the substitution
+	\[
+	v(t,x) = \frac{u(t,x)}{\varphi(x)},
+	\]
+so we have
+	\begin{align*}
+    \partial_t^2 v + \partial_t v - \partial_x^2 v
+	 = \frac{|u|^p}{\varphi}
+	 + 2 \frac{\dot \varphi \partial_x u}{\varphi^2}
+	 + \frac{\ddot \varphi}{\varphi^2} u
+	 - 2 \frac{\dot \varphi^2}{\varphi^3} u
+	\end{align*}
+Since
+	\[
+	\partial_x u = v \dot \varphi  + \varphi \partial_x v
+	\]
+we arrive at
+	\[
+	\partial_t^2 v + \partial_t v - \partial_x^2 v \\
+	= \bigg( |u|^{p-2} u + \frac{\ddot \varphi}{\varphi} \bigg) v
+	+ 2 \frac{\dot \varphi}{\varphi} \partial_x v
+	\]
+Therefore, the Cauchy problem can be rewritten as
+	\begin{align*}
+	\begin{cases}
+	\partial_t^2 v + \partial_t v - \partial_x^2 v  = f v+g\partial_xv, \\
+	v(0,x)=\varepsilon_0 , & x \in \mathbb R, \\
+	\partial_t v(0,x) =\varepsilon_1 , & x \in \mathbb R.
+	\end{cases}
+	\end{align*}
+with 
+	\[
+	f = |u|^{p-2}u  + \frac{\ddot \varphi}{\varphi},
+	\quad
+	g =  2  \frac{\dot \varphi}{\varphi}.
+	\]
+Noting
+	\[
+	\dot g = 2 \frac{\ddot \varphi}{\varphi} - 2 \frac{\dot \varphi^2}{\varphi^2}
+	\]	
+and applying Lemma \ref{lemma:local_existence}
+and the assumption \eqref{eq:shape_assumption},
+\[
+\|f\|_{L^\infty(0,T_0; L^\infty)}
+\leq C_1 ( |\varepsilon_1|^{p-1} + \rho )
+\]
+and $\|g\|_{W^{1,\infty}} \leq C_1 \rho$
+with some positive constants $C_1$.
+\end{proof}
+
+Next estimate plays an important role
+to estimate the solution on the basis of initial data.
+
+\begin{Lemma}[Hermite–Hadamard]\label{l3}
+Let $\phi$ be $C^1(\mathbb R; [0,\infty))$,
+such that there is a positive constant $\rho$ so that
+\begin{align}\label{eq.bb1}
+ &  |\dot \phi(x)| \leq \rho  \phi(x) , \ \ \forall x \geq 0.
+\end{align}
+Then we have
+\begin{align}\label{eq.HH1}
+      & \frac{ \phi(\alpha) + \phi(\beta)}{2} \leq  \frac{1}{\beta - \alpha} \int_{\alpha}^{\beta} \phi(\sigma) d \sigma + \frac{\rho}{2} \int_{\alpha}^\beta \phi(\sigma) d \sigma
+\end{align}
+and
+\begin{align}\label{eq.HH1mm}
+      & \frac{ \phi(\alpha) + \phi(\beta)}{2} \geq  \frac{1}{\beta - \alpha} \int_{\alpha}^{\beta} \phi(\sigma) d \sigma -\frac{\rho}{2} \int_{\alpha}^\beta \phi(\sigma) d \sigma
+\end{align}
+for $0  \leq  \alpha < \beta < \infty.$
+\end{Lemma}
+
+\begin{proof}
+We use the following identity, obtained in \cite{DA98}
+(see Lemma 2.1 in \cite{DA98})
+	\[
+	\frac{ \phi(\alpha) + \phi(\beta)}{2} - \frac{1}{\beta - \alpha} \int_{\alpha}^{\beta} \phi(\sigma) d \sigma
+	= \frac{\beta -  \alpha}{2} \int_0^1 (1-2t) \dot \phi(t \alpha + (1-t)\beta) dt.
+	\]
+Then we can write
+	\begin{align*}
+	\frac{ \phi(\alpha) + \phi(\beta)}{2} - \frac{1}{\beta - \alpha} \int_{\alpha}^{\beta} \phi(\sigma) d \sigma
+	& = \frac{\beta - \alpha}{2} \int_0^1 (1-2t) \dot \phi(t \alpha + (1-t)\beta) dt \\
+	& \leq \frac{\beta - \alpha}{2} \int_{0}^1  | \dot \phi(t \alpha + (1-t)\beta)| dt \\
+	&  = \frac{1}{2}\int_{\alpha}^{\beta} |\dot \phi(\sigma)| d \sigma.
+	\end{align*}
+Assuming \eqref{eq.bb1}, we get
+\eqref{eq.HH1}.
+
+It is easy to extend this estimate also to the cases $\alpha < 0 < \beta$ and $\alpha < \beta <0$
+using the additional assumption that $\phi$ is an even function.
+In fact, when $\alpha < 0 < \beta$ we define the interval $J\subset [0,\infty)$ with ends $-\alpha$ and $\beta$ and then we can apply \eqref{eq.HH1} so we have
+	\begin{align}\label{eq.HH1m}
+	\frac{ \phi(\alpha) + \phi(\beta)}{2}
+	= \frac{ \phi(-\alpha) + \phi(\beta)}{2}
+	\leq  \frac{1}{|J|} \int_{J} \phi(\sigma) d \sigma
+	+ \frac{\rho}{2} \int_{J } \phi(\sigma) d \sigma.
+	\end{align}
+This completes the proof.
+\end{proof}
+
+We finalize this section
+by collecting some estimates of calculs to control nonlinaerity.
+Consider the function
+	\begin{align}\label{eq.dC}
+	C(t,r,\rho,\varepsilon_1)
+	= \sup_{\tau \in [0,t]} G(\tau,r,\rho,\varepsilon_1),
+	\end{align}
+where
+	\[
+	G(\tau,r,\rho,\varepsilon_1)
+	= \frac{ |r - \tau(1 - r)|}{1-C ( |\varepsilon_1|^{p-1} + \rho ) \tau}
+	\]
+under the assumption \eqref{eq:condition_for_u_devided} is satisfied.
+Here $\rho$ is a positive number and $\varepsilon_1$ is a negative number
+which are close to $0$.
+
+\begin{Lemma}\label{l.61}
+We have the relation
+\begin{equation}
+\begin{aligned}
+& C(t,r,\rho,c_0) =  \max \left(r , \frac{t(1-r/2)-r }{(1-t^2/4)} \right)+ O(\rho+|c_0-1/4|).
+\end{aligned}
+\end{equation}   
+\end{Lemma}
+
+\begin{proof}
+    The function $G(\tau,r,\rho,c_0)$ is at least $C^1$ with respect  to $\rho, c_0$ in a small neighbourhood of $(0,1/4)$ so it is sufficient to consider the case $\rho=0$ and $c_0=1/4.$
+Then we have the relation
+\begin{equation}
+  G(\tau,r,0,1/4) = \left\{ \begin{aligned}
+    &\frac{ \tau(1-r/2)-r}{1- \tau^2/4)}  \ \mbox{if $\tau>2r/(2-r)$},\\
+    & \frac{ r-\tau(1-r/2)}{(1-\tau^2/4)} \ \mbox{if $0 \leq \tau<2r/(2-r)$}.
+  \end{aligned}\right.  
+\end{equation}
+In the interval $[0,2r/(2-r)]$ it is decreasing since 
+we have
+\begin{equation}
+    \partial_t G(\tau,r,0,1/4) = 2\frac{\tau^2(r-2) + 4\tau r +4(r-2) }{(4-\tau^2)^2} < 0 
+\end{equation}
+for $\tau \in [0,2r/(2-r))$ and $r \in [0,1).$ For $\tau > 2r/2-r$ it is increasing so
+\begin{equation}
+\begin{aligned}
+    & C(t,r,\rho,c_0) =  \sup_{\tau \in [0,t]}  G(\tau,r,\rho,c_0) \\
+    &  = \sup_{\tau \in [0,t]} G(\tau,r,0,1/4)+ O(\rho+|c_0-1/4|)\\
+    & = \max \left(r , \frac{t(1-r/2)-r }{(1-t^2/4)} \right)+ O(\rho+|c_0-1/4|).
+\end{aligned}
+\end{equation}
+
+
+
+for $0\leq r < 1$.
+\end{proof}
+
+\begin{Corollary}\label{c62}
+We have the relation
+	\begin{align}
+	C(t,r,0,1/4) =
+	\begin{cases}
+	\frac{t(1-r/2)-r }{(1-t^2/4)}
+	& \mbox{if} \quad r < r_t,\\
+	r
+	& \mbox{if} \quad r \geq r_t,
+	\end{cases}
+	\end{align}
+where
+	\[
+	r_t
+	= \frac{4t}{8+2t-t^2}
+	= \frac{4t}{(4-t)(2+t)}.
+	\]
+\end{Corollary}
+
+%[[[ \section{Comparison principle}
+\section{Proof of Theorem \ref{theorem:main}}
+%[[[ Proposition Comparison Principle
+$w = e^{t/2} u$ is a solution to the Cauchy problem
+	\begin{align}\label{CPa1}
+	\begin{cases}
+	\partial_t^2 w - \Delta w = \left(\frac{1}{4} + u|u|^{p-2} \right) w,
+	& t \in (0,T_0), \ x \in \mathbb R,\\
+	w(0)=\varepsilon_0 \varphi(x),
+	& x \in \mathbb R,\\
+	\partial_t w(0) =\varepsilon_1\varphi(x)+\frac{\varepsilon_0}{2}\varphi(x),
+	& x \in \mathbb R.
+	\end{cases}
+	\end{align}
+	
+The D'Alembert formula implies
+\begin{align*}
+    &w(t) = \varepsilon_0 \frac{d}{dt} W(t) (\varphi)(x) + \left(\varepsilon_1 + \frac{\varepsilon_0}{2} \right) W(t)(\varphi)(x)\\
+    &+ \int_0^t W(t-\tau)\left( \left(\frac{1}{4}+u(\tau)|u(\tau)|^{p-2}\right) w(\tau) \right) (x) d\tau,
+\end{align*}
+where
+	\[
+	W(t)(f)(x) = \frac{1}{2} \int_{x-t}^{x+t} f(\tau) d\tau,
+	\]
+so
+	\begin{align*}
+	&\partial_t w(t,x) =  \varepsilon_0 \left(\frac{d}{dt}\right)^2 W(t) (\varphi)(x) + \left(\varepsilon_1 + \frac{\varepsilon_0}{2} \right) \frac{d}{dt} W(t)(\varphi)(x)\\
+	&+ \int_0^t \frac{d}{dt} W(t-\tau)\left( \left(\frac{1}{4}+u(\tau)|u(\tau)|^{p-2}\right) w(\tau) \right) (x) d\tau
+	\end{align*}
+
+Set 
+	\[
+	r = \varepsilon_0/|\varepsilon_1|
+	\]
+and $r\in [0,1)$ follows from the assumption \eqref{eq:condition_ratio}.
+
+The idea of the proof is to define the set
+\begin{equation}\label{eq.dA}
+\mathcal{A}
+= \{r \in [0,1); \exists (t,\varepsilon_0, \varepsilon_1, \varphi), \  w(t,x) \leq 0,\  \partial_t w(t,x) \leq 0 \ \mbox{for a.e.} \ \  x \in \mathbb{R} \}
+\end{equation}
+and show that $\mathcal{A}$ covers the whole interval $[0,1),$ i.e.
+\begin{equation}\label{Asup}
+    \begin{aligned}
+        \mathcal{A} \supset [0,1).
+    \end{aligned}
+\end{equation}
+
+We start with a sufficient condition that guaranties $\partial_t w(t,x) \leq 0$ for almost every $x \in \mathbb{R}.$
+\begin{Lemma}
+\label{lemma:condition_for_negative_speed}
+Let the assumption of Lemma \ref{lemma:estaimte_of_u_devided}
+be satisfied.
+Let $\rho$ be the parameter from assumption \eqref{eq:shape_assumption}
+and $c_0$ be a number close to $1/4.$
+If $C(t,r,\rho,c_0)$ defined by \eqref{eq.dC} satisfies the estimate
+	\begin{equation}\label{eq.a1}
+	\frac{c_0}{2} C(t,r,\rho,c_0)
+	\leq \bigg(1 - r \bigg( \rho + \frac{1}{2} \bigg) \bigg) \bigg( \frac{1}{2t} - \frac \rho 2 \bigg)
+	\end{equation}
+then $\partial_t w(t,x) \leq 0$ for a.e. $x \in \mathbb{R}.$
+\end{Lemma}
+
+\begin{proof}
+The D'Alembert formula gives
+\begin{equation}
+    \begin{aligned}
+   &\partial_t w(t,x)\\
+	&= \varepsilon_0 \frac{\varphi^\prime(x+t)- \varphi^\prime(x-t)}{2} 
+	+ \left(\varepsilon_1 + \frac{\varepsilon_0}{2} \right) \frac{\varphi(x+t) + \varphi(x-t)}{2} \\
+    & + \int_0^t \frac{d}{dt} W(t-\tau)\left( \left(\frac{1}{4}+u(\tau)|u(\tau)|^{p-2}\right) w(\tau) \right) (x) d\tau.
+    \end{aligned}
+\end{equation}
+
+ 
+Then using \eqref{eq2mm} in  Lemma \ref{lemma:estimate_of_transformed_wave},
+we obtain 
+	\begin{align*}
+	&\int_0^t \frac{d}{dt} W(t-\tau)\left( \left(\frac{1}{4}+u(\tau)|u(\tau)|^{p-2}\right) w(\tau) \right) (x) d\tau \\
+	& \leq c_0 \int_0^t \frac{d}{dt} W(t-\tau) ( w(\tau) ) (x) d\tau \\
+	&=  \frac{c_0}{2}\int_0^t \left(  w(\tau, x+t-\tau) +  w(\tau, x-t+\tau) \right) d\tau \\
+	& \leq \frac{c_0}{2}\max_{0\leq \tau \leq t} \frac{ |\varepsilon_0 + \tau(\varepsilon_1 + \varepsilon_0/2)|}{(1-c_0 \tau^2-2c_0\rho \tau^2 - 2 \rho \tau)}
+	\int_0^t \left(  \varphi(x+t-\tau) +  \varphi( x-t+\tau) \right) d\tau\\
+	& \leq \frac{c_0}{2}| \varepsilon_1 | C(t,r) \int_{-t}^t  \varphi(x+\sigma) d\sigma.
+	\end{align*}
+
+Using  \eqref{eq:shape_assumption}, we obtain
+	\begin{align*}
+	&\partial_t w(t,x)\\
+	&\leq \varepsilon_0 \frac{\varphi^\prime(x+t)- \varphi^\prime(x-t)}{2} 
+	+ \left(\varepsilon_1 + \frac{\varepsilon_0}{2} \right) \frac{\varphi(x+t) + \varphi(x-t)}{2} \\
+	& + \frac{c_0}{2} |\varepsilon_1| C(t,r) \int_{-t}^t  \varphi(x+\sigma) d\tau\\
+	& \leq \left(\varepsilon_0 \rho + \varepsilon_1 + \frac{\varepsilon_0}{2}\right)\frac{\varphi(x+t) + \varphi(x-t)}{2}
+	+ \frac{c_0}{2}| \varepsilon_1 | C(t,r)
+	\int_{-t}^t  \varphi(x+\sigma) d\sigma.
+	\end{align*}
+
+Lemma \ref{l3} implies
+	\begin{align}\label{eq.HH1m1}
+	\frac{\varphi(x+t) + \varphi(x-t)}{2}
+	\geq  \left( \frac{1}{2t} - \frac \rho 2 \right)
+	\int_{-t}^t  \varphi(x+\sigma) d\tau. 
+	\end{align}
+
+Then we estimate
+	\begin{align}
+	\label{HH2}
+	\partial_t w(t,x)
+	&\leq |\varepsilon_1| A(t,r) \int_{-t}^t  \varphi(x+\sigma) d\tau,
+	\end{align}
+where 
+	\[
+	A(t,r) =
+	- \bigg(1 - r \bigg( \rho + \frac{1}{2} \bigg) \bigg) \bigg( \frac{1}{2t} - \frac \rho 2 \bigg)
+	+ \frac{c_0}{2} C(t,r, \rho,c_0).
+	\]
+Therefore, the condition \eqref{eq.a1} implies $A(t,r) \leq 0$
+and hence $\partial_t w(t,x) \leq 0$ a.e.
+This completes the proof.
+\end{proof}
+
+
+\begin{Lemma}
+\label{lemma:condition_for_negative_position}
+Let the assumption of Lemma \ref{lemma:estaimte_of_u_devided}
+be satisfied.
+If the inequality
+	\begin{equation}\label{eq.a2}
+   \frac{c_0}{2}t  C(t,r,\rho,c_0)
+	\leq 1 - \bigg( \frac{\rho+1}{2} + \frac{1}{2t}\bigg) r
+	\end{equation}
+holds, then
+$ w (t,x) \leq 0$ for a.e. $x \in \mathbb{R}$.
+Here $C(t,r,\rho,c_0)$ is defined in \eqref{eq.dC}.
+\end{Lemma}
+ \begin{proof}
+     We have
+     \begin{align*}
+	&w(t,x)\\
+	&\leq \varepsilon_0 \frac{\varphi(x+t)+ \varphi(x-t)}{2} 
+	+ \left(\varepsilon_1 + \frac{\varepsilon_0}{2} \right) \int_{-t}^{t}\frac{\varphi(x+\tau)}{2} d\tau \\
+	& + \frac{c_0}{2}|\varepsilon_1| C(t,r) \int_0^t \int_{\tau-t}^{t-\tau}\varphi(x+\sigma) d\sigma d\tau\\
+	&\leq
+	- |\varepsilon_1|
+	\bigg\{
+		1
+		- \bigg( \frac{\rho+1}{2} + \frac{1}{2t}\bigg) r
+		- \frac{c_0}{2} t  C(t,r)
+	\bigg\}
+	\int_{-t}^t \varphi(x+\sigma) d\sigma.
+	\end{align*}
+ \end{proof}
+
+In view of the above Lemmas
+\ref{lemma:estaimte_of_u_devided},
+\ref{lemma:condition_for_negative_speed},
+and \ref{lemma:condition_for_negative_position},
+$\mathcal{A}$ contains the following set.
+	\[
+	\mathcal{B}
+	= \{r \in [0,1); \exists (t,c_0,\rho)\
+	\mathrm{satisfying}\
+	\eqref{eq:condition_for_u_devided},\
+	\eqref{eq.a1},\
+	\mathrm{and}\ \eqref{eq.a2}\}
+	\]
+Indeed, if $r \in \mathcal{B}$, then
+there exits $(\varepsilon_0, \varepsilon_1, \varphi)$
+such that $r=\varepsilon_0/|\varepsilon_1|$ and the assumptions
+\eqref{eq:condition_for_u_devided} is satisfied.
+Therefore, $r \in \mathcal{A}$.
+
+The definition \eqref{eq.dC} and Corollary \ref{c62} imply
+	\begin{equation}
+	C(t,r,0,1/4) =
+	\begin{cases}
+	\frac{t(1-r/2)-r }{(1-t^2/4)}
+	& \mbox{if} \ r < 4t/(8+2t-t^2),\\
+	r
+	& \mbox{if} \ r > 4t/(8+2t-t^2).
+	\end{cases}
+	\end{equation}
+Therefore, a sufficient condition for $r \in \mathcal B$
+is that whether $r \in [0,1)$ satisfies
+that there exists $t \in (0,2)$ such that
+{\color{blue} A sufficient condition for 
+$r\in B$
+is that 
+$r \in (0,1)$
+and there exists $t$
+such that 
+}
+
+
+
+the following two inequalities hold:
+	\begin{equation}\label{sys1}
+	\begin{cases}
+	\frac{1}{8}  \left(\frac{t(1-r/2)-r }{(1-t^2/4)}  \right)
+	< \bigg(1 - \frac{r}{2}  \bigg) \bigg( \frac{1}{2t} \bigg),\\
+	\frac{1}{8} t  \left(\frac{t(1-r/2)-r }{(1-t^2/4)}  \right)
+	< 1 - \bigg( \frac{1}{2} + \frac{1}{2t}\bigg) r,\\
+	r
+	< \frac{4t}{(4-t)(2+t)}
+	\end{cases}
+	\end{equation}
+and
+	\begin{equation}\label{sys2}
+	\begin{cases}
+	\frac{1}{8}  r
+	< \bigg(1 - \frac{r}{2}  \bigg) \bigg( \frac{1}{2t} \bigg),\\
+	\frac{1}{8} t  r
+	< 1 - \bigg( \frac{1}{2} + \frac{1}{2t}\bigg) r,\\
+	r > \frac{4t}{(4-t)(2+t)}.
+	\end{cases}
+	\end{equation}
+In particular, if $r \in [0,1)$ admits some $t \in (0,2)$
+such that $(t,r)$ satisfies either \eqref{sys1} or \eqref{sys2},
+then one can choose $c_0$ sufficiently close to $1/4$
+and $\rho>0$ sufficiently small
+so that the assumptions \eqref{eq:condition_for_u_devided}, \eqref{eq.a1} and \eqref{eq.a2}
+in Lemmas \ref{lemma:condition_for_negative_speed}
+and \ref{lemma:condition_for_negative_position} are satisfied.
+Consequently,
+$\mathcal B$ contains the following set:
+	\[
+	\mathcal C
+	= \{r \in [0,1); \exists t, \ (t,r) \ \mbox{is a solution to \eqref{sys2}}\}.
+	\]
+
+Finally, we show that $\mathcal C \supset [0,1)$.
+The system \eqref{sys2} is equivalent to
+	\begin{align}\label{sys4}
+	\begin{cases}
+	r <   \frac{4}{2+t},\\
+	r < \frac{8t}{(2+t)^2},\\
+	r > \frac{4t}{(4-t)(2+t)}.
+	\end{cases}
+	\end{align}
+ A positive solution $r$ can be found iff
+	\[
+	\frac{4t}{(4-t)(2+t)} < \min \left(\frac{4}{2+t}, \frac{8t}{(2+t)^2}  \right) .
+	\]
+Note that for $t \in [0,4)$
+	\[
+	\frac{4t}{(4-t)(2+t)} < \frac{4}{2+t}
+	\]
+is equivalent to $t <2$ and
+	\[
+	\frac{4t}{(4-t)(2+t)} < \frac{8t}{(2+t)^2}
+	\]
+is equivalent to $t <2.$
+Therefore the interval
+	\begin{align*}
+	I(t) &= (a(t),b(t)), \\
+	a(t) &= \frac{4t}{(4-t)(2+t)} , \\
+	b(t) &= \min \left(\frac{4}{2+t}, \frac{8t}{(2+t)^2}  \right) 
+	\end{align*}
+is nonempty for any $t \in (0,2).$ Note that
+	\[
+	\frac{8t}{(2+t)^2} < \frac{4}{2+t}
+	\]
+for $t \in (0,2).$ Therefore,
+	\[
+	b(t) = \frac{8t}{(2+t)^2}.
+	\]
+The function $a$ is increasing on $[0,4)$, because
+	\[
+	a(t)
+	= \frac{4}{4-t}\bigg( 1 - \frac{2}{t+2} \bigg).
+	\]
+Moreover, $a(0)=0 $ and $ a(2)=b(2)=1$ imply that 
+	\[
+	\mathcal{A} \supset \mathcal{B} \supset \mathcal{C} \supset [0,1).
+	\]
+This completes the proof.
+\bibliographystyle{plain}
+
+%\bibliography{L1Dec}
+%\bibliography{DIA}
+
+\bibliography{../DIA}
+%\bibliography{GlobalSOLNEG/DIA}
+
+%]]]
+
+%\bibliographystyle{plain}
+%\bibliography{DAMP}
+
+\end{document}
