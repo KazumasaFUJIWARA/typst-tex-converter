@@ -307,25 +307,46 @@ cat jsonl/README.md
 
 #### 継続学習の例
 ```bash
-# バージョン001で新規学習
+# バージョン001で新規学習（チェックポイント保存付き）
 python python/train_llama32_3b_qlora_fixed.py \
   --data jsonl/train_001.jsonl \
   --out outputs/llama32-3b-typst-qlora-001 \
-  --epochs 10
+  --epochs 10 \
+  --batch_size 2 \
+  --grad_accum 8 \
+  --learning_rate 2e-4 \
+  --lora_r 8 \
+  --lora_alpha 16 \
+  --lora_dropout 0.1
 
-# バージョン002で継続学習（001から継続）
+# チェックポイントの確認
+ls -la outputs/llama32-3b-typst-qlora-001/
+
+# バージョン002で継続学習（001の最新チェックポイントから継続）
 python python/train_llama32_3b_qlora_fixed.py \
   --data jsonl/train_002.jsonl \
   --out outputs/llama32-3b-typst-qlora-002 \
   --resume_from_checkpoint outputs/llama32-3b-typst-qlora-001/checkpoint-XXX \
-  --epochs 10
+  --epochs 10 \
+  --batch_size 2 \
+  --grad_accum 8 \
+  --learning_rate 2e-4 \
+  --lora_r 8 \
+  --lora_alpha 16 \
+  --lora_dropout 0.1
 
-# バージョン003で継続学習（002から継続）
+# バージョン003で継続学習（002の最新チェックポイントから継続）
 python python/train_llama32_3b_qlora_fixed.py \
   --data jsonl/train_003.jsonl \
   --out outputs/llama32-3b-typst-qlora-003 \
   --resume_from_checkpoint outputs/llama32-3b-typst-qlora-002/checkpoint-XXX \
-  --epochs 10
+  --epochs 10 \
+  --batch_size 2 \
+  --grad_accum 8 \
+  --learning_rate 2e-4 \
+  --lora_r 8 \
+  --lora_alpha 16 \
+  --lora_dropout 0.1
 ```
 
 #### テストコマンド
