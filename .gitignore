@@ -3,8 +3,8 @@ venv/
 env/
 .venv/
 
-# 出力ディレクトリ
-outputs/
+# 出力ディレクトリ（学習済みモデルは保存）
+# outputs/
 data/processed/
 data/output/
 data/logs/
@@ -16,9 +16,9 @@ data/logs/
 *.pt
 *.pth
 
-# ログファイル
-*.log
-logs/
+# ログファイル（学習ログは保存）
+# *.log
+# logs/
 
 # 一時ファイル
 *.tmp

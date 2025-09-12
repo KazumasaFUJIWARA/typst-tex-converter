@@ -1,0 +1,24 @@
+{"prompt": [{"role": "user", "content": "LaTeXをTypstに変換してください: \\partial"}], "completion": [{"role": "assistant", "content": "∂"}]}
+{"prompt": [{"role": "user", "content": "LaTeXをTypstに変換してください: \\Delta"}], "completion": [{"role": "assistant", "content": "Δ"}]}
+{"prompt": [{"role": "user", "content": "LaTeXをTypstに変換してください: \\mathbb{R}"}], "completion": [{"role": "assistant", "content": "ℝ"}]}
+{"prompt": [{"role": "user", "content": "LaTeXをTypstに変換してください: \\in"}], "completion": [{"role": "assistant", "content": "∈"}]}
+{"prompt": [{"role": "user", "content": "LaTeXをTypstに変換してください: \\leq"}], "completion": [{"role": "assistant", "content": "≤"}]}
+{"prompt": [{"role": "user", "content": "LaTeXをTypstに変換してください: \\geq"}], "completion": [{"role": "assistant", "content": "≥"}]}
+{"prompt": [{"role": "user", "content": "LaTeXをTypstに変換してください: \\neq"}], "completion": [{"role": "assistant", "content": "≠"}]}
+{"prompt": [{"role": "user", "content": "LaTeXをTypstに変換してください: \\nabla"}], "completion": [{"role": "assistant", "content": "∇"}]}
+{"prompt": [{"role": "user", "content": "LaTeXをTypstに変換してください: \\alpha"}], "completion": [{"role": "assistant", "content": "α"}]}
+{"prompt": [{"role": "user", "content": "LaTeXをTypstに変換してください: \\beta"}], "completion": [{"role": "assistant", "content": "β"}]}
+{"prompt": [{"role": "user", "content": "LaTeXをTypstに変換してください: \\gamma"}], "completion": [{"role": "assistant", "content": "γ"}]}
+{"prompt": [{"role": "user", "content": "LaTeXをTypstに変換してください: \\delta"}], "completion": [{"role": "assistant", "content": "δ"}]}
+{"prompt": [{"role": "user", "content": "LaTeXをTypstに変換してください: \\varepsilon"}], "completion": [{"role": "assistant", "content": "ε"}]}
+{"prompt": [{"role": "user", "content": "LaTeXをTypstに変換してください: \\varphi"}], "completion": [{"role": "assistant", "content": "φ"}]}
+{"prompt": [{"role": "user", "content": "LaTeXをTypstに変換してください: \\Omega"}], "completion": [{"role": "assistant", "content": "Ω"}]}
+{"prompt": [{"role": "user", "content": "LaTeXをTypstに変換してください: \\partial_t"}], "completion": [{"role": "assistant", "content": "∂_t"}]}
+{"prompt": [{"role": "user", "content": "LaTeXをTypstに変換してください: \\partial_t^2"}], "completion": [{"role": "assistant", "content": "∂_t^2"}]}
+{"prompt": [{"role": "user", "content": "LaTeXをTypstに変換してください: \\mathbb{R}^n"}], "completion": [{"role": "assistant", "content": "ℝ^n"}]}
+{"prompt": [{"role": "user", "content": "LaTeXをTypstに変換してください: x \\in \\mathbb{R}^n"}], "completion": [{"role": "assistant", "content": "x ∈ ℝ^n"}]}
+{"prompt": [{"role": "user", "content": "LaTeXをTypstに変換してください: t > 0"}], "completion": [{"role": "assistant", "content": "t > 0"}]}
+{"prompt": [{"role": "user", "content": "LaTeXをTypstに変換してください: \\partial_t^2 u+\\partial_t u-\\Delta u=|u|^p"}], "completion": [{"role": "assistant", "content": "∂_t^2 u + ∂_t u - Δ u = |u|^p"}]}
+{"prompt": [{"role": "user", "content": "LaTeXをTypstに変換してください: \\frac{\\partial^2 u}{\\partial t^2} + \\frac{\\partial u}{\\partial t} - \\Delta u = |u|^p"}], "completion": [{"role": "assistant", "content": "∂_t^2 u + ∂_t u - Δ u = |u|^p"}]}
+{"prompt": [{"role": "user", "content": "LaTeXをTypstに変換してください: \\left(u_0, u_1\\right)=\\left(\\varepsilon_0 \\varphi, \\varepsilon_1 \\varphi\\right)"}], "completion": [{"role": "assistant", "content": "(u_0, u_1) = (ε_0 φ, ε_1 φ)"}]}
+{"prompt": [{"role": "user", "content": "LaTeXをTypstに変換してください: 0 < \\varepsilon_0 < |\\varepsilon_1| = -\\varepsilon_1"}], "completion": [{"role": "assistant", "content": "0 < ε_0 < |ε_1| = -ε_1"}]}

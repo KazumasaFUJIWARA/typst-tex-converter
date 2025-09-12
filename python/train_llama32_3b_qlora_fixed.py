@@ -40,6 +40,8 @@ def main():
                        help="LoRA dropout")
     parser.add_argument("--resume_from_checkpoint", type=str, default=None,
                        help="チェックポイントから学習を再開するパス")
+    parser.add_argument("--peft_model_path", type=str, default=None,
+                       help="既存のPEFTモデルから継続学習するパス")
     parser.add_argument("--continue_training", action="store_true",
                        help="既存のPEFTモデルから継続学習")
     
@@ -51,6 +53,14 @@ def main():
     print(f"Llama 3.2 3Bモデル: {args.model_id}")
     print(f"データ: {args.data}")
     print(f"出力: {args.out}")
+    print(f"学習率: {args.learning_rate}")
+    print(f"エポック数: {args.epochs}")
+    print(f"バッチサイズ: {args.batch_size}")
+    print(f"勾配累積: {args.grad_accum}")
+    print(f"LoRA rank: {args.lora_r}")
+    print(f"LoRA alpha: {args.lora_alpha}")
+    print(f"LoRA dropout: {args.lora_dropout}")
+    print("=" * 50)  # 区切り線を追加
     
     # 継続学習の確認
     if args.continue_training:
@@ -74,7 +84,7 @@ def main():
         load_in_4bit=True,
         bnb_4bit_use_double_quant=True,
         bnb_4bit_quant_type="nf4",
-        bnb_4bit_compute_dtype=torch.bfloat16
+        bnb_4bit_compute_dtype=torch.float16  # bfloat16からfloat16に変更（警告1の対策）
     )
     
     # モデルの読み込み（最新の方法）
@@ -83,15 +93,20 @@ def main():
         args.model_id,
         quantization_config=bnb_config,
         device_map="auto",
-        dtype=torch.bfloat16,
+        dtype=torch.float16,  # bfloat16からfloat16に変更（警告1の対策）
         trust_remote_code=True
     )
     
     # 継続学習の場合、既存のPEFTモデルを読み込み
-    if args.continue_training:
-        print("既存のPEFTモデルを読み込み中...")
+    if args.continue_training or args.peft_model_path:
+        peft_path = args.peft_model_path if args.peft_model_path else args.out
+        print(f"既存のPEFTモデルを読み込み中: {peft_path}")
         from peft import PeftModel
-        model = PeftModel.from_pretrained(model, args.out)
+        # 既存のPEFT設定をクリアしてから読み込み（警告2の対策）
+        if hasattr(model, 'peft_config'):
+            print("既存のPEFT設定をクリア中...")
+            model = model.base_model
+        model = PeftModel.from_pretrained(model, peft_path)
     
     # Llama 3.2 3B専用LoRA設定
     lora_config = LoraConfig(
@@ -118,20 +133,21 @@ def main():
         output_dir=args.out,
         per_device_train_batch_size=args.batch_size,
         gradient_accumulation_steps=args.grad_accum,
+        dataloader_drop_last=False,  # 最後のバッチも使用
         learning_rate=args.learning_rate,
         num_train_epochs=args.epochs,
         max_steps=-1,
-        save_steps=50,  # 50ステップごとにチェックポイント保存
+        save_steps=1,  # 1ステップごとにチェックポイント保存（継続学習用）
         save_strategy="steps",
-        logging_steps=10,
+        logging_steps=1,  # 1ステップごとにログ出力
         logging_dir=f"{args.out}/logs",
-        warmup_steps=50,
-        fp16=False,
-        bf16=True,
+        warmup_steps=10,  # ウォームアップステップを削減
+        fp16=True,  # float16を使用（警告1の対策）
+        bf16=False,
         remove_unused_columns=False,
         dataloader_pin_memory=False,
         report_to=None,
-        save_total_limit=5,  # 最新5つのチェックポイントのみ保持
+        save_total_limit=3,  # 最新3つのチェックポイントのみ保持（継続学習用）
         load_best_model_at_end=False,
         metric_for_best_model=None,
         greater_is_better=None,
@@ -154,6 +170,13 @@ def main():
     # チェックポイントから再開する場合
     if args.resume_from_checkpoint:
         print(f"チェックポイント '{args.resume_from_checkpoint}' から学習を再開します...")
+        # 学習率を強制的に上書き（継続学習でのパラメータ反映問題の対策）
+        trainer.args.learning_rate = args.learning_rate
+        print(f"学習率を強制的に {args.learning_rate} に設定しました")
+        # 学習状態をリセット（継続学習での学習完了状態問題の対策）
+        trainer.args.max_steps = -1  # ステップ制限を解除
+        trainer.args.num_train_epochs = args.epochs  # エポック数を再設定
+        print(f"学習状態をリセット: max_steps=-1, epochs={args.epochs}")
         trainer.train(resume_from_checkpoint=args.resume_from_checkpoint)
     else:
         trainer.train()

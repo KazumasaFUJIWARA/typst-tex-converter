@@ -77,8 +77,10 @@ def format_prompt(latex_text, tokenizer, use_baseline=False):
 
 出力はTypst構文のみ。説明や注釈は不要。"""
     else:
-        # 学習済みモデル用の簡潔プロンプト
-        system_prompt = "LaTeXをTypstに変換してください。全文を変換してください。"
+        # 学習済みモデル用のプロンプト（Typstの説明を明確化）
+        system_prompt = """LaTeX 形式の文章を Typst形式 へ変換してください.
+重要: TypstはLaTeXの代替となる文書組版システムです。TypeScript（プログラミング言語）ではありません。
+出力はTypst構文のみ。プログラミングコードは出力しません。"""
     
     messages = [
         {"role": "system", "content": system_prompt},
@@ -137,7 +139,7 @@ def convert_latex_to_typst(model, tokenizer, latex_text, max_length=1024, use_ba
         print(f"  生成テキスト開始: {generated_text[:200]}...")
         print(f"  生成テキスト終了: ...{generated_text[-200:]}")
         
-        # アシスタントの応答部分を抽出（実際のLlama 3.2テンプレートに基づく）
+        # アシスタントの応答部分を抽出（簡素化）
         assistant_marker = "<|start_header_id|>assistant<|end_header_id|>"
         
         if assistant_marker in generated_text:
@@ -145,51 +147,19 @@ def convert_latex_to_typst(model, tokenizer, latex_text, max_length=1024, use_ba
             response = generated_text.split(assistant_marker)[-1].strip()
             print(f"  アシスタント応答抽出: {len(response)} 文字")
         else:
-            # フォールバック: 他のマーカーを試す
-            fallback_markers = [
-                "<|assistant|>",
-                "assistant<|end_header_id|>",
-                "<|start_header_id|>assistant"
-            ]
-            
-            response = None
-            for marker in fallback_markers:
-                if marker in generated_text:
-                    response = generated_text.split(marker)[-1].strip()
-                    print(f"  フォールバック応答抽出 ({marker}): {len(response)} 文字")
-                    break
-            
-            if response is None:
-                # 最後の手段: プロンプト部分を除去
-                if generated_text.startswith(prompt):
-                    response = generated_text[len(prompt):].strip()
-                else:
-                    # プロンプトの終了部分を探す
-                    prompt_end_markers = [
-                        "Today Date: 11 Sep 2025",
-                        "LaTeXをTypstに変換してください。",
-                        "<|eot_id|>"
-                    ]
-                    
-                    for marker in prompt_end_markers:
-                        if marker in generated_text:
-                            parts = generated_text.split(marker)
-                            if len(parts) > 1:
-                                # マーカー以降の部分を取得
-                                response = "".join(parts[1:]).strip()
-                                break
-                    
-                    if response is None:
-                        response = generated_text.strip()
-                
-                print(f"  最終フォールバック応答抽出: {len(response)} 文字")
+            # シンプルなフォールバック: プロンプト部分を除去
+            if generated_text.startswith(prompt):
+                response = generated_text[len(prompt):].strip()
+                print(f"  プロンプト除去による応答抽出: {len(response)} 文字")
+            else:
+                # 最後の手段: 全体を使用
+                response = generated_text.strip()
+                print(f"  全体を応答として使用: {len(response)} 文字")
         
-        # プロンプト部分を除去（追加のクリーニング）
-        if response and "LaTeXをTypstに変換してください。" in response:
-            # プロンプト部分が含まれている場合は、最後のassistant以降のみを取得
-            if "assistant" in response:
-                response = response.split("assistant")[-1].strip()
-                print(f"  プロンプト除去後の応答: {len(response)} 文字")
+        # TypeScriptコードが生成された場合の警告
+        if response and ("import" in response or "void main()" in response or "writeln" in response or "typscript" in response.lower()):
+            print("  警告: TypeScriptコードが生成されました。Typstコードを期待しています。")
+            print("  原因: モデルがTypstをTypeScriptと混同している可能性があります。")
         
         # デバッグ: 抽出された応答の内容を表示
         print(f"  抽出された応答: {response[:100]}...")
