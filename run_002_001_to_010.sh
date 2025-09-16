@@ -24,12 +24,15 @@ python3 iterative_train.py \
     --start_iteration 0 \
     --end_iteration 11 \
     --test_interval 2 \
-    --learning_rate 1e-5 \
+    --learning_rate 5e-5 \
+	 --epochs 5 \
     --lora_r 8 \
     --lora_alpha 8 \
     --lora_dropout 0.1 \
     --batch_size 1 \
-    --grad_accum 16
+    --grad_accum 16 \
+	 --warmup_ratio 0.1 \
+	 --warmup_steps 50
 
 echo "=== 001をbaseに002-000から002-010への学習完了 ==="
 echo "終了時刻: $(date)"
