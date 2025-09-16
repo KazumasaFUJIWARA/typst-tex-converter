@@ -1,0 +1,59 @@
+ベースモデル: meta-llama/Llama-3.2-3B-Instruct
+✅ 使用モデル: PEFT（LoRA適用済み）
+   PEFTモデル: ../outputs/llama32-3b-typst-qlora-003-000
+入力ファイル: ../sample/sample_small.tex
+出力ファイル: ../trained/003-000.md
+トークナイザーを読み込み中...
+4bit量子化設定を準備中...
+ベースモデルを読み込み中...
+
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]
+Loading checkpoint shards:  50%|█████     | 1/2 [00:02<00:02,  2.95s/it]
+Loading checkpoint shards: 100%|██████████| 2/2 [00:03<00:00,  1.77s/it]
+Loading checkpoint shards: 100%|██████████| 2/2 [00:03<00:00,  1.95s/it]
+The following generation flags are not valid and may be ignored: ['temperature', 'top_p']. Set `TRANSFORMERS_VERBOSITY=info` for more details.
+✅ PEFTモデルを読み込み中...
+   PEFTパス: ../outputs/llama32-3b-typst-qlora-003-000
+   PEFTモデル読み込み完了
+LaTeXファイルを読み込み中...
+LaTeXテキストを 1 チャンクに分割しました
+LaTeX→Typst変換を開始します...
+チャンク 1/1 を変換中...
+  入力テキスト長: 865 文字
+  チャットテンプレート適用成功
+  プロンプト長: 1223 文字
+  入力トークン数: 415
+  生成開始...
+  生成完了: 629 トークン
+  生成テキスト長: 1715 文字
+  プロンプト長: 1223 文字
+  生成テキスト開始: system
+
+Cutting Knowledge Date: December 2023
+Today Date: 17 Sep 2025
+
+LaTeX 形式の文章を Typst形式 へ変換してください.
+重要: TypstはLaTeXの代替となる文書組版システムです。TypeScript（プログラミング言語）ではありません。
+出力はTypst構文のみ。プログラミングコードは出力しません。user...
+  生成テキスト終了: ... $\left(\varepsilon_0, \varepsilon_1\right) \in \mathbb{R}^2$ are small, and $\varphi$ is a regular non-negative function. Our goal is to show the global existence of solutions under these conditions.
+  生成テキスト全体の長さ: 1715 文字
+  プロンプトの長さ: 1223 文字
+  方法1（全体使用）: 1715 文字
+  方法3（```typstマーカー）: 638 文字
+  最終応答: system
+
+Cutting Knowledge Date: December 2023
+Today Date: 17 Sep 2025
+
+LaTeX 形式の文章を Typst形式 へ変換してください.
+重要: TypstはLaTeXの代替となる文書組版システムです。TypeScript（プログラミング言語）ではありません。
+出力はTypst構文のみ。プログラミングコードは出力しません。user...
+  最終応答の最後: ...non-negative function. Our goal is to show the global existence of solutions under these conditions.
+  抽出された応答: system
+
+Cutting Knowledge Date: December 2023
+Today Date: 17 Sep 2025
+
+LaTeX 形式の文章を Typst形式 へ変換してくださ...
+結果を ../trained/003-000.md に保存中...
+変換完了！
