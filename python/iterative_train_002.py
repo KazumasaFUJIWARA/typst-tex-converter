@@ -69,23 +69,45 @@ def main():
         return
     
     # 初期チェックポイントの確認
-    initial_checkpoint = "../outputs/llama32-3b-typst-qlora-001"
-    if not os.path.exists(initial_checkpoint):
-        print(f"エラー: 初期チェックポイント {initial_checkpoint} が見つかりません。")
-        print("先に001の学習を完了してください。")
-        return
-    
-    # 最新のチェックポイントを取得
-    if os.path.exists(initial_checkpoint):
-        checkpoints = [d for d in os.listdir(initial_checkpoint) if d.startswith("checkpoint-")]
-        if checkpoints:
-            latest_checkpoint = sorted(checkpoints)[-1]
-            current_checkpoint = f"{initial_checkpoint}/{latest_checkpoint}"
+    if args.start_from == 0:
+        # 新規学習の場合は001シリーズから開始
+        initial_checkpoint = "../outputs/llama32-3b-typst-qlora-001"
+        if not os.path.exists(initial_checkpoint):
+            print(f"エラー: 初期チェックポイント {initial_checkpoint} が見つかりません。")
+            print("先に001の学習を完了してください。")
+            return
+        
+        # 最新のチェックポイントを取得
+        if os.path.exists(initial_checkpoint):
+            checkpoints = [d for d in os.listdir(initial_checkpoint) if d.startswith("checkpoint-")]
+            if checkpoints:
+                latest_checkpoint = sorted(checkpoints)[-1]
+                current_checkpoint = f"{initial_checkpoint}/{latest_checkpoint}"
+            else:
+                current_checkpoint = initial_checkpoint
         else:
-            current_checkpoint = initial_checkpoint
+            print(f"エラー: {initial_checkpoint} が見つかりません。")
+            return
     else:
-        print(f"エラー: {initial_checkpoint} が見つかりません。")
-        return
+        # 継続学習の場合は指定されたエポックから開始
+        start_epoch = f"{args.start_from:02d}"
+        initial_checkpoint = f"../outputs/llama32-3b-typst-qlora-002-{start_epoch}"
+        if not os.path.exists(initial_checkpoint):
+            print(f"エラー: 継続学習用チェックポイント {initial_checkpoint} が見つかりません。")
+            print(f"先に002-{start_epoch}の学習を完了してください。")
+            return
+        
+        # 最新のチェックポイントを取得
+        if os.path.exists(initial_checkpoint):
+            checkpoints = [d for d in os.listdir(initial_checkpoint) if d.startswith("checkpoint-")]
+            if checkpoints:
+                latest_checkpoint = sorted(checkpoints)[-1]
+                current_checkpoint = f"{initial_checkpoint}/{latest_checkpoint}"
+            else:
+                current_checkpoint = initial_checkpoint
+        else:
+            print(f"エラー: {initial_checkpoint} が見つかりません。")
+            return
     
     print(f"初期チェックポイント: {current_checkpoint}")
     print()
@@ -109,7 +131,11 @@ def main():
                 --lora_r 8 \
                 --lora_alpha 16 \
                 --lora_dropout 0.1"""
-            print(f"継続学習（001から）: {train_file} (from PEFT model {current_checkpoint})")
+            if args.start_from == 0:
+                print(f"継続学習（001から）: {train_file} (from PEFT model {current_checkpoint})")
+            else:
+                start_epoch = f"{args.start_from:02d}"
+                print(f"継続学習（002-{start_epoch}から）: {train_file} (from PEFT model {current_checkpoint})")
         else:
             # 2回目以降は前回のエポックから継続学習
             train_cmd = f"""python3 train_llama32_3b_qlora_fixed.py \
@@ -137,22 +163,27 @@ def main():
             continue
         
         # テストコマンド
-        test_cmd = f"""python3 inference_llama32_3b.py \
-            --input_file ../sample/sample_small.tex \
-            --output_file ../trained/002-{epoch_num}.typ \
-            --peft_model_path ../outputs/llama32-3b-typst-qlora-002-{epoch_num} \
-            --no-chunking"""
-        
-        test_log = f"../logs/002-{epoch_num}_test_{timestamp}.log"
-        print(f"テスト実行: ../trained/002-{epoch_num}.typ")
-        print(f"テストログ: {test_log}")
-        
-        test_result = run_command(test_cmd, test_log)
-        
-        if test_result != 0:
-            print(f"エラー: エポック {epoch_num} のテストに失敗しました。")
+        # テスト実行（5回に1回のみ）
+        if i % 5 == 0:
+            test_cmd = f"""python3 inference_llama32_3b.py \
+                --input_file ../sample/sample_small.tex \
+                --output_file ../trained/002-{epoch_num}.typ \
+                --peft_model_path ../outputs/llama32-3b-typst-qlora-002-{epoch_num} \
+                --no-chunking"""
+            
+            test_log = f"../logs/002-{epoch_num}_test_{timestamp}.log"
+            print(f"テスト実行: ../trained/002-{epoch_num}.typ")
+            print(f"テストログ: {test_log}")
+            
+            test_result = run_command(test_cmd, test_log)
+            
+            if test_result != 0:
+                print(f"エラー: エポック {epoch_num} のテストに失敗しました。")
+            else:
+                print(f"完了: エポック {epoch_num} の学習・テストが完了しました。")
         else:
-            print(f"完了: エポック {epoch_num} の学習・テストが完了しました。")
+            print(f"スキップ: エポック {epoch_num} のテストをスキップしました（5回に1回の実行）")
+            test_result = 0
         
         # 次の繰り返し用にチェックポイントを更新（学習が成功した場合のみ）
         if train_result == 0:

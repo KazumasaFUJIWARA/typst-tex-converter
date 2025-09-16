@@ -103,8 +103,8 @@ def main():
                 --out outputs/llama32-3b-typst-qlora-002-{epoch_num} \
                 --resume_from_checkpoint {current_checkpoint} \
                 --epochs {args.epochs} \
-                --batch_size 2 \
-                --grad_accum 8 \
+                --batch_size 1 \
+                --grad_accum 16 \
                 --learning_rate {args.learning_rate} \
                 --lora_r 8 \
                 --lora_alpha 16 \
@@ -117,8 +117,8 @@ def main():
                 --out outputs/llama32-3b-typst-qlora-002-{epoch_num} \
                 --peft_model_path {current_checkpoint} \
                 --epochs {args.epochs} \
-                --batch_size 2 \
-                --grad_accum 8 \
+                --batch_size 1 \
+                --grad_accum 16 \
                 --learning_rate {args.learning_rate} \
                 --lora_r 8 \
                 --lora_alpha 16 \

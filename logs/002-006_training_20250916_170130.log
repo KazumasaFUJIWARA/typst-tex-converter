@@ -1,0 +1,67 @@
+Llama 3.2 3Bモデル: meta-llama/Llama-3.2-3B-Instruct
+データ: ../jsonl/train_002.jsonl
+出力: ../outputs/llama32-3b-typst-qlora-002-006
+学習率: 1e-05
+エポック数: 1
+バッチサイズ: 1
+勾配累積: 16
+LoRA rank: 8
+LoRA alpha: 8
+LoRA dropout: 0.1
+==================================================
+トークナイザーを読み込み中...
+4bit量子化設定を準備中...
+モデルを読み込み中...
+
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]
+Loading checkpoint shards:  50%|█████     | 1/2 [00:02<00:02,  2.95s/it]
+Loading checkpoint shards: 100%|██████████| 2/2 [00:03<00:00,  1.75s/it]
+Loading checkpoint shards: 100%|██████████| 2/2 [00:03<00:00,  1.93s/it]
+/mnt/d/github/typst-tex-converter/venv/lib/python3.11/site-packages/peft/tuners/lora/bnb.py:348: UserWarning: Merge lora module to 4-bit linear may get different generations due to rounding errors.
+  warnings.warn(
+/mnt/d/github/typst-tex-converter/venv/lib/python3.11/site-packages/peft/tuners/tuners_utils.py:196: UserWarning: Already found a `peft_config` attribute in the model. This will lead to having multiple adapters in the model. Make sure to know what you are doing!
+  warnings.warn(
+The tokenizer has new PAD/BOS/EOS tokens that differ from the model config and generation config. The model config and generation config were aligned accordingly, being updated with the tokenizer's values. Updated tokens: {'eos_token_id': 128009}.
+既存のPEFTモデルを読み込み中: ../outputs/llama32-3b-typst-qlora-002-005
+データセットを読み込み中...
+データセットサイズ: 92
+Llama 3.2 3B QLoRA学習を開始します...
+
+  0%|          | 0/6 [00:00<?, ?it/s]
+ 17%|█▋        | 1/6 [00:07<00:35,  7.12s/it]
+                                             
+
+ 17%|█▋        | 1/6 [00:07<00:35,  7.12s/it]
+ 33%|███▎      | 2/6 [00:15<00:31,  7.83s/it]
+                                             
+
+ 33%|███▎      | 2/6 [00:15<00:31,  7.83s/it]
+ 50%|█████     | 3/6 [00:23<00:23,  7.99s/it]
+                                             
+
+ 50%|█████     | 3/6 [00:23<00:23,  7.99s/it]
+ 67%|██████▋   | 4/6 [00:31<00:16,  8.04s/it]
+                                             
+
+ 67%|██████▋   | 4/6 [00:31<00:16,  8.04s/it]
+ 83%|████████▎ | 5/6 [00:39<00:08,  8.06s/it]
+                                             
+
+ 83%|████████▎ | 5/6 [00:39<00:08,  8.06s/it]
+100%|██████████| 6/6 [00:46<00:00,  7.63s/it]
+                                             
+
+100%|██████████| 6/6 [00:46<00:00,  7.63s/it]
+                                             
+
+100%|██████████| 6/6 [00:48<00:00,  7.63s/it]
+100%|██████████| 6/6 [00:48<00:00,  8.05s/it]
+{'loss': 1.145, 'grad_norm': 1.7275118827819824, 'learning_rate': 0.0, 'entropy': 1.3655147440731525, 'num_tokens': 1785.0, 'mean_token_accuracy': 0.8157977424561977, 'epoch': 0.17}
+{'loss': 1.384, 'grad_norm': 1.9615449905395508, 'learning_rate': 1e-05, 'entropy': 1.4408875815570354, 'num_tokens': 3662.0, 'mean_token_accuracy': 0.7870026677846909, 'epoch': 0.35}
+{'loss': 1.2749, 'grad_norm': 2.16231369972229, 'learning_rate': 9.045084971874738e-06, 'entropy': 1.4845013916492462, 'num_tokens': 5405.0, 'mean_token_accuracy': 0.8030149862170219, 'epoch': 0.52}
+{'loss': 1.3035, 'grad_norm': 1.7778900861740112, 'learning_rate': 6.545084971874738e-06, 'entropy': 1.46272699162364, 'num_tokens': 7212.0, 'mean_token_accuracy': 0.8176902309060097, 'epoch': 0.7}
+{'loss': 1.1648, 'grad_norm': 2.076228141784668, 'learning_rate': 3.4549150281252635e-06, 'entropy': 1.427764255553484, 'num_tokens': 9022.0, 'mean_token_accuracy': 0.7940269038081169, 'epoch': 0.87}
+{'loss': 1.2475, 'grad_norm': 2.39463472366333, 'learning_rate': 9.549150281252633e-07, 'entropy': 1.4732811351617177, 'num_tokens': 10314.0, 'mean_token_accuracy': 0.8085015167792639, 'epoch': 1.0}
+{'train_runtime': 48.3025, 'train_samples_per_second': 1.905, 'train_steps_per_second': 0.124, 'train_loss': 1.2532626390457153, 'epoch': 1.0}
+モデルを保存中...
+Llama 3.2 3B QLoRA学習完了！モデルは ../outputs/llama32-3b-typst-qlora-002-006 に保存されました。

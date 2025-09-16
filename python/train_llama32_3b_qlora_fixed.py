@@ -24,18 +24,18 @@ def main():
                        help="出力ディレクトリ")
     parser.add_argument("--max_len", type=int, default=1024, 
                        help="最大シーケンス長（3B推奨: 1024）")
-    parser.add_argument("--batch_size", type=int, default=2, 
-                       help="デバイスあたりのバッチサイズ（3Bは軽量なので2に増加）")
-    parser.add_argument("--grad_accum", type=int, default=8, 
-                       help="勾配累積ステップ数（3Bは軽量なので削減）")
-    parser.add_argument("--learning_rate", type=float, default=2e-4, 
-                       help="学習率（3B推奨: 2e-4）")
+    parser.add_argument("--batch_size", type=int, default=1, 
+                       help="デバイスあたりのバッチサイズ（メモリ不足対策で1に削減）")
+    parser.add_argument("--grad_accum", type=int, default=16, 
+                       help="勾配累積ステップ数（メモリ不足対策で16に増加）")
+    parser.add_argument("--learning_rate", type=float, default=1e-5, 
+                       help="学習率（逐次学習用: 1e-5）")
     parser.add_argument("--epochs", type=int, default=5, 
                        help="エポック数（3Bは軽量なので増加可能）")
-    parser.add_argument("--lora_r", type=int, default=8, 
-                       help="LoRA rank（3B推奨: 8）")
-    parser.add_argument("--lora_alpha", type=int, default=16, 
-                       help="LoRA alpha（3B推奨: 16）")
+    parser.add_argument("--lora_r", type=int, default=16, 
+                       help="LoRA rank（逐次学習用: 16）")
+    parser.add_argument("--lora_alpha", type=int, default=32, 
+                       help="LoRA alpha（逐次学習用: 32）")
     parser.add_argument("--lora_dropout", type=float, default=0.1, 
                        help="LoRA dropout")
     parser.add_argument("--resume_from_checkpoint", type=str, default=None,
@@ -141,13 +141,16 @@ def main():
         save_strategy="steps",
         logging_steps=1,  # 1ステップごとにログ出力
         logging_dir=f"{args.out}/logs",
-        warmup_steps=10,  # ウォームアップステップを削減
+        warmup_ratio=0.1,  # ウォームアップ比率10%（逐次学習用）
+        lr_scheduler_type="cosine",  # コサイン学習率スケジューラー（逐次学習用）
+        max_grad_norm=1.0,  # 勾配クリッピング（逐次学習用）
         fp16=True,  # float16を使用（警告1の対策）
         bf16=False,
         remove_unused_columns=False,
         dataloader_pin_memory=False,
+        dataloader_num_workers=0,  # メモリ不足対策でワーカー数を0に
         report_to=None,
-        save_total_limit=3,  # 最新3つのチェックポイントのみ保持（継続学習用）
+        save_total_limit=1,  # 最新1つのチェックポイントのみ保持（メモリ不足対策）
         load_best_model_at_end=False,
         metric_for_best_model=None,
         greater_is_better=None,

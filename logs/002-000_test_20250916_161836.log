@@ -1,0 +1,242 @@
+ベースモデル: meta-llama/Llama-3.2-3B-Instruct
+✅ 使用モデル: PEFT（LoRA適用済み）
+   PEFTモデル: ../outputs/llama32-3b-typst-qlora-002-000
+入力ファイル: ../sample/sample_small.tex
+出力ファイル: ../trained/002-000.typ
+トークナイザーを読み込み中...
+4bit量子化設定を準備中...
+ベースモデルを読み込み中...
+
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]
+Loading checkpoint shards:  50%|█████     | 1/2 [00:03<00:03,  3.02s/it]
+Loading checkpoint shards: 100%|██████████| 2/2 [00:03<00:00,  1.81s/it]
+Loading checkpoint shards: 100%|██████████| 2/2 [00:03<00:00,  1.99s/it]
+The following generation flags are not valid and may be ignored: ['temperature', 'top_p']. Set `TRANSFORMERS_VERBOSITY=info` for more details.
+✅ PEFTモデルを読み込み中...
+   PEFTパス: ../outputs/llama32-3b-typst-qlora-002-000
+   PEFTモデル読み込み完了
+LaTeXファイルを読み込み中...
+LaTeXテキストを 6 チャンクに分割しました
+LaTeX→Typst変換を開始します...
+チャンク 1/6 を変換中...
+  入力テキスト長: 29 文字
+  チャットテンプレート適用成功
+  プロンプト長: 387 文字
+  入力トークン数: 118
+  生成開始...
+  生成完了: 133 トークン
+  生成テキスト長: 282 文字
+  プロンプト長: 387 文字
+  生成テキスト開始: system
+
+Cutting Knowledge Date: December 2023
+Today Date: 16 Sep 2025
+
+LaTeX 形式の文章を Typst形式 へ変換してください.
+重要: TypstはLaTeXの代替となる文書組版システムです。TypeScript（プログラミング言語）ではありません。
+出力はTypst構文のみ。プログラミングコードは出力しません。user...
+  生成テキスト終了: ...を Typst形式 へ変換してください.
+重要: TypstはLaTeXの代替となる文書組版システムです。TypeScript（プログラミング言語）ではありません。
+出力はTypst構文のみ。プログラミングコードは出力しません。user
+
+\documentclass[reqno]{amsart}assistant
+
+```
+---
+title: 
+author: 
+date: 
+---
+
+```
+  全体を応答として使用: 282 文字
+  抽出された応答: system
+
+Cutting Knowledge Date: December 2023
+Today Date: 16 Sep 2025
+
+LaTeX 形式の文章を Typst形式 へ変換してくださ...
+チャンク 2/6 を変換中...
+  入力テキスト長: 16 文字
+  チャットテンプレート適用成功
+  プロンプト長: 374 文字
+  入力トークン数: 113
+  生成開始...
+  生成完了: 131 トークン
+  生成テキスト長: 279 文字
+  プロンプト長: 374 文字
+  生成テキスト開始: system
+
+Cutting Knowledge Date: December 2023
+Today Date: 16 Sep 2025
+
+LaTeX 形式の文章を Typst形式 へ変換してください.
+重要: TypstはLaTeXの代替となる文書組版システムです。TypeScript（プログラミング言語）ではありません。
+出力はTypst構文のみ。プログラミングコードは出力しません。user...
+  生成テキスト終了: ...の文章を Typst形式 へ変換してください.
+重要: TypstはLaTeXの代替となる文書組版システムです。TypeScript（プログラミング言語）ではありません。
+出力はTypst構文のみ。プログラミングコードは出力しません。user
+
+\begin{document}assistant
+
+```
+---
+title: 
+date: 
+author: 
+version: 
+---
+
+```
+  全体を応答として使用: 279 文字
+  抽出された応答: system
+
+Cutting Knowledge Date: December 2023
+Today Date: 16 Sep 2025
+
+LaTeX 形式の文章を Typst形式 へ変換してくださ...
+チャンク 3/6 を変換中...
+  入力テキスト長: 10 文字
+  チャットテンプレート適用成功
+  プロンプト長: 368 文字
+  入力トークン数: 112
+  生成開始...
+  生成完了: 121 トークン
+  生成テキスト長: 246 文字
+  プロンプト長: 368 文字
+  生成テキスト開始: system
+
+Cutting Knowledge Date: December 2023
+Today Date: 16 Sep 2025
+
+LaTeX 形式の文章を Typst形式 へ変換してください.
+重要: TypstはLaTeXの代替となる文書組版システムです。TypeScript（プログラミング言語）ではありません。
+出力はTypst構文のみ。プログラミングコードは出力しません。user...
+  生成テキスト終了: ...Today Date: 16 Sep 2025
+
+LaTeX 形式の文章を Typst形式 へ変換してください.
+重要: TypstはLaTeXの代替となる文書組版システムです。TypeScript（プログラミング言語）ではありません。
+出力はTypst構文のみ。プログラミングコードは出力しません。user
+
+\maketitleassistant
+
+```
+---
+title: 
+---
+```
+  全体を応答として使用: 246 文字
+  抽出された応答: system
+
+Cutting Knowledge Date: December 2023
+Today Date: 16 Sep 2025
+
+LaTeX 形式の文章を Typst形式 へ変換してくださ...
+チャンク 4/6 を変換中...
+  入力テキスト長: 22 文字
+  チャットテンプレート適用成功
+  プロンプト長: 380 文字
+  入力トークン数: 113
+  生成開始...
+  生成完了: 120 トークン
+  生成テキスト長: 257 文字
+  プロンプト長: 380 文字
+  生成テキスト開始: system
+
+Cutting Knowledge Date: December 2023
+Today Date: 16 Sep 2025
+
+LaTeX 形式の文章を Typst形式 へ変換してください.
+重要: TypstはLaTeXの代替となる文書組版システムです。TypeScript（プログラミング言語）ではありません。
+出力はTypst構文のみ。プログラミングコードは出力しません。user...
+  生成テキスト終了: ... 16 Sep 2025
+
+LaTeX 形式の文章を Typst形式 へ変換してください.
+重要: TypstはLaTeXの代替となる文書組版システムです。TypeScript（プログラミング言語）ではありません。
+出力はTypst構文のみ。プログラミングコードは出力しません。user
+
+\section{Introduction}assistant
+
+```
+# Introduction
+```
+  全体を応答として使用: 257 文字
+  抽出された応答: system
+
+Cutting Knowledge Date: December 2023
+Today Date: 16 Sep 2025
+
+LaTeX 形式の文章を Typst形式 へ変換してくださ...
+チャンク 5/6 を変換中...
+  入力テキスト長: 764 文字
+  チャットテンプレート適用成功
+  プロンプト長: 1122 文字
+  入力トークン数: 385
+  生成開始...
+  生成完了: 897 トークン
+  生成テキスト長: 2707 文字
+  プロンプト長: 1122 文字
+  生成テキスト開始: system
+
+Cutting Knowledge Date: December 2023
+Today Date: 16 Sep 2025
+
+LaTeX 形式の文章を Typst形式 へ変換してください.
+重要: TypstはLaTeXの代替となる文書組版システムです。TypeScript（プログラミング言語）ではありません。
+出力はTypst構文のみ。プログラミングコードは出力しません。user...
+  生成テキスト終了: ...n use the method of energy estimates. This involves deriving an inequality that bounds the total energy of the solution over time. By showing that the total energy is bounded, we can conclude that the
+  全体を応答として使用: 2707 文字
+  抽出された応答: system
+
+Cutting Knowledge Date: December 2023
+Today Date: 16 Sep 2025
+
+LaTeX 形式の文章を Typst形式 へ変換してくださ...
+チャンク 6/6 を変換中...
+  入力テキスト長: 14 文字
+  チャットテンプレート適用成功
+  プロンプト長: 372 文字
+  入力トークン数: 113
+  生成開始...
+  生成完了: 149 トークン
+  生成テキスト長: 329 文字
+  プロンプト長: 372 文字
+  生成テキスト開始: system
+
+Cutting Knowledge Date: December 2023
+Today Date: 16 Sep 2025
+
+LaTeX 形式の文章を Typst形式 へ変換してください.
+重要: TypstはLaTeXの代替となる文書組版システムです。TypeScript（プログラミング言語）ではありません。
+出力はTypst構文のみ。プログラミングコードは出力しません。user...
+  生成テキスト終了: ...ステムです。TypeScript（プログラミング言語）ではありません。
+出力はTypst構文のみ。プログラミングコードは出力しません。user
+
+\end{document}assistant
+
+```
+---
+title: 
+date: 
+version: 
+author: 
+---
+
+```typst
+---
+title: 
+date: 
+version: 
+author: 
+---
+
+```
+  全体を応答として使用: 329 文字
+  抽出された応答: system
+
+Cutting Knowledge Date: December 2023
+Today Date: 16 Sep 2025
+
+LaTeX 形式の文章を Typst形式 へ変換してくださ...
+結果を ../trained/002-000.typ に保存中...
+変換完了！

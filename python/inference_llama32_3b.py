@@ -6,6 +6,7 @@
 import argparse
 import torch
 import os
+import time
 from transformers import AutoTokenizer, AutoModelForCausalLM, BitsAndBytesConfig
 from peft import PeftModel
 import json
@@ -139,22 +140,53 @@ def convert_latex_to_typst(model, tokenizer, latex_text, max_length=1024, use_ba
         print(f"  生成テキスト開始: {generated_text[:200]}...")
         print(f"  生成テキスト終了: ...{generated_text[-200:]}")
         
-        # アシスタントの応答部分を抽出（簡素化）
-        assistant_marker = "<|start_header_id|>assistant<|end_header_id|>"
+        # アシスタントの応答部分を抽出（新しい解析方法）
+        print(f"  生成テキスト全体の長さ: {len(generated_text)} 文字")
+        print(f"  プロンプトの長さ: {len(prompt)} 文字")
         
-        if assistant_marker in generated_text:
-            # アシスタントマーカー以降の部分を抽出
-            response = generated_text.split(assistant_marker)[-1].strip()
-            print(f"  アシスタント応答抽出: {len(response)} 文字")
+        # 方法1: プロンプト部分を除去
+        if generated_text.startswith(prompt):
+            response = generated_text[len(prompt):].strip()
+            print(f"  方法1（プロンプト除去）: {len(response)} 文字")
         else:
-            # シンプルなフォールバック: プロンプト部分を除去
-            if generated_text.startswith(prompt):
-                response = generated_text[len(prompt):].strip()
-                print(f"  プロンプト除去による応答抽出: {len(response)} 文字")
-            else:
-                # 最後の手段: 全体を使用
-                response = generated_text.strip()
-                print(f"  全体を応答として使用: {len(response)} 文字")
+            response = generated_text.strip()
+            print(f"  方法1（全体使用）: {len(response)} 文字")
+        
+        # 方法2: アシスタントマーカーで抽出
+        assistant_marker = "<|start_header_id|>assistant<|end_header_id|>"
+        if assistant_marker in generated_text:
+            assistant_response = generated_text.split(assistant_marker)[-1].strip()
+            print(f"  方法2（アシスタントマーカー）: {len(assistant_response)} 文字")
+            
+            # 次のマーカーで切る
+            if "<|start_header_id|>" in assistant_response:
+                assistant_response = assistant_response.split("<|start_header_id|>")[0].strip()
+                print(f"  方法2（マーカーで切る後）: {len(assistant_response)} 文字")
+            
+            # より長い応答を選択
+            if len(assistant_response) > len(response):
+                response = assistant_response
+                print(f"  方法2を採用: {len(response)} 文字")
+        
+        # 方法3: ```typstマーカーで抽出
+        if "```typst" in response:
+            typst_start = response.find("```typst")
+            typst_content = response[typst_start:].strip()
+            print(f"  方法3（```typstマーカー）: {len(typst_content)} 文字")
+            
+            # 最後の```を除去
+            if typst_content.endswith('```'):
+                typst_content = typst_content[:-3].strip()
+                print(f"  方法3（```除去後）: {len(typst_content)} 文字")
+            
+            # より長い応答を選択
+            if len(typst_content) > len(response):
+                response = typst_content
+                print(f"  方法3を採用: {len(response)} 文字")
+        
+        # デバッグ: 最終的な応答の内容を表示
+        print(f"  最終応答: {response[:200]}...")
+        print(f"  最終応答の最後: ...{response[-100:]}")
         
         # TypeScriptコードが生成された場合の警告
         if response and ("import" in response or "void main()" in response or "writeln" in response or "typscript" in response.lower()):
@@ -177,63 +209,33 @@ def convert_latex_to_typst(model, tokenizer, latex_text, max_length=1024, use_ba
         return f"# 変換エラー: {e}"
 
 def preprocess_latex(latex_text):
-    """LaTeXテキストを前処理（数式環境を考慮した分割）"""
-    # 数式環境の境界を保持しながら分割
-    chunks = []
-    
-    # 数式環境（align, equation, cases等）を検出
-    math_environments = [
-        r'\\begin\{align\}.*?\\end\{align\}',
-        r'\\begin\{equation\}.*?\\end\{equation\}',
-        r'\\begin\{cases\}.*?\\end\{cases\}',
-        r'\\begin\{array\}.*?\\end\{array\}',
-        r'\\begin\{matrix\}.*?\\end\{matrix\}',
-        r'\\begin\{pmatrix\}.*?\\end\{pmatrix\}',
-        r'\\begin\{bmatrix\}.*?\\end\{bmatrix\}',
-        r'\\begin\{vmatrix\}.*?\\end\{vmatrix\}',
-    ]
-    
-    # 数式環境を一時的にマーク
-    marked_text = latex_text
-    math_placeholders = []
-    
-    for i, pattern in enumerate(math_environments):
-        matches = re.finditer(pattern, marked_text, re.DOTALL)
-        for match in reversed(list(matches)):  # 後ろから置換してインデックスを保持
-            placeholder = f"__MATH_ENV_{i}_{len(math_placeholders)}__"
-            math_placeholders.append(match.group())
-            marked_text = marked_text[:match.start()] + placeholder + marked_text[match.end():]
-    
-    # 段落単位で分割
-    paragraphs = marked_text.split('\n\n')
-    
-    for para in paragraphs:
-        para = para.strip()
-        if para and len(para) > 5:  # 空でない段落のみ
-            # 数式環境のプレースホルダーを元に戻す
-            for i, placeholder in enumerate([f"__MATH_ENV_{j}_{i}__" for j in range(len(math_environments)) for i in range(len(math_placeholders))]):
-                if placeholder in para:
-                    para = para.replace(placeholder, math_placeholders[i])
-            
-            # 長すぎる段落は文単位で分割（数式環境は保持）
-            if len(para) > 1500:  # 制限を緩和
-                # 数式環境内でない文の境界で分割
-                sentences = re.split(r'(?<=[.!?])\s+(?![^\\]*\\end\{)', para)
-                current_chunk = ""
-                for sentence in sentences:
-                    if len(current_chunk + sentence) > 1500:
-                        if current_chunk:
-                            chunks.append(current_chunk.strip())
-                        current_chunk = sentence
-                    else:
-                        current_chunk += " " + sentence if current_chunk else sentence
-                if current_chunk:
+    """LaTeXテキストを前処理（適切な分割）"""
+    # 全文を1つのチャンクとして処理（分割を簡素化）
+    # 長すぎる場合は文書構造で分割
+    if len(latex_text) > 3000:
+        # 文書構造で分割
+        chunks = []
+        
+        # \section, \subsection, \begin{document}等で分割
+        sections = re.split(r'(\\section\{[^}]*\}|\\subsection\{[^}]*\}|\\begin\{document\})', latex_text)
+        
+        current_chunk = ""
+        for section in sections:
+            if len(current_chunk + section) > 3000:
+                if current_chunk.strip():
                     chunks.append(current_chunk.strip())
+                current_chunk = section
             else:
-                chunks.append(para)
-    
-    # チャンクが空の場合は元のテキストをそのまま使用
-    if not chunks:
+                current_chunk += section
+        
+        if current_chunk.strip():
+            chunks.append(current_chunk.strip())
+        
+        # チャンクが空の場合は元のテキストをそのまま使用
+        if not chunks:
+            chunks = [latex_text]
+    else:
+        # 短い場合は全文を1つのチャンクとして処理
         chunks = [latex_text]
     
     return chunks
@@ -300,10 +302,35 @@ def main():
     else:
         typst_content = "\n\n".join(typst_parts)
     
-    # 出力ファイルに保存
+    # 出力ファイルに保存（新しい形式）
     print(f"結果を {args.output_file} に保存中...")
     with open(args.output_file, 'w', encoding='utf-8') as f:
+        f.write("# プロンプト\n")
+        f.write("``` plain text\n")
+        f.write("LaTeX 形式の文章を Typst形式 へ変換してください.\n")
+        f.write("重要: TypstはLaTeXの代替となる文書組版システムです。TypeScript（プログラミング言語）ではありません。\n")
+        f.write("出力はTypst構文のみ。プログラミングコードは出力しません。\n")
+        f.write("```\n\n")
+        
+        f.write("# 元の文\n")
+        f.write("``` LaTeX\n")
+        f.write(latex_content)
+        f.write("\n```\n\n")
+        
+        f.write("# 出力\n")
+        f.write("``` Typst\n")
         f.write(typst_content)
+        f.write("\n```\n\n")
+        
+        # ログファイルへの参照と要約を追加
+        f.write("---\n")
+        f.write("## 学習情報\n")
+        f.write(f"- **学習ログ**: `../logs/{os.path.basename(args.output_file).replace('.md', '_training_*.log')}`\n")
+        f.write(f"- **テストログ**: `../logs/{os.path.basename(args.output_file).replace('.md', '_test_*.log')}`\n")
+        f.write(f"- **生成時刻**: {time.strftime('%Y-%m-%d %H:%M:%S')}\n")
+        f.write(f"- **入力文字数**: {len(latex_content)}\n")
+        f.write(f"- **出力文字数**: {len(typst_content)}\n")
+        f.write(f"- **チャンク数**: {len(latex_chunks)}\n")
     
     print("変換完了！")
 
