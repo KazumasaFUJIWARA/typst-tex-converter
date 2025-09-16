@@ -25,7 +25,7 @@ python3 iterative_train.py \
     --start_iteration 0 \
     --end_iteration 10 \
     --test_interval 2 \
-    --epochs 8 \
+    --epochs 12 \
     --learning_rate 1e-5 \
     --lora_r 8 \
     --lora_alpha 8 \

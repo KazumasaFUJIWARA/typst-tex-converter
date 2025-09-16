@@ -1,0 +1,390 @@
+---
+alwaysApply: false
+---
+# TeX > Typst変換規則
+
+## 0. 微分記号の変換（重要）
+- `dx` → `d x`（スペースを追加、Typstでは複数文字がコマンドとして認識されるため）
+- `dy` → `d y`（スペースを追加）
+- `dz` → `d z`（スペースを追加）
+- `dt` → `d t`（スペースを追加）
+- `du` → `d u`（スペースを追加）
+- `dv` → `d v`（スペースを追加）
+
+## 1. Unicode記号の使用(強制)
+- ギリシャ文字
+- Fraktur
+- 黒板太字
+- 筆記体
+- 演算子
+
+### preambleの保持（重要）
+- TeXのpreambleは復元が困難なため、コメントアウトで保持
+- 例：`\documentclass[reqno]{amsart}` → `// \documentclass[reqno]{amsart}`
+- 例：`\usepackage{mathtools,amssymb, xcolor}` → `// \usepackage{mathtools,amssymb, xcolor}`
+- 例：`\newtheorem{Theorem}{Theorem}[section]` → `// \newtheorem{Theorem}{Theorem}[section]`
+
+### 数学演算子のUnicode化（重要）
+- `in` → `∈`（属する）
+- `<=` → `≤`（小なりイコール）
+- `>=` → `≥`（大なりイコール）
+- `!=` → `≠`（等しくない）
+- `->` → `→`（矢印）
+- `=>` → `⇒`（二重矢印）
+- `infty` → `∞`（無限大）
+- `sum` → `∑`（総和）
+- `prod` → `∏`（総積）
+- `cap` → `∩`（共通部分）
+- `cup` → `∪`（和集合）
+- `subset` → `⊂`（部分集合）
+- `supset` → `⊃`（上位集合）
+- `emptyset` → `∅`（空集合）
+- `RR` → `ℝ`（実数全体）
+- `NN` → `ℕ`（自然数全体）
+- `ZZ` → `ℤ`（整数全体）
+- `QQ` → `ℚ`（有理数全体）
+- `CC` → `ℂ`（複素数全体）
+
+## 2. 数式環境の変換
+- `\begin{align}...\end{align}` → Typstの数式ブロック `$ ... $`
+- `\begin{equation}...\end{equation}` → Typstの数式ブロック `$ ... $`
+- `\begin{cases}...\end{cases}` → `cases()`関数
+
+### cases環境でのカンマのエスケープ（重要）
+- `cases`環境内では`,`が改行になるため、カンマを表示するには`\,`とエスケープが必要
+- ただし、`()`内のカンマはエスケープ不要
+- 例：`cases(f(x) = x, quad x > 0, f(x) = -x, quad x <= 0)` → `cases(f(x) = x\, quad x > 0, f(x) = -x\, quad x ≤ 0)`
+- 例：`cases((a, b) = (1, 2), c = 3)` → `cases((a, b) = (1, 2)\, c = 3)`（`()`内のカンマはエスケープ不要）
+- `\label{eq:name}` → `<eq:name>`形式
+- `\eqref{eq:name}` → `@eq:name`形式
+- `\tag{name}` → `<name>`形式
+
+### 積分記号の変換（重要）
+- `\int` → `∫`（機械的置換、Unicode記号使用）
+- `\iint` → `∬`（二重積分、機械的置換、Unicode記号使用）
+- `\iiint` → `∭`（三重積分、機械的置換、Unicode記号使用）
+
+### 微分記号の変換（重要）
+- `\dot{A}` → `dot(A)`（一階微分）
+- `\ddot{A}` → `dot.double(A)`（二階微分）
+- `\dddot{A}` → `dot.triple(A)`（三階微分）
+- `\ddddot{A}` → `dot.quad(A)`（四階微分）
+- `\partial_t` → `∂_t`（偏微分、Unicode記号使用）
+- `\partial_{xx}` → `∂_(x x)`（二階偏微分、Unicode記号使用）
+- `\partial_{xy}` → `∂_(x y)`（混合偏微分、Unicode記号使用）
+- `\nabla` → `∇`（ナブラ、Unicode記号使用）
+- `\Delta` → `Δ`（ラプラシアン、Unicode記号使用）
+
+### 数式内のラベルと参照
+- `\label{eq:name}` → `<eq:name> // \label{eq:name}`（数式ブロック内）
+- `\eqref{eq:name}` → `"@eq:name" // \eqref{eq:name}`（数式ブロック内の文字列として）
+- `\ref{eq:name}` → `"@eq:name" // \ref{eq:name}`（数式ブロック内の文字列として）
+- `\tag{name}` → `<name> // \tag{name}`
+- `\tag*{name}` → `<name> // \tag*{name}`
+
+#### sample
+- $A " is defined by @eq:A"$
+
+## 3. 定理環境の変換
+
+### パッケージの使用
+```typst
+#import "@original/article:1.0.0": *
+
+#show: article.with(
+  title: "タイトル",
+  author: "著者名",
+  affiliation: "所属",
+  email: "email@example.com",
+  date: "日付",
+  abstract: [要約文],
+  keywords: "キーワード1, キーワード2"
+)
+```
+
+### 変換規則
+- `\begin{Theorem}...\end{Theorem}` → `#theorem[...]`
+- `\begin{Theorem}[title]...\end{Theorem}` → `#theorem(title: "title")[...]`
+- `\begin{Theorem}\label{theorem:name}...\end{Theorem}` → `#theorem(id: "theorem:name")[...]`
+- `\begin{Theorem}[title]\label{theorem:name}...\end{Theorem}` → `#theorem(title: "title", id: "theorem:name")[...]`
+
+- `\begin{Lemma}...\end{Lemma}` → `#lemma[...]`
+- `\begin{Lemma}[title]...\end{Lemma}` → `#lemma(title: "title")[...]`
+- `\begin{Lemma}\label{lemma:name}...\end{Lemma}` → `#lemma(id: "lemma:name")[...]`
+- `\begin{Lemma}[title]\label{lemma:name}...\end{Lemma}` → `#lemma(title: "title", id: "lemma:name")[...]`
+
+- `\begin{Corollary}...\end{Corollary}` → `#corollary[...]`
+- `\begin{Corollary}[title]...\end{Corollary}` → `#corollary(title: "title")[...]`
+- `\begin{Corollary}\label{corollary:name}...\end{Corollary}` → `#corollary(id: "corollary:name")[...]`
+- `\begin{Corollary}[title]\label{corollary:name}...\end{Corollary}` → `#corollary(title: "title", id: "corollary:name")[...]`
+
+- `\begin{Proposition}...\end{Proposition}` → `#proposition[...]`
+- `\begin{Proposition}[title]...\end{Proposition}` → `#proposition(title: "title")[...]`
+- `\begin{Proposition}\label{proposition:name}...\end{Proposition}` → `#proposition(id: "proposition:name")[...]`
+- `\begin{Proposition}[title]\label{proposition:name}...\end{Proposition}` → `#proposition(title: "title", id: "proposition:name")[...]`
+
+- `\begin{Definition}...\end{Definition}` → `#definition[...]`
+- `\begin{Definition}[title]...\end{Definition}` → `#definition(title: "title")[...]`
+- `\begin{Definition}\label{definition:name}...\end{Definition}` → `#definition(id: "definition:name")[...]`
+- `\begin{Definition}[title]\label{definition:name}...\end{Definition}` → `#definition(title: "title", id: "definition:name")[...]`
+
+- `\begin{Remark}...\end{Remark}` → `#remark[...]`
+- `\begin{Remark}[title]...\end{Remark}` → `#remark(title: "title")[...]`
+- `\begin{Remark}\label{remark:name}...\end{Remark}` → `#remark(id: "remark:name")[...]`
+- `\begin{Remark}[title]\label{remark:name}...\end{Remark}` → `#remark(title: "title", id: "remark:name")[...]`
+
+- `\begin{Proof}...\end{Proof}` → `#proof[...]`
+- `\begin{Proof}[title]...\end{Proof}` → `#proof(title: "title")[...]`
+- `\begin{Proof}\label{proof:name}...\end{Proof}` → `#proof(id: "proof:name")[...]`
+- `\begin{Proof}[title]\label{proof:name}...\end{Proof}` → `#proof(title: "title", id: "proof:name")[...]`
+
+### 定理環境のラベルと参照
+- `\label{theorem:name}` → `id: "theorem:name" // \label{theorem:name}`パラメータに変換
+- `\label{lemma:name}` → `id: "lemma:name" // \label{lemma:name}`パラメータに変換
+- `\label{corollary:name}` → `id: "corollary:name" // \label{corollary:name}`パラメータに変換
+- `\label{proposition:name}` → `id: "proposition:name" // \label{proposition:name}`パラメータに変換
+- `\label{definition:name}` → `id: "definition:name" // \label{definition:name}`パラメータに変換
+- `\label{remark:name}` → `id: "remark:name" // \label{remark:name}`パラメータに変換
+- `\label{proof:name}` → `id: "proof:name" // \label{proof:name}`パラメータに変換
+- `\ref{theorem:name}` → `@theorem:name // \ref{theorem:name}`
+- `\ref{lemma:name}` → `@lemma:name // \ref{lemma:name}`
+- `\ref{corollary:name}` → `@corollary:name // \ref{corollary:name}`
+- `\ref{proposition:name}` → `@proposition:name // \ref{proposition:name}`
+- `\ref{definition:name}` → `@definition:name // \ref{definition:name}`
+- `\ref{remark:name}` → `@remark:name // \ref{remark:name}`
+- `\ref{proof:name}` → `@proof:name // \ref{proof:name}`
+
+## 4. セクション・図表のラベルと参照
+
+### セクション
+- `\label{sec:name}` → `[<sec:name>] // \label{sec:name}`（セクション内）
+- `\ref{sec:name}` → `@sec:name // \ref{sec:name}`
+- `\pageref{sec:name}` → `@sec:name // \pageref{sec:name}`
+
+### 図表
+- `\label{fig:name}` → `<fig:name> // \label{fig:name}`（図内）
+- `\label{tab:name}` → `<tab:name> // \label{tab:name}`（表内）
+- `\ref{fig:name}` → `@fig:name // \ref{fig:name}`
+- `\ref{tab:name}` → `@tab:name // \ref{tab:name}`
+
+## 5. 参考文献の変換
+
+### 引用コマンド
+- `\cite{ref}` → `@ref // \cite{ref}`
+- `\cite[page]{ref}` → `@ref // \cite[page]{ref}`
+- `\cite{ref1,ref2}` → `@ref1, @ref2 // \cite{ref1,ref2}`
+- `\citep{ref}` → `@ref // \citep{ref}`
+- `\citet{ref}` → `@ref // \citet{ref}`
+- `\citeauthor{ref}` → `@ref.author // \citeauthor{ref}`
+- `\citeyear{ref}` → `@ref.year // \citeyear{ref}`
+
+### 参考文献システム
+- `\bibliography{file}` → `#bibliography("file.bib") // \bibliography{file}`
+- `\bibliography{../file}` → `#bibliography("../file.bib") // \bibliography{../file}`
+- `\bibliographystyle{plain}` → `// \bibliographystyle{plain}`（削除してコメント化）
+- `\bibliographystyle{alpha}` → `// \bibliographystyle{alpha}`（削除してコメント化）
+- `\bibliographystyle{unsrt}` → `// \bibliographystyle{unsrt}`（削除してコメント化）
+
+### 参考文献リストの表示
+- 文書の最後に `#bibliography("file.bib")` を配置
+- 複数のbibファイルがある場合：`#bibliography("file1.bib", "file2.bib")`
+
+### 手動参考文献エントリ（.bibファイルがない場合）
+```typst
+#let refs = (
+  author: "著者名",
+  title: "論文タイトル",
+  journal: "雑誌名",
+  year: 2023,
+  volume: 1,
+  number: 1,
+  pages: (1, 10),
+  doi: "10.1000/example",
+  url: "https://example.com",
+)
+```
+
+## 6. その他の変換
+- `\section{title}` → `= title // \section{title}`
+- `\subsection{title}` → `== title // \subsection{title}`
+- `\subsubsection{title}` → `=== title // \subsubsection{title}`
+- `\textbf{text}` → `*text* // \textbf{text}`
+- `\textit{text}` → `_text_ // \textit{text}`
+- `\emph{text}` → `_text_ // \emph{text}`
+- `\texttt{text}` → `` `text` `` // `\texttt{text}`
+- `\url{url}` → `[url] // \url{url}`
+- `\href{url}{text}` → `[text](url) // \href{url}{text}`
+- `\begin{abstract}...\end{abstract}` → `#set document(abstract: [...]) // \begin{abstract}...\end{abstract}`
+- `\title{title}` → `#set document(title: "title") // \title{title}`
+- `\author{name}` → `#set document(authors: (name)) // \author{name}`
+- `\maketitle` → `// \maketitle`（削除してコメント化）
+- `\noindent` → `// \noindent`（削除してコメント化）
+- `\\` → `\ // \\`
+- `\newline` → `\ // \newline`
+- `\linebreak` → `\ // \linebreak`
+- `\pagebreak` → `#pagebreak() // \pagebreak`
+- `\clearpage` → `#pagebreak() // \clearpage`
+
+## 7. 文書設定の変換
+
+### articleパッケージを使用した文書設定
+```typst
+#import "@preview/article:1.0.0": *
+
+#show: article.with(
+  title: "タイトル",
+  author: "著者名",
+  affiliation: "所属",
+  email: "email@example.com",
+  date: "日付",
+  abstract: [要約文],
+  keywords: "キーワード1, キーワード2"
+)
+
+// 本文内容は直接記述
+= Introduction
+// 本文内容
+```
+
+### 変換規則
+- `\begin{document}` → `// \begin{document}`（削除してコメント化）
+- `\end{document}` → `// \end{document}`（削除してコメント化）
+- `\documentclass[reqno]{amsart}` → `#show: article.with(...) // \documentclass[reqno]{amsart}`
+- `\usepackage{...}` → `// \usepackage{...}`（削除してコメント化）
+- `\newtheorem{...}{...}` → `// \newtheorem{...}{...}`（削除してコメント化）
+- `%` コメント → `//` コメント
+- `\begin{proof}...\end{proof}` → `#proof(id: "proof:name")[...] // \begin{proof}...\end{proof}`
+
+## 8. よくあるエラーとその修正
+
+### 数式ラベルの位置エラー
+**エラー**: 数式ラベルが数式ブロック内に入っている
+```typst
+$ cases(...) <eq:name>$  // ❌ エラー
+```
+**修正**: 数式ラベルを数式ブロックの外に移動
+```typst
+$ cases(...) $ <eq:name>  // ✅ 正しい
+```
+
+### 微分記号の記法エラー
+**エラー**: TeX記法をそのまま使用
+```typst
+\ddot{A}  // ❌ エラー
+\partial_{xx}  // ❌ エラー
+```
+**修正**: 正しいTypst記法に変換
+```typst
+dot.double(A)  // ✅ 正しい
+∂_(x x)  // ✅ 正しい（Unicode記号使用）
+```
+
+### 積分記号の上下限エラー
+**エラー**: 上下限の_と^を忘れる
+```typst
+int_a^b  // ❌ エラー（上下限なし）
+```
+**修正**: 上下限を必ず保持
+```typst
+int_a^b  // ✅ 正しい（上下限保持）
+```
+
+### 数式内参照の記法エラー
+**エラー**: 数式内で参照を引用符なしで使用
+```typst
+$A is defined by @eq:A$  // ❌ エラー
+```
+**修正**: 数式内では参照を文字列として扱う
+```typst
+$A " is defined by @eq:A"$  // ✅ 正しい
+```
+
+### 積分記号の記法エラー
+**エラー**: TeX記法をそのまま使用
+```typst
+\int  // ❌ エラー
+```
+**修正**: 機械的にUnicode記号に置換
+```typst
+∫  // ✅ 正しい（機械的置換、Unicode記号使用）
+```
+
+### 微分記号の記法エラー
+**エラー**: 微分記号にスペースがない
+```typst
+dx  // ❌ エラー（Typstでは複数文字がコマンドとして認識される）
+```
+**修正**: スペースを追加
+```typst
+d x  // ✅ 正しい（スペースを追加）
+```
+
+### @コマンドの記法エラー
+**エラー**: 数式モード外で@の後に引用符を使用
+```typst
+@"eq:DW"  // ❌ エラー（数式モード外で引用符を使用）
+$"@eq:DW"$  // ❌ エラー（数式モード内で引用符を使用）
+```
+**修正**: 数式モード外では引用符を使用しない
+```typst
+@eq:DW  // ✅ 正しい（数式モード外では引用符なし）
+"@eq:DW"  // ✅ 正しい（数式モード内では引用符を使用）
+```
+
+### 大量の@コマンド誤用エラー
+**問題**: ファイル全体で@コマンドの誤用が大量に発生
+**対処**: 一括置換で修正
+- `@"eq:name"` → `@eq:name`（数式モード外）
+- `$"@eq:name"$` → `@"eq:name"`（数式モード内）
+
+### \tagコマンドの対応エラー
+**エラー**: TeXの`\tag`コマンドがTypstでサポートされていない
+```tex
+\tag{H1}  // ❌ エラー（Typstでサポートされていない）
+```
+**修正**: コメントアウトして情報を保持
+```typst
+// <H1> (tag command not supported in Typst)  // ✅ 正しい（コメントアウト）
+```
+
+### cases環境でのカンマのエスケープエラー
+**エラー**: `cases`環境内でカンマがエスケープされていない
+```typst
+cases(f(x) = x, quad x > 0)  // ❌ エラー（カンマが改行になる）
+```
+**修正**: カンマを`\,`でエスケープ
+```typst
+cases(f(x) = x\, quad x > 0)  // ✅ 正しい（カンマをエスケープ）
+```
+
+### 数学演算子のUnicode化エラー
+**エラー**: 数学演算子がUnicode記号に変換されていない
+```typst
+in  // ❌ エラー（Unicode記号を使用していない）
+<=  // ❌ エラー（Unicode記号を使用していない）
+RR  // ❌ エラー（Unicode記号を使用していない）
+```
+**修正**: Unicode記号を使用
+```typst
+∈  // ✅ 正しい（Unicode記号使用）
+≤  // ✅ 正しい（Unicode記号使用）
+ℝ  // ✅ 正しい（Unicode記号使用）
+```
+
+### preambleの保持エラー
+**エラー**: TeXのpreambleが復元できない
+```tex
+\documentclass[reqno]{amsart}
+\usepackage{mathtools,amssymb, xcolor}
+\newtheorem{Theorem}{Theorem}[section]
+```
+**修正**: コメントアウトで保持
+```typst
+// \documentclass[reqno]{amsart}
+// \usepackage{mathtools,amssymb, xcolor}
+// \newtheorem{Theorem}{Theorem}[section]
+```
+
+### エラーメッセージの遅延問題
+**問題**: ファイルを修正してもエラーメッセージが古いまま表示される
+**対処**: ファイルを再保存するか、エディタを再起動してエラーメッセージを更新
