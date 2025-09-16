@@ -1,0 +1,2029 @@
+nohup: ignoring input
+=== 002-010をbaseに003-000から003-010への学習開始 ===
+開始時刻: Tue Sep 16 22:49:53 JST 2025
+予定終了時刻: Tue Sep 16 23:49:53 JST 2025
+学習済みモデル: 002-010
+学習データ: train_003.jsonl
+学習範囲: 003-000 → 003-010
+出力形式: Markdown (.md)
+試験間隔: 2回に1回
+学習率: 1e-5（逐次学習用）
+LoRA rank: 8
+LoRA alpha: 8
+VRAM: 8GB対応設定
+================================
+=== 汎用的継続学習開始 ===
+学習済みモデル: 002-010
+学習データ: train_003.jsonl
+学習範囲: 0 → 10
+各繰り返しのエポック数: 8
+学習率: 1e-05
+LoRA rank: 8
+LoRA alpha: 8
+テスト間隔: 2回に1回
+タイムスタンプ: 20250916_224953
+
+初期チェックポイント: ../outputs/llama32-3b-typst-qlora-002-010
+学習ファイル: ../jsonl/train_003.jsonl
+
+=== Iteration 000 の処理開始 ===
+継続学習: ../jsonl/train_003.jsonl (from ../outputs/llama32-3b-typst-qlora-002-010)
+学習ログ: ../logs/003-000_training_20250916_224953.log
+実行中: python3 train_llama32_3b_qlora_fixed.py             --data ../jsonl/train_003.jsonl             --out ../outputs/llama32-3b-typst-qlora-003-000             --peft_model_path ../outputs/llama32-3b-typst-qlora-002-010             --epochs 8             --batch_size 1             --grad_accum 16             --learning_rate 1e-05             --lora_r 8             --lora_alpha 8             --lora_dropout 0.1
+Llama 3.2 3Bモデル: meta-llama/Llama-3.2-3B-Instruct
+データ: ../jsonl/train_003.jsonl
+出力: ../outputs/llama32-3b-typst-qlora-003-000
+学習率: 1e-05
+エポック数: 8
+バッチサイズ: 1
+勾配累積: 16
+LoRA rank: 8
+LoRA alpha: 8
+LoRA dropout: 0.1
+==================================================
+トークナイザーを読み込み中...
+4bit量子化設定を準備中...
+モデルを読み込み中...
+
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]
+Loading checkpoint shards:  50%|█████     | 1/2 [00:04<00:04,  4.89s/it]
+Loading checkpoint shards: 100%|██████████| 2/2 [00:06<00:00,  2.97s/it]
+Loading checkpoint shards: 100%|██████████| 2/2 [00:06<00:00,  3.26s/it]
+既存のPEFTモデルを読み込み中: ../outputs/llama32-3b-typst-qlora-002-010
+データセットを読み込み中...
+
+Generating train split: 0 examples [00:00, ? examples/s]
+Generating train split: 43 examples [00:00, 2861.46 examples/s]
+/mnt/d/github/typst-tex-converter/venv/lib/python3.11/site-packages/peft/tuners/lora/bnb.py:348: UserWarning: Merge lora module to 4-bit linear may get different generations due to rounding errors.
+  warnings.warn(
+/mnt/d/github/typst-tex-converter/venv/lib/python3.11/site-packages/peft/tuners/tuners_utils.py:196: UserWarning: Already found a `peft_config` attribute in the model. This will lead to having multiple adapters in the model. Make sure to know what you are doing!
+  warnings.warn(
+データセットサイズ: 43
+
+Tokenizing train dataset:   0%|          | 0/43 [00:00<?, ? examples/s]
+Tokenizing train dataset: 100%|██████████| 43/43 [00:00<00:00, 737.45 examples/s]
+
+Truncating train dataset:   0%|          | 0/43 [00:00<?, ? examples/s]
+Truncating train dataset: 100%|██████████| 43/43 [00:00<00:00, 10969.84 examples/s]
+The tokenizer has new PAD/BOS/EOS tokens that differ from the model config and generation config. The model config and generation config were aligned accordingly, being updated with the tokenizer's values. Updated tokens: {'eos_token_id': 128009}.
+Llama 3.2 3B QLoRA学習を開始します...
+
+  0%|          | 0/24 [00:00<?, ?it/s]
+  4%|▍         | 1/24 [00:09<03:34,  9.33s/it]
+                                              
+
+  4%|▍         | 1/24 [00:09<03:34,  9.33s/it]
+  8%|▊         | 2/24 [00:21<04:07, 11.25s/it]
+                                              
+
+  8%|▊         | 2/24 [00:21<04:07, 11.25s/it]
+ 12%|█▎        | 3/24 [00:28<03:13,  9.21s/it]
+                                              
+
+ 12%|█▎        | 3/24 [00:28<03:13,  9.21s/it]
+ 17%|█▋        | 4/24 [00:38<03:10,  9.51s/it]
+                                              
+
+ 17%|█▋        | 4/24 [00:38<03:10,  9.51s/it]
+ 21%|██        | 5/24 [00:55<03:49, 12.08s/it]
+                                              
+
+ 21%|██        | 5/24 [00:55<03:49, 12.08s/it]
+ 25%|██▌       | 6/24 [01:03<03:11, 10.66s/it]
+                                              
+
+ 25%|██▌       | 6/24 [01:03<03:11, 10.66s/it]
+ 29%|██▉       | 7/24 [01:13<02:59, 10.56s/it]
+                                              
+
+ 29%|██▉       | 7/24 [01:13<02:59, 10.56s/it]
+ 33%|███▎      | 8/24 [01:25<02:55, 10.94s/it]
+                                              
+
+ 33%|███▎      | 8/24 [01:25<02:55, 10.94s/it]
+ 38%|███▊      | 9/24 [01:40<03:03, 12.21s/it]
+                                              
+
+ 38%|███▊      | 9/24 [01:40<03:03, 12.21s/it]
+ 42%|████▏     | 10/24 [01:58<03:17, 14.12s/it]
+                                               
+
+ 42%|████▏     | 10/24 [01:58<03:17, 14.12s/it]
+ 46%|████▌     | 11/24 [02:09<02:50, 13.10s/it]
+                                               
+
+ 46%|████▌     | 11/24 [02:09<02:50, 13.10s/it]
+ 50%|█████     | 12/24 [02:18<02:21, 11.79s/it]
+                                               
+
+ 50%|█████     | 12/24 [02:18<02:21, 11.79s/it]
+ 54%|█████▍    | 13/24 [02:36<02:31, 13.80s/it]
+ 54%|█████▍    | 13/24 [02:36<02:31, 13.80s/it]
+                                               
+
+ 62%|██████▎   | 15/24 [02:56<01:43, 11.54s/it]
+                                               
+
+ 62%|██████▎   | 15/24 [02:56<01:43, 11.54s/it]
+ 67%|██████▋   | 16/24 [03:06<01:28, 11.06s/it]
+                                               
+
+ 67%|██████▋   | 16/24 [03:06<01:28, 11.06s/it]
+ 71%|███████   | 17/24 [03:25<01:35, 13.70s/it]
+                                               
+
+ 71%|███████   | 17/24 [03:25<01:35, 13.70s/it]
+ 75%|███████▌  | 18/24 [03:33<01:11, 11.97s/it]
+                                               
+
+ 75%|███████▌  | 18/24 [03:33<01:11, 11.97s/it]
+ 79%|███████▉  | 19/24 [03:50<01:07, 13.53s/it]
+                                               
+
+ 79%|███████▉  | 19/24 [03:50<01:07, 13.53s/it]
+ 83%|████████▎ | 20/24 [04:04<00:53, 13.39s/it]
+                                               
+
+ 83%|████████▎ | 20/24 [04:04<00:53, 13.39s/it]
+ 88%|████████▊ | 21/24 [04:11<00:34, 11.66s/it]
+                                               
+
+ 88%|████████▊ | 21/24 [04:11<00:34, 11.66s/it]
+ 92%|█████████▏| 22/24 [04:23<00:23, 11.65s/it]
+                                               
+
+ 92%|█████████▏| 22/24 [04:23<00:23, 11.65s/it]
+ 96%|█████████▌| 23/24 [04:41<00:13, 13.69s/it]
+                                               
+
+ 96%|█████████▌| 23/24 [04:41<00:13, 13.69s/it]
+100%|██████████| 24/24 [04:49<00:00, 11.89s/it]
+                                               
+
+100%|██████████| 24/24 [04:49<00:00, 11.89s/it]
+                                               
+
+100%|██████████| 24/24 [04:51<00:00, 11.89s/it]
+100%|██████████| 24/24 [04:51<00:00, 12.13s/it]
+{'loss': 0.8692, 'grad_norm': 2.1862120628356934, 'learning_rate': 0.0, 'entropy': 1.66405912861228, 'num_tokens': 1931.0, 'mean_token_accuracy': 0.8166080676019192, 'epoch': 0.37}
+{'loss': 0.7162, 'grad_norm': 1.8621069192886353, 'learning_rate': 3.3333333333333333e-06, 'entropy': 1.3603801243007183, 'num_tokens': 4979.0, 'mean_token_accuracy': 0.839089784771204, 'epoch': 0.74}
+{'loss': 0.9717, 'grad_norm': 2.746840476989746, 'learning_rate': 6.666666666666667e-06, 'entropy': 1.5216717774217778, 'num_tokens': 6274.0, 'mean_token_accuracy': 0.8372980952262878, 'epoch': 1.0}
+{'loss': 0.8728, 'grad_norm': 2.7863845825195312, 'learning_rate': 1e-05, 'entropy': 1.648754846304655, 'num_tokens': 7986.0, 'mean_token_accuracy': 0.8078477643430233, 'epoch': 1.37}
+{'loss': 0.823, 'grad_norm': 1.8142019510269165, 'learning_rate': 9.944154131125643e-06, 'entropy': 1.3402169942855835, 'num_tokens': 11109.0, 'mean_token_accuracy': 0.8466840200126171, 'epoch': 1.74}
+{'loss': 0.5602, 'grad_norm': 1.4890062808990479, 'learning_rate': 9.777864028930705e-06, 'entropy': 1.5806122097102078, 'num_tokens': 12548.0, 'mean_token_accuracy': 0.8703107617118142, 'epoch': 2.0}
+{'loss': 0.8624, 'grad_norm': 1.9683449268341064, 'learning_rate': 9.504844339512096e-06, 'entropy': 1.5231489837169647, 'num_tokens': 14567.0, 'mean_token_accuracy': 0.8438084833323956, 'epoch': 2.37}
+{'loss': 0.7389, 'grad_norm': 2.327601432800293, 'learning_rate': 9.131193871579975e-06, 'entropy': 1.4936347417533398, 'num_tokens': 16850.0, 'mean_token_accuracy': 0.8552906177937984, 'epoch': 2.74}
+{'loss': 0.5667, 'grad_norm': 1.1441998481750488, 'learning_rate': 8.665259359149132e-06, 'entropy': 1.5556881373578852, 'num_tokens': 18822.0, 'mean_token_accuracy': 0.8408078063618053, 'epoch': 3.0}
+{'loss': 0.7413, 'grad_norm': 1.5963994264602661, 'learning_rate': 8.117449009293668e-06, 'entropy': 1.5090272165834904, 'num_tokens': 21518.0, 'mean_token_accuracy': 0.8415696173906326, 'epoch': 3.37}
+{'loss': 0.6265, 'grad_norm': 1.9487519264221191, 'learning_rate': 7.500000000000001e-06, 'entropy': 1.6322349607944489, 'num_tokens': 23215.0, 'mean_token_accuracy': 0.8565590307116508, 'epoch': 3.74}
+{'loss': 0.6063, 'grad_norm': 1.5342655181884766, 'learning_rate': 6.8267051218319766e-06, 'entropy': 1.3893965536897832, 'num_tokens': 25096.0, 'mean_token_accuracy': 0.8524696556004611, 'epoch': 4.0}
+{'loss': 0.6531, 'grad_norm': 1.4991215467453003, 'learning_rate': 6.112604669781572e-06, 'entropy': 1.4310537278652191, 'num_tokens': 28086.0, 'mean_token_accuracy': 0.841074712574482, 'epoch': 4.37}
+{'loss': 0.5965, 'grad_norm': 1.8693363666534424, 'learning_rate': 5.373650467932122e-06, 'entropy': 1.566716741770506, 'num_tokens': 30094.0, 'mean_token_accuracy': 0.849822610616684, 'epoch': 4.74}
+{'loss': 0.6423, 'grad_norm': 1.8990185260772705, 'learning_rate': 4.626349532067879e-06, 'entropy': 1.6115865978327664, 'num_tokens': 31370.0, 'mean_token_accuracy': 0.8640002391555093, 'epoch': 5.0}
+{'loss': 0.7406, 'grad_norm': 2.1061644554138184, 'learning_rate': 3.887395330218429e-06, 'entropy': 1.6258467361330986, 'num_tokens': 33121.0, 'mean_token_accuracy': 0.8428926356136799, 'epoch': 5.37}
+{'loss': 0.5483, 'grad_norm': 1.1281330585479736, 'learning_rate': 3.173294878168025e-06, 'entropy': 1.393462896347046, 'num_tokens': 36291.0, 'mean_token_accuracy': 0.8702456392347813, 'epoch': 5.74}
+{'loss': 0.6134, 'grad_norm': 2.490050792694092, 'learning_rate': 2.5000000000000015e-06, 'entropy': 1.5871723727746443, 'num_tokens': 37644.0, 'mean_token_accuracy': 0.8485838120633905, 'epoch': 6.0}
+{'loss': 0.6777, 'grad_norm': 1.5602436065673828, 'learning_rate': 1.8825509907063328e-06, 'entropy': 1.468178540468216, 'num_tokens': 40341.0, 'mean_token_accuracy': 0.847036574035883, 'epoch': 6.37}
+{'loss': 0.5455, 'grad_norm': 1.653025507926941, 'learning_rate': 1.3347406408508695e-06, 'entropy': 1.5358333624899387, 'num_tokens': 42695.0, 'mean_token_accuracy': 0.8589903153479099, 'epoch': 6.74}
+{'loss': 0.4783, 'grad_norm': 1.6978806257247925, 'learning_rate': 8.688061284200266e-07, 'entropy': 1.6126861572265625, 'num_tokens': 43918.0, 'mean_token_accuracy': 0.8605035922744058, 'epoch': 7.0}
+{'loss': 0.446, 'grad_norm': 1.2672555446624756, 'learning_rate': 4.951556604879049e-07, 'entropy': 1.5062026046216488, 'num_tokens': 46190.0, 'mean_token_accuracy': 0.8864259645342827, 'epoch': 7.37}
+{'loss': 0.6903, 'grad_norm': 1.402605652809143, 'learning_rate': 2.2213597106929608e-07, 'entropy': 1.5311267673969269, 'num_tokens': 48753.0, 'mean_token_accuracy': 0.8424062095582485, 'epoch': 7.74}
+{'loss': 0.652, 'grad_norm': 2.698387622833252, 'learning_rate': 5.584586887435739e-08, 'entropy': 1.5644095865162937, 'num_tokens': 50192.0, 'mean_token_accuracy': 0.8311085430058566, 'epoch': 8.0}
+{'train_runtime': 291.0364, 'train_samples_per_second': 1.182, 'train_steps_per_second': 0.082, 'train_loss': 0.6766363581021627, 'epoch': 8.0}
+モデルを保存中...
+Llama 3.2 3B QLoRA学習完了！モデルは ../outputs/llama32-3b-typst-qlora-003-000 に保存されました。
+テスト実行: ../outputs/llama32-3b-typst-qlora-003-000
+テストログ: ../logs/003-000_test_20250916_224953.log
+実行中: python3 inference_llama32_3b.py                 --peft_model_path ../outputs/llama32-3b-typst-qlora-003-000                 --input_file ../sample/sample_small.tex                 --output_file ../trained/003-000.md
+ベースモデル: meta-llama/Llama-3.2-3B-Instruct
+✅ 使用モデル: PEFT（LoRA適用済み）
+   PEFTモデル: ../outputs/llama32-3b-typst-qlora-003-000
+入力ファイル: ../sample/sample_small.tex
+出力ファイル: ../trained/003-000.md
+トークナイザーを読み込み中...
+4bit量子化設定を準備中...
+ベースモデルを読み込み中...
+
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]
+Loading checkpoint shards:  50%|█████     | 1/2 [00:02<00:02,  2.86s/it]
+Loading checkpoint shards: 100%|██████████| 2/2 [00:03<00:00,  1.71s/it]
+Loading checkpoint shards: 100%|██████████| 2/2 [00:03<00:00,  1.88s/it]
+The following generation flags are not valid and may be ignored: ['temperature', 'top_p']. Set `TRANSFORMERS_VERBOSITY=info` for more details.
+✅ PEFTモデルを読み込み中...
+   PEFTパス: ../outputs/llama32-3b-typst-qlora-003-000
+   PEFTモデル読み込み完了
+LaTeXファイルを読み込み中...
+LaTeXテキストを 1 チャンクに分割しました
+LaTeX→Typst変換を開始します...
+チャンク 1/1 を変換中...
+  入力テキスト長: 865 文字
+  チャットテンプレート適用成功
+  プロンプト長: 1223 文字
+  入力トークン数: 415
+  生成開始...
+  生成完了: 615 トークン
+  生成テキスト長: 1711 文字
+  プロンプト長: 1223 文字
+  生成テキスト開始: system
+
+Cutting Knowledge Date: December 2023
+Today Date: 16 Sep 2025
+
+LaTeX 形式の文章を Typst形式 へ変換してください.
+重要: TypstはLaTeXの代替となる文書組版システムです。TypeScript（プログラミング言語）ではありません。
+出力はTypst構文のみ。プログラミングコードは出力しません。user...
+  生成テキスト終了: ...u_0, u_1\right) = \left(\varepsilon_0 \varphi, \varepsilon_1 \varphi\right),$$
+
+where $0 < \varepsilon_0 < |\varepsilon_1| = -\varepsilon_1$, with $\varphi$ being a regular non-negative function.
+
+```
+  生成テキスト全体の長さ: 1711 文字
+  プロンプトの長さ: 1223 文字
+  方法1（全体使用）: 1711 文字
+  方法3（```typstマーカー）: 634 文字
+  方法3（```除去後）: 629 文字
+  最終応答: system
+
+Cutting Knowledge Date: December 2023
+Today Date: 16 Sep 2025
+
+LaTeX 形式の文章を Typst形式 へ変換してください.
+重要: TypstはLaTeXの代替となる文書組版システムです。TypeScript（プログラミング言語）ではありません。
+出力はTypst構文のみ。プログラミングコードは出力しません。user...
+  最終応答の最後: ...on_0 < |\varepsilon_1| = -\varepsilon_1$, with $\varphi$ being a regular non-negative function.
+
+```
+  抽出された応答: system
+
+Cutting Knowledge Date: December 2023
+Today Date: 16 Sep 2025
+
+LaTeX 形式の文章を Typst形式 へ変換してくださ...
+結果を ../trained/003-000.md に保存中...
+変換完了！
+完了: Iteration 000 の学習・テストが完了しました。
+チェックポイントを更新: ../outputs/llama32-3b-typst-qlora-003-000
+=== Iteration 000 の処理完了 ===
+--------------------------------------------------
+=== Iteration 001 の処理開始 ===
+継続学習: ../jsonl/train_003.jsonl (from ../outputs/llama32-3b-typst-qlora-003-000)
+学習ログ: ../logs/003-001_training_20250916_224953.log
+実行中: python3 train_llama32_3b_qlora_fixed.py             --data ../jsonl/train_003.jsonl             --out ../outputs/llama32-3b-typst-qlora-003-001             --peft_model_path ../outputs/llama32-3b-typst-qlora-003-000             --epochs 8             --batch_size 1             --grad_accum 16             --learning_rate 1e-05             --lora_r 8             --lora_alpha 8             --lora_dropout 0.1
+Llama 3.2 3Bモデル: meta-llama/Llama-3.2-3B-Instruct
+データ: ../jsonl/train_003.jsonl
+出力: ../outputs/llama32-3b-typst-qlora-003-001
+学習率: 1e-05
+エポック数: 8
+バッチサイズ: 1
+勾配累積: 16
+LoRA rank: 8
+LoRA alpha: 8
+LoRA dropout: 0.1
+==================================================
+トークナイザーを読み込み中...
+4bit量子化設定を準備中...
+モデルを読み込み中...
+
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]
+Loading checkpoint shards:  50%|█████     | 1/2 [00:02<00:02,  2.75s/it]
+Loading checkpoint shards: 100%|██████████| 2/2 [00:03<00:00,  1.63s/it]
+Loading checkpoint shards: 100%|██████████| 2/2 [00:03<00:00,  1.79s/it]
+/mnt/d/github/typst-tex-converter/venv/lib/python3.11/site-packages/peft/tuners/lora/bnb.py:348: UserWarning: Merge lora module to 4-bit linear may get different generations due to rounding errors.
+  warnings.warn(
+/mnt/d/github/typst-tex-converter/venv/lib/python3.11/site-packages/peft/tuners/tuners_utils.py:196: UserWarning: Already found a `peft_config` attribute in the model. This will lead to having multiple adapters in the model. Make sure to know what you are doing!
+  warnings.warn(
+The tokenizer has new PAD/BOS/EOS tokens that differ from the model config and generation config. The model config and generation config were aligned accordingly, being updated with the tokenizer's values. Updated tokens: {'eos_token_id': 128009}.
+既存のPEFTモデルを読み込み中: ../outputs/llama32-3b-typst-qlora-003-000
+データセットを読み込み中...
+データセットサイズ: 43
+Llama 3.2 3B QLoRA学習を開始します...
+
+  0%|          | 0/24 [00:00<?, ?it/s]
+  4%|▍         | 1/24 [00:09<03:33,  9.30s/it]
+                                              
+
+  4%|▍         | 1/24 [00:09<03:33,  9.30s/it]
+  8%|▊         | 2/24 [00:22<04:10, 11.40s/it]
+                                              
+
+  8%|▊         | 2/24 [00:22<04:10, 11.40s/it]
+ 12%|█▎        | 3/24 [00:29<03:17,  9.40s/it]
+                                              
+
+ 12%|█▎        | 3/24 [00:29<03:17,  9.40s/it]
+ 17%|█▋        | 4/24 [00:39<03:17,  9.87s/it]
+                                              
+
+ 17%|█▋        | 4/24 [00:39<03:17,  9.87s/it]
+ 21%|██        | 5/24 [00:57<04:02, 12.79s/it]
+                                              
+
+ 21%|██        | 5/24 [00:57<04:02, 12.79s/it]
+ 25%|██▌       | 6/24 [01:05<03:21, 11.20s/it]
+                                              
+
+ 25%|██▌       | 6/24 [01:05<03:21, 11.20s/it]
+ 29%|██▉       | 7/24 [01:16<03:07, 11.04s/it]
+                                              
+
+ 29%|██▉       | 7/24 [01:16<03:07, 11.04s/it]
+ 33%|███▎      | 8/24 [01:27<02:57, 11.10s/it]
+                                              
+
+ 33%|███▎      | 8/24 [01:27<02:57, 11.10s/it]
+ 38%|███▊      | 9/24 [01:41<02:58, 11.92s/it]
+                                              
+
+ 38%|███▊      | 9/24 [01:41<02:58, 11.92s/it]
+ 42%|████▏     | 10/24 [01:58<03:06, 13.34s/it]
+                                               
+
+ 42%|████▏     | 10/24 [01:58<03:06, 13.34s/it]
+ 46%|████▌     | 11/24 [02:08<02:40, 12.38s/it]
+                                               
+
+ 46%|████▌     | 11/24 [02:08<02:40, 12.38s/it]
+ 50%|█████     | 12/24 [02:17<02:16, 11.33s/it]
+                                               
+
+ 50%|█████     | 12/24 [02:17<02:16, 11.33s/it]
+ 54%|█████▍    | 13/24 [02:34<02:23, 13.02s/it]
+                                               
+
+ 54%|█████▍    | 13/24 [02:34<02:23, 13.02s/it]
+ 58%|█████▊    | 14/24 [02:44<02:02, 12.24s/it]
+                                               
+
+ 58%|█████▊    | 14/24 [02:44<02:02, 12.24s/it]
+ 62%|██████▎   | 15/24 [02:51<01:37, 10.78s/it]
+                                               
+
+ 62%|██████▎   | 15/24 [02:51<01:37, 10.78s/it]
+ 67%|██████▋   | 16/24 [03:02<01:25, 10.74s/it]
+                                               
+
+ 67%|██████▋   | 16/24 [03:02<01:25, 10.74s/it]
+ 71%|███████   | 17/24 [03:20<01:31, 13.01s/it]
+                                               
+
+ 71%|███████   | 17/24 [03:20<01:31, 13.01s/it]
+ 75%|███████▌  | 18/24 [03:28<01:08, 11.40s/it]
+                                               
+
+ 75%|███████▌  | 18/24 [03:28<01:08, 11.40s/it]
+ 79%|███████▉  | 19/24 [03:44<01:03, 12.75s/it]
+                                               
+
+ 79%|███████▉  | 19/24 [03:44<01:03, 12.75s/it]
+ 83%|████████▎ | 20/24 [03:56<00:49, 12.45s/it]
+                                               
+
+ 83%|████████▎ | 20/24 [03:56<00:49, 12.45s/it]
+ 88%|████████▊ | 21/24 [04:03<00:32, 10.84s/it]
+                                               
+
+ 88%|████████▊ | 21/24 [04:03<00:32, 10.84s/it]
+ 92%|█████████▏| 22/24 [04:13<00:21, 10.79s/it]
+                                               
+
+ 92%|█████████▏| 22/24 [04:13<00:21, 10.79s/it]
+ 96%|█████████▌| 23/24 [04:30<00:12, 12.61s/it]
+                                               
+
+ 96%|█████████▌| 23/24 [04:30<00:12, 12.61s/it]
+100%|██████████| 24/24 [04:38<00:00, 11.01s/it]
+                                               
+
+100%|██████████| 24/24 [04:38<00:00, 11.01s/it]
+                                               
+
+100%|██████████| 24/24 [04:39<00:00, 11.01s/it]
+100%|██████████| 24/24 [04:39<00:00, 11.66s/it]
+{'loss': 0.8689, 'grad_norm': 2.3519108295440674, 'learning_rate': 0.0, 'entropy': 1.6638527177274227, 'num_tokens': 1931.0, 'mean_token_accuracy': 0.8166080676019192, 'epoch': 0.37}
+{'loss': 0.7159, 'grad_norm': 1.9830938577651978, 'learning_rate': 3.3333333333333333e-06, 'entropy': 1.3603141084313393, 'num_tokens': 4979.0, 'mean_token_accuracy': 0.839089784771204, 'epoch': 0.74}
+{'loss': 0.9713, 'grad_norm': 2.9428656101226807, 'learning_rate': 6.666666666666667e-06, 'entropy': 1.5218071666630832, 'num_tokens': 6274.0, 'mean_token_accuracy': 0.8372980952262878, 'epoch': 1.0}
+{'loss': 0.8719, 'grad_norm': 2.951404571533203, 'learning_rate': 1e-05, 'entropy': 1.6490538194775581, 'num_tokens': 7986.0, 'mean_token_accuracy': 0.8078477643430233, 'epoch': 1.37}
+{'loss': 0.8216, 'grad_norm': 1.9450247287750244, 'learning_rate': 9.944154131125643e-06, 'entropy': 1.3406174704432487, 'num_tokens': 11109.0, 'mean_token_accuracy': 0.8466840200126171, 'epoch': 1.74}
+{'loss': 0.5592, 'grad_norm': 1.5774128437042236, 'learning_rate': 9.777864028930705e-06, 'entropy': 1.5810400301759893, 'num_tokens': 12548.0, 'mean_token_accuracy': 0.8708719286051664, 'epoch': 2.0}
+{'loss': 0.8601, 'grad_norm': 2.0913705825805664, 'learning_rate': 9.504844339512096e-06, 'entropy': 1.5236204899847507, 'num_tokens': 14567.0, 'mean_token_accuracy': 0.8438084833323956, 'epoch': 2.37}
+{'loss': 0.7348, 'grad_norm': 2.478502035140991, 'learning_rate': 9.131193871579975e-06, 'entropy': 1.4941994398832321, 'num_tokens': 16850.0, 'mean_token_accuracy': 0.8552906177937984, 'epoch': 2.74}
+{'loss': 0.5649, 'grad_norm': 1.2000714540481567, 'learning_rate': 8.665259359149132e-06, 'entropy': 1.5562322356484153, 'num_tokens': 18822.0, 'mean_token_accuracy': 0.8408078063618053, 'epoch': 3.0}
+{'loss': 0.7377, 'grad_norm': 1.6868964433670044, 'learning_rate': 8.117449009293668e-06, 'entropy': 1.5097712874412537, 'num_tokens': 21518.0, 'mean_token_accuracy': 0.8415696173906326, 'epoch': 3.37}
+{'loss': 0.6238, 'grad_norm': 2.0485756397247314, 'learning_rate': 7.500000000000001e-06, 'entropy': 1.6332252398133278, 'num_tokens': 23215.0, 'mean_token_accuracy': 0.8565590307116508, 'epoch': 3.74}
+{'loss': 0.6023, 'grad_norm': 1.5998120307922363, 'learning_rate': 6.8267051218319766e-06, 'entropy': 1.3900737274776807, 'num_tokens': 25096.0, 'mean_token_accuracy': 0.8540104898539457, 'epoch': 4.0}
+{'loss': 0.6485, 'grad_norm': 1.5889018774032593, 'learning_rate': 6.112604669781572e-06, 'entropy': 1.4320647194981575, 'num_tokens': 28086.0, 'mean_token_accuracy': 0.841074712574482, 'epoch': 4.37}
+{'loss': 0.5922, 'grad_norm': 1.9590827226638794, 'learning_rate': 5.373650467932122e-06, 'entropy': 1.5675256848335266, 'num_tokens': 30094.0, 'mean_token_accuracy': 0.849822610616684, 'epoch': 4.74}
+{'loss': 0.6406, 'grad_norm': 1.977964162826538, 'learning_rate': 4.626349532067879e-06, 'entropy': 1.612360412424261, 'num_tokens': 31370.0, 'mean_token_accuracy': 0.8640002391555093, 'epoch': 5.0}
+{'loss': 0.7354, 'grad_norm': 2.1855623722076416, 'learning_rate': 3.887395330218429e-06, 'entropy': 1.6266475543379784, 'num_tokens': 33121.0, 'mean_token_accuracy': 0.8421903848648071, 'epoch': 5.37}
+{'loss': 0.5456, 'grad_norm': 1.1835830211639404, 'learning_rate': 3.173294878168025e-06, 'entropy': 1.3945980407297611, 'num_tokens': 36291.0, 'mean_token_accuracy': 0.8702456392347813, 'epoch': 5.74}
+{'loss': 0.606, 'grad_norm': 2.5810110569000244, 'learning_rate': 2.5000000000000015e-06, 'entropy': 1.5881447792053223, 'num_tokens': 37644.0, 'mean_token_accuracy': 0.8485838120633905, 'epoch': 6.0}
+{'loss': 0.6736, 'grad_norm': 1.6168805360794067, 'learning_rate': 1.8825509907063328e-06, 'entropy': 1.469311822205782, 'num_tokens': 40341.0, 'mean_token_accuracy': 0.8487468883395195, 'epoch': 6.37}
+{'loss': 0.5415, 'grad_norm': 1.7179406881332397, 'learning_rate': 1.3347406408508695e-06, 'entropy': 1.53654994815588, 'num_tokens': 42695.0, 'mean_token_accuracy': 0.8589903153479099, 'epoch': 6.74}
+{'loss': 0.4744, 'grad_norm': 1.770216703414917, 'learning_rate': 8.688061284200266e-07, 'entropy': 1.613747607577931, 'num_tokens': 43918.0, 'mean_token_accuracy': 0.8605035922744058, 'epoch': 7.0}
+{'loss': 0.4442, 'grad_norm': 1.3149722814559937, 'learning_rate': 4.951556604879049e-07, 'entropy': 1.507012315094471, 'num_tokens': 46190.0, 'mean_token_accuracy': 0.8874340280890465, 'epoch': 7.37}
+{'loss': 0.6857, 'grad_norm': 1.4570024013519287, 'learning_rate': 2.2213597106929608e-07, 'entropy': 1.5318519547581673, 'num_tokens': 48753.0, 'mean_token_accuracy': 0.8424062095582485, 'epoch': 7.74}
+{'loss': 0.6431, 'grad_norm': 2.738940477371216, 'learning_rate': 5.584586887435739e-08, 'entropy': 1.5652825507250698, 'num_tokens': 50192.0, 'mean_token_accuracy': 0.8311085430058566, 'epoch': 8.0}
+{'train_runtime': 279.7787, 'train_samples_per_second': 1.23, 'train_steps_per_second': 0.086, 'train_loss': 0.6734667904675007, 'epoch': 8.0}
+モデルを保存中...
+Llama 3.2 3B QLoRA学習完了！モデルは ../outputs/llama32-3b-typst-qlora-003-001 に保存されました。
+スキップ: Iteration 001 のテストをスキップしました（2回に1回の実行）
+チェックポイントを更新: ../outputs/llama32-3b-typst-qlora-003-001
+=== Iteration 001 の処理完了 ===
+--------------------------------------------------
+=== Iteration 002 の処理開始 ===
+継続学習: ../jsonl/train_003.jsonl (from ../outputs/llama32-3b-typst-qlora-003-001)
+学習ログ: ../logs/003-002_training_20250916_224953.log
+実行中: python3 train_llama32_3b_qlora_fixed.py             --data ../jsonl/train_003.jsonl             --out ../outputs/llama32-3b-typst-qlora-003-002             --peft_model_path ../outputs/llama32-3b-typst-qlora-003-001             --epochs 8             --batch_size 1             --grad_accum 16             --learning_rate 1e-05             --lora_r 8             --lora_alpha 8             --lora_dropout 0.1
+Llama 3.2 3Bモデル: meta-llama/Llama-3.2-3B-Instruct
+データ: ../jsonl/train_003.jsonl
+出力: ../outputs/llama32-3b-typst-qlora-003-002
+学習率: 1e-05
+エポック数: 8
+バッチサイズ: 1
+勾配累積: 16
+LoRA rank: 8
+LoRA alpha: 8
+LoRA dropout: 0.1
+==================================================
+トークナイザーを読み込み中...
+4bit量子化設定を準備中...
+モデルを読み込み中...
+
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]
+Loading checkpoint shards:  50%|█████     | 1/2 [00:03<00:03,  3.02s/it]
+Loading checkpoint shards: 100%|██████████| 2/2 [00:04<00:00,  1.82s/it]
+Loading checkpoint shards: 100%|██████████| 2/2 [00:04<00:00,  2.00s/it]
+/mnt/d/github/typst-tex-converter/venv/lib/python3.11/site-packages/peft/tuners/lora/bnb.py:348: UserWarning: Merge lora module to 4-bit linear may get different generations due to rounding errors.
+  warnings.warn(
+/mnt/d/github/typst-tex-converter/venv/lib/python3.11/site-packages/peft/tuners/tuners_utils.py:196: UserWarning: Already found a `peft_config` attribute in the model. This will lead to having multiple adapters in the model. Make sure to know what you are doing!
+  warnings.warn(
+The tokenizer has new PAD/BOS/EOS tokens that differ from the model config and generation config. The model config and generation config were aligned accordingly, being updated with the tokenizer's values. Updated tokens: {'eos_token_id': 128009}.
+既存のPEFTモデルを読み込み中: ../outputs/llama32-3b-typst-qlora-003-001
+データセットを読み込み中...
+データセットサイズ: 43
+Llama 3.2 3B QLoRA学習を開始します...
+
+  0%|          | 0/24 [00:00<?, ?it/s]
+  4%|▍         | 1/24 [00:09<03:31,  9.20s/it]
+                                              
+
+  4%|▍         | 1/24 [00:09<03:31,  9.20s/it]
+  8%|▊         | 2/24 [00:22<04:14, 11.57s/it]
+                                              
+
+  8%|▊         | 2/24 [00:22<04:14, 11.57s/it]
+ 12%|█▎        | 3/24 [00:29<03:19,  9.52s/it]
+                                              
+
+ 12%|█▎        | 3/24 [00:29<03:19,  9.52s/it]
+ 17%|█▋        | 4/24 [00:39<03:15,  9.79s/it]
+                                              
+
+ 17%|█▋        | 4/24 [00:39<03:15,  9.79s/it]
+ 21%|██        | 5/24 [00:56<03:55, 12.40s/it]
+                                              
+
+ 21%|██        | 5/24 [00:56<03:55, 12.40s/it]
+ 25%|██▌       | 6/24 [01:04<03:16, 10.92s/it]
+                                              
+
+ 25%|██▌       | 6/24 [01:04<03:16, 10.92s/it]
+ 29%|██▉       | 7/24 [01:15<03:02, 10.75s/it]
+                                              
+
+ 29%|██▉       | 7/24 [01:15<03:02, 10.75s/it]
+ 33%|███▎      | 8/24 [01:26<02:57, 11.08s/it]
+                                              
+
+ 33%|███▎      | 8/24 [01:26<02:57, 11.08s/it]
+ 38%|███▊      | 9/24 [01:40<02:58, 11.91s/it]
+                                              
+
+ 38%|███▊      | 9/24 [01:40<02:58, 11.91s/it]
+ 42%|████▏     | 10/24 [01:57<03:06, 13.32s/it]
+                                               
+
+ 42%|████▏     | 10/24 [01:57<03:06, 13.32s/it]
+ 46%|████▌     | 11/24 [02:07<02:40, 12.31s/it]
+                                               
+
+ 46%|████▌     | 11/24 [02:07<02:40, 12.31s/it]
+ 50%|█████     | 12/24 [02:15<02:12, 11.08s/it]
+                                               
+
+ 50%|█████     | 12/24 [02:15<02:12, 11.08s/it]
+ 54%|█████▍    | 13/24 [02:32<02:22, 12.95s/it]
+                                               
+
+ 54%|█████▍    | 13/24 [02:32<02:22, 12.95s/it]
+ 58%|█████▊    | 14/24 [02:43<02:02, 12.29s/it]
+                                               
+
+ 58%|█████▊    | 14/24 [02:43<02:02, 12.29s/it]
+ 62%|██████▎   | 15/24 [02:51<01:39, 11.00s/it]
+                                               
+
+ 62%|██████▎   | 15/24 [02:51<01:39, 11.00s/it]
+ 67%|██████▋   | 16/24 [03:00<01:24, 10.52s/it]
+                                               
+
+ 67%|██████▋   | 16/24 [03:00<01:24, 10.52s/it]
+ 71%|███████   | 17/24 [03:18<01:29, 12.78s/it]
+                                               
+
+ 71%|███████   | 17/24 [03:18<01:29, 12.78s/it]
+ 75%|███████▌  | 18/24 [03:26<01:07, 11.26s/it]
+                                               
+
+ 75%|███████▌  | 18/24 [03:26<01:07, 11.26s/it]
+ 79%|███████▉  | 19/24 [03:42<01:03, 12.66s/it]
+                                               
+
+ 79%|███████▉  | 19/24 [03:42<01:03, 12.66s/it]
+ 83%|████████▎ | 20/24 [03:54<00:49, 12.47s/it]
+                                               
+
+ 83%|████████▎ | 20/24 [03:54<00:49, 12.47s/it]
+ 88%|████████▊ | 21/24 [04:02<00:32, 11.00s/it]
+                                               
+
+ 88%|████████▊ | 21/24 [04:02<00:32, 11.00s/it]
+ 92%|█████████▏| 22/24 [04:12<00:21, 10.94s/it]
+                                               
+
+ 92%|█████████▏| 22/24 [04:12<00:21, 10.94s/it]
+ 96%|█████████▌| 23/24 [04:29<00:12, 12.73s/it]
+                                               
+
+ 96%|█████████▌| 23/24 [04:29<00:12, 12.73s/it]
+100%|██████████| 24/24 [04:37<00:00, 11.24s/it]
+                                               
+
+100%|██████████| 24/24 [04:37<00:00, 11.24s/it]
+                                               
+
+100%|██████████| 24/24 [04:39<00:00, 11.24s/it]
+100%|██████████| 24/24 [04:39<00:00, 11.64s/it]
+{'loss': 0.8692, 'grad_norm': 2.1784770488739014, 'learning_rate': 0.0, 'entropy': 1.663694228976965, 'num_tokens': 1931.0, 'mean_token_accuracy': 0.8166080676019192, 'epoch': 0.37}
+{'loss': 0.7161, 'grad_norm': 1.8572397232055664, 'learning_rate': 3.3333333333333333e-06, 'entropy': 1.3601749129593372, 'num_tokens': 4979.0, 'mean_token_accuracy': 0.839089784771204, 'epoch': 0.74}
+{'loss': 0.9716, 'grad_norm': 2.728949546813965, 'learning_rate': 6.666666666666667e-06, 'entropy': 1.5217713551087813, 'num_tokens': 6274.0, 'mean_token_accuracy': 0.8372980952262878, 'epoch': 1.0}
+{'loss': 0.8729, 'grad_norm': 2.7816214561462402, 'learning_rate': 1e-05, 'entropy': 1.6488106772303581, 'num_tokens': 7986.0, 'mean_token_accuracy': 0.8078477643430233, 'epoch': 1.37}
+{'loss': 0.8231, 'grad_norm': 1.8126755952835083, 'learning_rate': 9.944154131125643e-06, 'entropy': 1.3403987921774387, 'num_tokens': 11109.0, 'mean_token_accuracy': 0.8466840200126171, 'epoch': 1.74}
+{'loss': 0.5602, 'grad_norm': 1.4850218296051025, 'learning_rate': 9.777864028930705e-06, 'entropy': 1.5807656970891086, 'num_tokens': 12548.0, 'mean_token_accuracy': 0.8703107617118142, 'epoch': 2.0}
+{'loss': 0.8632, 'grad_norm': 1.9734182357788086, 'learning_rate': 9.504844339512096e-06, 'entropy': 1.5231941752135754, 'num_tokens': 14567.0, 'mean_token_accuracy': 0.8438084833323956, 'epoch': 2.37}
+{'loss': 0.74, 'grad_norm': 2.3304624557495117, 'learning_rate': 9.131193871579975e-06, 'entropy': 1.4937690421938896, 'num_tokens': 16850.0, 'mean_token_accuracy': 0.8552906177937984, 'epoch': 2.74}
+{'loss': 0.5675, 'grad_norm': 1.147783637046814, 'learning_rate': 8.665259359149132e-06, 'entropy': 1.5561461719599636, 'num_tokens': 18822.0, 'mean_token_accuracy': 0.8408078063618053, 'epoch': 3.0}
+{'loss': 0.7425, 'grad_norm': 1.6101356744766235, 'learning_rate': 8.117449009293668e-06, 'entropy': 1.5091664381325245, 'num_tokens': 21518.0, 'mean_token_accuracy': 0.8415696173906326, 'epoch': 3.37}
+{'loss': 0.6272, 'grad_norm': 1.9564704895019531, 'learning_rate': 7.500000000000001e-06, 'entropy': 1.6326590590178967, 'num_tokens': 23215.0, 'mean_token_accuracy': 0.8565590307116508, 'epoch': 3.74}
+{'loss': 0.6072, 'grad_norm': 1.532778263092041, 'learning_rate': 6.8267051218319766e-06, 'entropy': 1.38956956429915, 'num_tokens': 25096.0, 'mean_token_accuracy': 0.8524696556004611, 'epoch': 4.0}
+{'loss': 0.6537, 'grad_norm': 1.5121675729751587, 'learning_rate': 6.112604669781572e-06, 'entropy': 1.4311141930520535, 'num_tokens': 28086.0, 'mean_token_accuracy': 0.8414380848407745, 'epoch': 4.37}
+{'loss': 0.598, 'grad_norm': 1.8685545921325684, 'learning_rate': 5.373650467932122e-06, 'entropy': 1.5667628236114979, 'num_tokens': 30094.0, 'mean_token_accuracy': 0.849822610616684, 'epoch': 4.74}
+{'loss': 0.6441, 'grad_norm': 1.8874287605285645, 'learning_rate': 4.626349532067879e-06, 'entropy': 1.6114928072149104, 'num_tokens': 31370.0, 'mean_token_accuracy': 0.8640002391555093, 'epoch': 5.0}
+{'loss': 0.7429, 'grad_norm': 2.1051342487335205, 'learning_rate': 3.887395330218429e-06, 'entropy': 1.6261455938220024, 'num_tokens': 33121.0, 'mean_token_accuracy': 0.8428926356136799, 'epoch': 5.37}
+{'loss': 0.5494, 'grad_norm': 1.1273261308670044, 'learning_rate': 3.173294878168025e-06, 'entropy': 1.393825899809599, 'num_tokens': 36291.0, 'mean_token_accuracy': 0.8702456392347813, 'epoch': 5.74}
+{'loss': 0.6139, 'grad_norm': 2.511411428451538, 'learning_rate': 2.5000000000000015e-06, 'entropy': 1.5878460515629162, 'num_tokens': 37644.0, 'mean_token_accuracy': 0.8485838120633905, 'epoch': 6.0}
+{'loss': 0.6797, 'grad_norm': 1.5580540895462036, 'learning_rate': 1.8825509907063328e-06, 'entropy': 1.4683395735919476, 'num_tokens': 40341.0, 'mean_token_accuracy': 0.847036574035883, 'epoch': 6.37}
+{'loss': 0.5467, 'grad_norm': 1.6531649827957153, 'learning_rate': 1.3347406408508695e-06, 'entropy': 1.5361540205776691, 'num_tokens': 42695.0, 'mean_token_accuracy': 0.8589903153479099, 'epoch': 6.74}
+{'loss': 0.4789, 'grad_norm': 1.702217936515808, 'learning_rate': 8.688061284200266e-07, 'entropy': 1.6134102615443142, 'num_tokens': 43918.0, 'mean_token_accuracy': 0.8605035922744058, 'epoch': 7.0}
+{'loss': 0.4477, 'grad_norm': 1.260115146636963, 'learning_rate': 4.951556604879049e-07, 'entropy': 1.5068982876837254, 'num_tokens': 46190.0, 'mean_token_accuracy': 0.8864259645342827, 'epoch': 7.37}
+{'loss': 0.6917, 'grad_norm': 1.4133516550064087, 'learning_rate': 2.2213597106929608e-07, 'entropy': 1.5315251126885414, 'num_tokens': 48753.0, 'mean_token_accuracy': 0.8405122719705105, 'epoch': 7.74}
+{'loss': 0.6517, 'grad_norm': 2.6871018409729004, 'learning_rate': 5.584586887435739e-08, 'entropy': 1.564683735370636, 'num_tokens': 50192.0, 'mean_token_accuracy': 0.8311085430058566, 'epoch': 8.0}
+{'train_runtime': 279.3453, 'train_samples_per_second': 1.231, 'train_steps_per_second': 0.086, 'train_loss': 0.6774658287564913, 'epoch': 8.0}
+モデルを保存中...
+Llama 3.2 3B QLoRA学習完了！モデルは ../outputs/llama32-3b-typst-qlora-003-002 に保存されました。
+テスト実行: ../outputs/llama32-3b-typst-qlora-003-002
+テストログ: ../logs/003-002_test_20250916_224953.log
+実行中: python3 inference_llama32_3b.py                 --peft_model_path ../outputs/llama32-3b-typst-qlora-003-002                 --input_file ../sample/sample_small.tex                 --output_file ../trained/003-002.md
+ベースモデル: meta-llama/Llama-3.2-3B-Instruct
+✅ 使用モデル: PEFT（LoRA適用済み）
+   PEFTモデル: ../outputs/llama32-3b-typst-qlora-003-002
+入力ファイル: ../sample/sample_small.tex
+出力ファイル: ../trained/003-002.md
+トークナイザーを読み込み中...
+4bit量子化設定を準備中...
+ベースモデルを読み込み中...
+
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]
+Loading checkpoint shards:  50%|█████     | 1/2 [00:03<00:03,  3.09s/it]
+Loading checkpoint shards: 100%|██████████| 2/2 [00:03<00:00,  1.77s/it]
+Loading checkpoint shards: 100%|██████████| 2/2 [00:03<00:00,  1.96s/it]
+The following generation flags are not valid and may be ignored: ['temperature', 'top_p']. Set `TRANSFORMERS_VERBOSITY=info` for more details.
+✅ PEFTモデルを読み込み中...
+   PEFTパス: ../outputs/llama32-3b-typst-qlora-003-002
+   PEFTモデル読み込み完了
+LaTeXファイルを読み込み中...
+LaTeXテキストを 1 チャンクに分割しました
+LaTeX→Typst変換を開始します...
+チャンク 1/1 を変換中...
+  入力テキスト長: 865 文字
+  チャットテンプレート適用成功
+  プロンプト長: 1223 文字
+  入力トークン数: 415
+  生成開始...
+  生成完了: 615 トークン
+  生成テキスト長: 1711 文字
+  プロンプト長: 1223 文字
+  生成テキスト開始: system
+
+Cutting Knowledge Date: December 2023
+Today Date: 16 Sep 2025
+
+LaTeX 形式の文章を Typst形式 へ変換してください.
+重要: TypstはLaTeXの代替となる文書組版システムです。TypeScript（プログラミング言語）ではありません。
+出力はTypst構文のみ。プログラミングコードは出力しません。user...
+  生成テキスト終了: ...u_0, u_1\right) = \left(\varepsilon_0 \varphi, \varepsilon_1 \varphi\right),$$
+
+where $0 < \varepsilon_0 < |\varepsilon_1| = -\varepsilon_1$, with $\varphi$ being a regular non-negative function.
+
+```
+  生成テキスト全体の長さ: 1711 文字
+  プロンプトの長さ: 1223 文字
+  方法1（全体使用）: 1711 文字
+  方法3（```typstマーカー）: 634 文字
+  方法3（```除去後）: 629 文字
+  最終応答: system
+
+Cutting Knowledge Date: December 2023
+Today Date: 16 Sep 2025
+
+LaTeX 形式の文章を Typst形式 へ変換してください.
+重要: TypstはLaTeXの代替となる文書組版システムです。TypeScript（プログラミング言語）ではありません。
+出力はTypst構文のみ。プログラミングコードは出力しません。user...
+  最終応答の最後: ...on_0 < |\varepsilon_1| = -\varepsilon_1$, with $\varphi$ being a regular non-negative function.
+
+```
+  抽出された応答: system
+
+Cutting Knowledge Date: December 2023
+Today Date: 16 Sep 2025
+
+LaTeX 形式の文章を Typst形式 へ変換してくださ...
+結果を ../trained/003-002.md に保存中...
+変換完了！
+完了: Iteration 002 の学習・テストが完了しました。
+チェックポイントを更新: ../outputs/llama32-3b-typst-qlora-003-002
+=== Iteration 002 の処理完了 ===
+--------------------------------------------------
+=== Iteration 003 の処理開始 ===
+継続学習: ../jsonl/train_003.jsonl (from ../outputs/llama32-3b-typst-qlora-003-002)
+学習ログ: ../logs/003-003_training_20250916_224953.log
+実行中: python3 train_llama32_3b_qlora_fixed.py             --data ../jsonl/train_003.jsonl             --out ../outputs/llama32-3b-typst-qlora-003-003             --peft_model_path ../outputs/llama32-3b-typst-qlora-003-002             --epochs 8             --batch_size 1             --grad_accum 16             --learning_rate 1e-05             --lora_r 8             --lora_alpha 8             --lora_dropout 0.1
+Llama 3.2 3Bモデル: meta-llama/Llama-3.2-3B-Instruct
+データ: ../jsonl/train_003.jsonl
+出力: ../outputs/llama32-3b-typst-qlora-003-003
+学習率: 1e-05
+エポック数: 8
+バッチサイズ: 1
+勾配累積: 16
+LoRA rank: 8
+LoRA alpha: 8
+LoRA dropout: 0.1
+==================================================
+トークナイザーを読み込み中...
+4bit量子化設定を準備中...
+モデルを読み込み中...
+
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]
+Loading checkpoint shards:  50%|█████     | 1/2 [00:02<00:02,  2.95s/it]
+Loading checkpoint shards: 100%|██████████| 2/2 [00:03<00:00,  1.75s/it]
+Loading checkpoint shards: 100%|██████████| 2/2 [00:03<00:00,  1.93s/it]
+/mnt/d/github/typst-tex-converter/venv/lib/python3.11/site-packages/peft/tuners/lora/bnb.py:348: UserWarning: Merge lora module to 4-bit linear may get different generations due to rounding errors.
+  warnings.warn(
+/mnt/d/github/typst-tex-converter/venv/lib/python3.11/site-packages/peft/tuners/tuners_utils.py:196: UserWarning: Already found a `peft_config` attribute in the model. This will lead to having multiple adapters in the model. Make sure to know what you are doing!
+  warnings.warn(
+The tokenizer has new PAD/BOS/EOS tokens that differ from the model config and generation config. The model config and generation config were aligned accordingly, being updated with the tokenizer's values. Updated tokens: {'eos_token_id': 128009}.
+既存のPEFTモデルを読み込み中: ../outputs/llama32-3b-typst-qlora-003-002
+データセットを読み込み中...
+データセットサイズ: 43
+Llama 3.2 3B QLoRA学習を開始します...
+
+  0%|          | 0/24 [00:00<?, ?it/s]
+  4%|▍         | 1/24 [00:09<03:35,  9.36s/it]
+                                              
+
+  4%|▍         | 1/24 [00:09<03:35,  9.36s/it]
+  8%|▊         | 2/24 [00:22<04:13, 11.54s/it]
+                                              
+
+  8%|▊         | 2/24 [00:22<04:13, 11.54s/it]
+ 12%|█▎        | 3/24 [00:30<03:24,  9.73s/it]
+                                              
+
+ 12%|█▎        | 3/24 [00:30<03:24,  9.73s/it]
+ 17%|█▋        | 4/24 [00:40<03:24, 10.20s/it]
+                                              
+
+ 17%|█▋        | 4/24 [00:40<03:24, 10.20s/it]
+ 21%|██        | 5/24 [00:58<04:01, 12.73s/it]
+                                              
+
+ 21%|██        | 5/24 [00:58<04:01, 12.73s/it]
+ 25%|██▌       | 6/24 [01:06<03:22, 11.27s/it]
+                                              
+
+ 25%|██▌       | 6/24 [01:06<03:22, 11.27s/it]
+ 29%|██▉       | 7/24 [01:17<03:11, 11.28s/it]
+                                              
+
+ 29%|██▉       | 7/24 [01:17<03:11, 11.28s/it]
+ 33%|███▎      | 8/24 [01:30<03:09, 11.85s/it]
+                                              
+
+ 33%|███▎      | 8/24 [01:30<03:09, 11.85s/it]
+ 38%|███▊      | 9/24 [01:46<03:14, 12.98s/it]
+                                              
+
+ 38%|███▊      | 9/24 [01:46<03:14, 12.98s/it]
+ 42%|████▏     | 10/24 [02:04<03:25, 14.69s/it]
+                                               
+
+ 42%|████▏     | 10/24 [02:04<03:25, 14.69s/it]
+ 46%|████▌     | 11/24 [02:16<02:58, 13.72s/it]
+                                               
+
+ 46%|████▌     | 11/24 [02:16<02:58, 13.72s/it]
+ 50%|█████     | 12/24 [02:25<02:28, 12.38s/it]
+                                               
+
+ 50%|█████     | 12/24 [02:25<02:28, 12.38s/it]
+ 54%|█████▍    | 13/24 [02:44<02:37, 14.34s/it]
+                                               
+
+ 54%|█████▍    | 13/24 [02:44<02:37, 14.34s/it]
+ 58%|█████▊    | 14/24 [02:56<02:15, 13.54s/it]
+                                               
+
+ 58%|█████▊    | 14/24 [02:56<02:15, 13.54s/it]
+ 62%|██████▎   | 15/24 [03:05<01:49, 12.12s/it]
+                                               
+
+ 62%|██████▎   | 15/24 [03:05<01:49, 12.12s/it]
+ 67%|██████▋   | 16/24 [03:15<01:33, 11.64s/it]
+                                               
+
+ 67%|██████▋   | 16/24 [03:15<01:33, 11.64s/it]
+ 71%|███████   | 17/24 [03:35<01:38, 14.11s/it]
+                                               
+
+ 71%|███████   | 17/24 [03:35<01:38, 14.11s/it]
+ 75%|███████▌  | 18/24 [03:44<01:14, 12.44s/it]
+                                               
+
+ 75%|███████▌  | 18/24 [03:44<01:14, 12.44s/it]
+ 79%|███████▉  | 19/24 [04:02<01:10, 14.19s/it]
+                                               
+
+ 79%|███████▉  | 19/24 [04:02<01:10, 14.19s/it]
+ 83%|████████▎ | 20/24 [04:15<00:55, 13.83s/it]
+                                               
+
+ 83%|████████▎ | 20/24 [04:15<00:55, 13.83s/it]
+ 88%|████████▊ | 21/24 [04:24<00:36, 12.30s/it]
+                                               
+
+ 88%|████████▊ | 21/24 [04:24<00:36, 12.30s/it]
+ 92%|█████████▏| 22/24 [04:36<00:24, 12.35s/it]
+                                               
+
+ 92%|█████████▏| 22/24 [04:36<00:24, 12.35s/it]
+ 96%|█████████▌| 23/24 [04:55<00:14, 14.30s/it]
+                                               
+
+ 96%|█████████▌| 23/24 [04:55<00:14, 14.30s/it]
+100%|██████████| 24/24 [05:04<00:00, 12.66s/it]
+                                               
+
+100%|██████████| 24/24 [05:04<00:00, 12.66s/it]
+                                               
+
+100%|██████████| 24/24 [05:05<00:00, 12.66s/it]
+100%|██████████| 24/24 [05:05<00:00, 12.75s/it]
+{'loss': 0.8692, 'grad_norm': 2.4180896282196045, 'learning_rate': 0.0, 'entropy': 1.6639505997300148, 'num_tokens': 1931.0, 'mean_token_accuracy': 0.8166080676019192, 'epoch': 0.37}
+{'loss': 0.7162, 'grad_norm': 2.0205183029174805, 'learning_rate': 3.3333333333333333e-06, 'entropy': 1.360489010810852, 'num_tokens': 4979.0, 'mean_token_accuracy': 0.839089784771204, 'epoch': 0.74}
+{'loss': 0.9715, 'grad_norm': 3.0203351974487305, 'learning_rate': 6.666666666666667e-06, 'entropy': 1.5219727158546448, 'num_tokens': 6274.0, 'mean_token_accuracy': 0.8372980952262878, 'epoch': 1.0}
+{'loss': 0.8723, 'grad_norm': 3.003138542175293, 'learning_rate': 1e-05, 'entropy': 1.6490342281758785, 'num_tokens': 7986.0, 'mean_token_accuracy': 0.8078477643430233, 'epoch': 1.37}
+{'loss': 0.8216, 'grad_norm': 2.0135042667388916, 'learning_rate': 9.944154131125643e-06, 'entropy': 1.3408538065850735, 'num_tokens': 11109.0, 'mean_token_accuracy': 0.8466840200126171, 'epoch': 1.74}
+{'loss': 0.5592, 'grad_norm': 1.6306012868881226, 'learning_rate': 9.777864028930705e-06, 'entropy': 1.5808078158985486, 'num_tokens': 12548.0, 'mean_token_accuracy': 0.8703107617118142, 'epoch': 2.0}
+{'loss': 0.8605, 'grad_norm': 2.1678149700164795, 'learning_rate': 9.504844339512096e-06, 'entropy': 1.523621577769518, 'num_tokens': 14567.0, 'mean_token_accuracy': 0.8450339734554291, 'epoch': 2.37}
+{'loss': 0.7353, 'grad_norm': 2.5459630489349365, 'learning_rate': 9.131193871579975e-06, 'entropy': 1.4940105713903904, 'num_tokens': 16850.0, 'mean_token_accuracy': 0.8552906177937984, 'epoch': 2.74}
+{'loss': 0.5657, 'grad_norm': 1.2166122198104858, 'learning_rate': 8.665259359149132e-06, 'entropy': 1.5560995773835615, 'num_tokens': 18822.0, 'mean_token_accuracy': 0.8408078063618053, 'epoch': 3.0}
+{'loss': 0.7387, 'grad_norm': 1.7154457569122314, 'learning_rate': 8.117449009293668e-06, 'entropy': 1.5095475688576698, 'num_tokens': 21518.0, 'mean_token_accuracy': 0.8415696173906326, 'epoch': 3.37}
+{'loss': 0.623, 'grad_norm': 2.112086296081543, 'learning_rate': 7.500000000000001e-06, 'entropy': 1.632738672196865, 'num_tokens': 23215.0, 'mean_token_accuracy': 0.8565590307116508, 'epoch': 3.74}
+{'loss': 0.603, 'grad_norm': 1.6291080713272095, 'learning_rate': 6.8267051218319766e-06, 'entropy': 1.390003887089816, 'num_tokens': 25096.0, 'mean_token_accuracy': 0.8524696556004611, 'epoch': 4.0}
+{'loss': 0.6497, 'grad_norm': 1.615473747253418, 'learning_rate': 6.112604669781572e-06, 'entropy': 1.431591160595417, 'num_tokens': 28086.0, 'mean_token_accuracy': 0.8414380848407745, 'epoch': 4.37}
+{'loss': 0.5923, 'grad_norm': 2.00760555267334, 'learning_rate': 5.373650467932122e-06, 'entropy': 1.5674676895141602, 'num_tokens': 30094.0, 'mean_token_accuracy': 0.849822610616684, 'epoch': 4.74}
+{'loss': 0.6403, 'grad_norm': 2.0566301345825195, 'learning_rate': 4.626349532067879e-06, 'entropy': 1.6119340441443704, 'num_tokens': 31370.0, 'mean_token_accuracy': 0.8640002391555093, 'epoch': 5.0}
+{'loss': 0.7355, 'grad_norm': 2.232740879058838, 'learning_rate': 3.887395330218429e-06, 'entropy': 1.6265204176306725, 'num_tokens': 33121.0, 'mean_token_accuracy': 0.8421903848648071, 'epoch': 5.37}
+{'loss': 0.546, 'grad_norm': 1.2072453498840332, 'learning_rate': 3.173294878168025e-06, 'entropy': 1.3943246342241764, 'num_tokens': 36291.0, 'mean_token_accuracy': 0.8702456392347813, 'epoch': 5.74}
+{'loss': 0.6071, 'grad_norm': 2.661162853240967, 'learning_rate': 2.5000000000000015e-06, 'entropy': 1.5882080034776167, 'num_tokens': 37644.0, 'mean_token_accuracy': 0.8485838120633905, 'epoch': 6.0}
+{'loss': 0.6741, 'grad_norm': 1.6603000164031982, 'learning_rate': 1.8825509907063328e-06, 'entropy': 1.469151820987463, 'num_tokens': 40341.0, 'mean_token_accuracy': 0.847036574035883, 'epoch': 6.37}
+{'loss': 0.5415, 'grad_norm': 1.7639031410217285, 'learning_rate': 1.3347406408508695e-06, 'entropy': 1.536443516612053, 'num_tokens': 42695.0, 'mean_token_accuracy': 0.8589903153479099, 'epoch': 6.74}
+{'loss': 0.4738, 'grad_norm': 1.8294496536254883, 'learning_rate': 8.688061284200266e-07, 'entropy': 1.6135367426005276, 'num_tokens': 43918.0, 'mean_token_accuracy': 0.8605035922744058, 'epoch': 7.0}
+{'loss': 0.4439, 'grad_norm': 1.3424347639083862, 'learning_rate': 4.951556604879049e-07, 'entropy': 1.5064375549554825, 'num_tokens': 46190.0, 'mean_token_accuracy': 0.8874340280890465, 'epoch': 7.37}
+{'loss': 0.6875, 'grad_norm': 1.4737930297851562, 'learning_rate': 2.2213597106929608e-07, 'entropy': 1.5314936377108097, 'num_tokens': 48753.0, 'mean_token_accuracy': 0.8424062095582485, 'epoch': 7.74}
+{'loss': 0.6444, 'grad_norm': 2.8698506355285645, 'learning_rate': 5.584586887435739e-08, 'entropy': 1.5654844641685486, 'num_tokens': 50192.0, 'mean_token_accuracy': 0.8311085430058566, 'epoch': 8.0}
+{'train_runtime': 305.9414, 'train_samples_per_second': 1.124, 'train_steps_per_second': 0.078, 'train_loss': 0.6738500632345676, 'epoch': 8.0}
+モデルを保存中...
+Llama 3.2 3B QLoRA学習完了！モデルは ../outputs/llama32-3b-typst-qlora-003-003 に保存されました。
+スキップ: Iteration 003 のテストをスキップしました（2回に1回の実行）
+チェックポイントを更新: ../outputs/llama32-3b-typst-qlora-003-003
+=== Iteration 003 の処理完了 ===
+--------------------------------------------------
+=== Iteration 004 の処理開始 ===
+継続学習: ../jsonl/train_003.jsonl (from ../outputs/llama32-3b-typst-qlora-003-003)
+学習ログ: ../logs/003-004_training_20250916_224953.log
+実行中: python3 train_llama32_3b_qlora_fixed.py             --data ../jsonl/train_003.jsonl             --out ../outputs/llama32-3b-typst-qlora-003-004             --peft_model_path ../outputs/llama32-3b-typst-qlora-003-003             --epochs 8             --batch_size 1             --grad_accum 16             --learning_rate 1e-05             --lora_r 8             --lora_alpha 8             --lora_dropout 0.1
+Llama 3.2 3Bモデル: meta-llama/Llama-3.2-3B-Instruct
+データ: ../jsonl/train_003.jsonl
+出力: ../outputs/llama32-3b-typst-qlora-003-004
+学習率: 1e-05
+エポック数: 8
+バッチサイズ: 1
+勾配累積: 16
+LoRA rank: 8
+LoRA alpha: 8
+LoRA dropout: 0.1
+==================================================
+トークナイザーを読み込み中...
+4bit量子化設定を準備中...
+モデルを読み込み中...
+
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]
+Loading checkpoint shards:  50%|█████     | 1/2 [00:02<00:02,  2.84s/it]
+Loading checkpoint shards: 100%|██████████| 2/2 [00:03<00:00,  1.66s/it]
+Loading checkpoint shards: 100%|██████████| 2/2 [00:03<00:00,  1.83s/it]
+/mnt/d/github/typst-tex-converter/venv/lib/python3.11/site-packages/peft/tuners/lora/bnb.py:348: UserWarning: Merge lora module to 4-bit linear may get different generations due to rounding errors.
+  warnings.warn(
+/mnt/d/github/typst-tex-converter/venv/lib/python3.11/site-packages/peft/tuners/tuners_utils.py:196: UserWarning: Already found a `peft_config` attribute in the model. This will lead to having multiple adapters in the model. Make sure to know what you are doing!
+  warnings.warn(
+The tokenizer has new PAD/BOS/EOS tokens that differ from the model config and generation config. The model config and generation config were aligned accordingly, being updated with the tokenizer's values. Updated tokens: {'eos_token_id': 128009}.
+既存のPEFTモデルを読み込み中: ../outputs/llama32-3b-typst-qlora-003-003
+データセットを読み込み中...
+データセットサイズ: 43
+Llama 3.2 3B QLoRA学習を開始します...
+
+  0%|          | 0/24 [00:00<?, ?it/s]
+  4%|▍         | 1/24 [00:09<03:32,  9.24s/it]
+                                              
+
+  4%|▍         | 1/24 [00:09<03:32,  9.24s/it]
+  8%|▊         | 2/24 [00:21<04:02, 11.03s/it]
+                                              
+
+  8%|▊         | 2/24 [00:21<04:02, 11.03s/it]
+ 12%|█▎        | 3/24 [00:28<03:10,  9.08s/it]
+                                              
+
+ 12%|█▎        | 3/24 [00:28<03:10,  9.08s/it]
+ 17%|█▋        | 4/24 [00:37<03:05,  9.28s/it]
+                                              
+
+ 17%|█▋        | 4/24 [00:37<03:05,  9.28s/it]
+ 21%|██        | 5/24 [00:54<03:43, 11.78s/it]
+                                              
+
+ 21%|██        | 5/24 [00:54<03:43, 11.78s/it]
+ 25%|██▌       | 6/24 [01:02<03:09, 10.52s/it]
+                                              
+
+ 25%|██▌       | 6/24 [01:02<03:09, 10.52s/it]
+ 29%|██▉       | 7/24 [01:12<02:56, 10.39s/it]
+                                              
+
+ 29%|██▉       | 7/24 [01:12<02:56, 10.39s/it]
+ 33%|███▎      | 8/24 [01:22<02:45, 10.36s/it]
+                                              
+
+ 33%|███▎      | 8/24 [01:22<02:45, 10.36s/it]
+ 38%|███▊      | 9/24 [01:35<02:49, 11.30s/it]
+                                              
+
+ 38%|███▊      | 9/24 [01:35<02:49, 11.30s/it]
+ 42%|████▏     | 10/24 [01:51<02:57, 12.68s/it]
+                                               
+
+ 42%|████▏     | 10/24 [01:51<02:57, 12.68s/it]
+ 46%|████▌     | 11/24 [02:01<02:34, 11.91s/it]
+                                               
+
+ 46%|████▌     | 11/24 [02:01<02:34, 11.91s/it]
+ 50%|█████     | 12/24 [02:09<02:08, 10.74s/it]
+                                               
+
+ 50%|█████     | 12/24 [02:09<02:08, 10.74s/it]
+ 54%|█████▍    | 13/24 [02:27<02:20, 12.79s/it]
+                                               
+
+ 54%|█████▍    | 13/24 [02:27<02:20, 12.79s/it]
+ 58%|█████▊    | 14/24 [02:37<02:00, 12.06s/it]
+                                               
+
+ 58%|█████▊    | 14/24 [02:37<02:00, 12.06s/it]
+ 62%|██████▎   | 15/24 [02:45<01:35, 10.66s/it]
+                                               
+
+ 62%|██████▎   | 15/24 [02:45<01:35, 10.66s/it]
+ 67%|██████▋   | 16/24 [02:53<01:20, 10.07s/it]
+                                               
+
+ 67%|██████▋   | 16/24 [02:53<01:20, 10.07s/it]
+ 71%|███████   | 17/24 [03:11<01:26, 12.29s/it]
+                                               
+
+ 71%|███████   | 17/24 [03:11<01:26, 12.29s/it]
+ 75%|███████▌  | 18/24 [03:18<01:04, 10.72s/it]
+                                               
+
+ 75%|███████▌  | 18/24 [03:18<01:04, 10.72s/it]
+ 79%|███████▉  | 19/24 [03:33<01:00, 12.01s/it]
+                                               
+
+ 79%|███████▉  | 19/24 [03:33<01:00, 12.01s/it]
+ 83%|████████▎ | 20/24 [03:44<00:47, 11.77s/it]
+                                               
+
+ 83%|████████▎ | 20/24 [03:44<00:47, 11.77s/it]
+ 88%|████████▊ | 21/24 [03:51<00:30, 10.26s/it]
+                                               
+
+ 88%|████████▊ | 21/24 [03:51<00:30, 10.26s/it]
+ 92%|█████████▏| 22/24 [04:01<00:20, 10.31s/it]
+                                               
+
+ 92%|█████████▏| 22/24 [04:01<00:20, 10.31s/it]
+ 96%|█████████▌| 23/24 [04:17<00:12, 12.01s/it]
+                                               
+
+ 96%|█████████▌| 23/24 [04:17<00:12, 12.01s/it]
+100%|██████████| 24/24 [04:24<00:00, 10.49s/it]
+                                               
+
+100%|██████████| 24/24 [04:24<00:00, 10.49s/it]
+                                               
+
+100%|██████████| 24/24 [04:26<00:00, 10.49s/it]
+100%|██████████| 24/24 [04:26<00:00, 11.10s/it]
+{'loss': 0.8691, 'grad_norm': 2.211153030395508, 'learning_rate': 0.0, 'entropy': 1.664391864091158, 'num_tokens': 1931.0, 'mean_token_accuracy': 0.8166080676019192, 'epoch': 0.37}
+{'loss': 0.716, 'grad_norm': 1.8625556230545044, 'learning_rate': 3.3333333333333333e-06, 'entropy': 1.360443104058504, 'num_tokens': 4979.0, 'mean_token_accuracy': 0.839089784771204, 'epoch': 0.74}
+{'loss': 0.9718, 'grad_norm': 2.767777919769287, 'learning_rate': 6.666666666666667e-06, 'entropy': 1.5218846093524585, 'num_tokens': 6274.0, 'mean_token_accuracy': 0.8372980952262878, 'epoch': 1.0}
+{'loss': 0.8731, 'grad_norm': 2.774000883102417, 'learning_rate': 1e-05, 'entropy': 1.6486247070133686, 'num_tokens': 7986.0, 'mean_token_accuracy': 0.8078477643430233, 'epoch': 1.37}
+{'loss': 0.8235, 'grad_norm': 1.843673825263977, 'learning_rate': 9.944154131125643e-06, 'entropy': 1.3403059281408787, 'num_tokens': 11109.0, 'mean_token_accuracy': 0.8466840200126171, 'epoch': 1.74}
+{'loss': 0.5607, 'grad_norm': 1.5130850076675415, 'learning_rate': 9.777864028930705e-06, 'entropy': 1.58049030195583, 'num_tokens': 12548.0, 'mean_token_accuracy': 0.8703107617118142, 'epoch': 2.0}
+{'loss': 0.8635, 'grad_norm': 2.0080788135528564, 'learning_rate': 9.504844339512096e-06, 'entropy': 1.5229932442307472, 'num_tokens': 14567.0, 'mean_token_accuracy': 0.8438084833323956, 'epoch': 2.37}
+{'loss': 0.7399, 'grad_norm': 2.353137969970703, 'learning_rate': 9.131193871579975e-06, 'entropy': 1.4931731410324574, 'num_tokens': 16850.0, 'mean_token_accuracy': 0.8552906177937984, 'epoch': 2.74}
+{'loss': 0.5675, 'grad_norm': 1.1517516374588013, 'learning_rate': 8.665259359149132e-06, 'entropy': 1.5553989193656228, 'num_tokens': 18822.0, 'mean_token_accuracy': 0.8408078063618053, 'epoch': 3.0}
+{'loss': 0.7423, 'grad_norm': 1.6049724817276, 'learning_rate': 8.117449009293668e-06, 'entropy': 1.5084845907986164, 'num_tokens': 21518.0, 'mean_token_accuracy': 0.8415696173906326, 'epoch': 3.37}
+{'loss': 0.6282, 'grad_norm': 1.9756574630737305, 'learning_rate': 7.500000000000001e-06, 'entropy': 1.6317849829792976, 'num_tokens': 23215.0, 'mean_token_accuracy': 0.8565590307116508, 'epoch': 3.74}
+{'loss': 0.6066, 'grad_norm': 1.5524743795394897, 'learning_rate': 6.8267051218319766e-06, 'entropy': 1.389018866148862, 'num_tokens': 25096.0, 'mean_token_accuracy': 0.8524696556004611, 'epoch': 4.0}
+{'loss': 0.6538, 'grad_norm': 1.5235021114349365, 'learning_rate': 6.112604669781572e-06, 'entropy': 1.4302286393940449, 'num_tokens': 28086.0, 'mean_token_accuracy': 0.8414380848407745, 'epoch': 4.37}
+{'loss': 0.5975, 'grad_norm': 1.8961189985275269, 'learning_rate': 5.373650467932122e-06, 'entropy': 1.566048838198185, 'num_tokens': 30094.0, 'mean_token_accuracy': 0.849822610616684, 'epoch': 4.74}
+{'loss': 0.644, 'grad_norm': 1.9022552967071533, 'learning_rate': 4.626349532067879e-06, 'entropy': 1.6111911914565347, 'num_tokens': 31370.0, 'mean_token_accuracy': 0.8640002391555093, 'epoch': 5.0}
+{'loss': 0.7425, 'grad_norm': 2.10123872756958, 'learning_rate': 3.887395330218429e-06, 'entropy': 1.6251374781131744, 'num_tokens': 33121.0, 'mean_token_accuracy': 0.8428926356136799, 'epoch': 5.37}
+{'loss': 0.5486, 'grad_norm': 1.1416921615600586, 'learning_rate': 3.173294878168025e-06, 'entropy': 1.3927391357719898, 'num_tokens': 36291.0, 'mean_token_accuracy': 0.8702456392347813, 'epoch': 5.74}
+{'loss': 0.6137, 'grad_norm': 2.537505865097046, 'learning_rate': 2.5000000000000015e-06, 'entropy': 1.5865809754891829, 'num_tokens': 37644.0, 'mean_token_accuracy': 0.8485838120633905, 'epoch': 6.0}
+{'loss': 0.6787, 'grad_norm': 1.5833524465560913, 'learning_rate': 1.8825509907063328e-06, 'entropy': 1.4675982035696507, 'num_tokens': 40341.0, 'mean_token_accuracy': 0.847036574035883, 'epoch': 6.37}
+{'loss': 0.5465, 'grad_norm': 1.6619584560394287, 'learning_rate': 1.3347406408508695e-06, 'entropy': 1.535181399434805, 'num_tokens': 42695.0, 'mean_token_accuracy': 0.8589903153479099, 'epoch': 6.74}
+{'loss': 0.4788, 'grad_norm': 1.7152622938156128, 'learning_rate': 8.688061284200266e-07, 'entropy': 1.6122390682047063, 'num_tokens': 43918.0, 'mean_token_accuracy': 0.8605035922744058, 'epoch': 7.0}
+{'loss': 0.4477, 'grad_norm': 1.2707563638687134, 'learning_rate': 4.951556604879049e-07, 'entropy': 1.5056572072207928, 'num_tokens': 46190.0, 'mean_token_accuracy': 0.8874340280890465, 'epoch': 7.37}
+{'loss': 0.691, 'grad_norm': 1.4095786809921265, 'learning_rate': 2.2213597106929608e-07, 'entropy': 1.5302689895033836, 'num_tokens': 48753.0, 'mean_token_accuracy': 0.8424062095582485, 'epoch': 7.74}
+{'loss': 0.6517, 'grad_norm': 2.7210042476654053, 'learning_rate': 5.584586887435739e-08, 'entropy': 1.5630483844063499, 'num_tokens': 50192.0, 'mean_token_accuracy': 0.8311085430058566, 'epoch': 8.0}
+{'train_runtime': 266.3635, 'train_samples_per_second': 1.291, 'train_steps_per_second': 0.09, 'train_loss': 0.6773585453629494, 'epoch': 8.0}
+モデルを保存中...
+Llama 3.2 3B QLoRA学習完了！モデルは ../outputs/llama32-3b-typst-qlora-003-004 に保存されました。
+テスト実行: ../outputs/llama32-3b-typst-qlora-003-004
+テストログ: ../logs/003-004_test_20250916_224953.log
+実行中: python3 inference_llama32_3b.py                 --peft_model_path ../outputs/llama32-3b-typst-qlora-003-004                 --input_file ../sample/sample_small.tex                 --output_file ../trained/003-004.md
+ベースモデル: meta-llama/Llama-3.2-3B-Instruct
+✅ 使用モデル: PEFT（LoRA適用済み）
+   PEFTモデル: ../outputs/llama32-3b-typst-qlora-003-004
+入力ファイル: ../sample/sample_small.tex
+出力ファイル: ../trained/003-004.md
+トークナイザーを読み込み中...
+4bit量子化設定を準備中...
+ベースモデルを読み込み中...
+
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]
+Loading checkpoint shards:  50%|█████     | 1/2 [00:02<00:02,  2.76s/it]
+Loading checkpoint shards: 100%|██████████| 2/2 [00:03<00:00,  1.62s/it]
+Loading checkpoint shards: 100%|██████████| 2/2 [00:03<00:00,  1.79s/it]
+The following generation flags are not valid and may be ignored: ['temperature', 'top_p']. Set `TRANSFORMERS_VERBOSITY=info` for more details.
+✅ PEFTモデルを読み込み中...
+   PEFTパス: ../outputs/llama32-3b-typst-qlora-003-004
+   PEFTモデル読み込み完了
+LaTeXファイルを読み込み中...
+LaTeXテキストを 1 チャンクに分割しました
+LaTeX→Typst変換を開始します...
+チャンク 1/1 を変換中...
+  入力テキスト長: 865 文字
+  チャットテンプレート適用成功
+  プロンプト長: 1223 文字
+  入力トークン数: 415
+  生成開始...
+  生成完了: 652 トークン
+  生成テキスト長: 1819 文字
+  プロンプト長: 1223 文字
+  生成テキスト開始: system
+
+Cutting Knowledge Date: December 2023
+Today Date: 16 Sep 2025
+
+LaTeX 形式の文章を Typst形式 へ変換してください.
+重要: TypstはLaTeXの代替となる文書組版システムです。TypeScript（プログラミング言語）ではありません。
+出力はTypst構文のみ。プログラミングコードは出力しません。user...
+  生成テキスト終了: ...negative function. 
+
+Note: The above text has been converted from LaTeX to Typst format. Please note that Typst is not a programming language, but rather a markup language used for creating documents.
+  生成テキスト全体の長さ: 1819 文字
+  プロンプトの長さ: 1223 文字
+  方法1（全体使用）: 1819 文字
+  方法3（```typstマーカー）: 742 文字
+  最終応答: system
+
+Cutting Knowledge Date: December 2023
+Today Date: 16 Sep 2025
+
+LaTeX 形式の文章を Typst形式 へ変換してください.
+重要: TypstはLaTeXの代替となる文書組版システムです。TypeScript（プログラミング言語）ではありません。
+出力はTypst構文のみ。プログラミングコードは出力しません。user...
+  最終応答の最後: ... that Typst is not a programming language, but rather a markup language used for creating documents.
+  抽出された応答: system
+
+Cutting Knowledge Date: December 2023
+Today Date: 16 Sep 2025
+
+LaTeX 形式の文章を Typst形式 へ変換してくださ...
+結果を ../trained/003-004.md に保存中...
+変換完了！
+完了: Iteration 004 の学習・テストが完了しました。
+チェックポイントを更新: ../outputs/llama32-3b-typst-qlora-003-004
+=== Iteration 004 の処理完了 ===
+--------------------------------------------------
+=== Iteration 005 の処理開始 ===
+継続学習: ../jsonl/train_003.jsonl (from ../outputs/llama32-3b-typst-qlora-003-004)
+学習ログ: ../logs/003-005_training_20250916_224953.log
+実行中: python3 train_llama32_3b_qlora_fixed.py             --data ../jsonl/train_003.jsonl             --out ../outputs/llama32-3b-typst-qlora-003-005             --peft_model_path ../outputs/llama32-3b-typst-qlora-003-004             --epochs 8             --batch_size 1             --grad_accum 16             --learning_rate 1e-05             --lora_r 8             --lora_alpha 8             --lora_dropout 0.1
+Llama 3.2 3Bモデル: meta-llama/Llama-3.2-3B-Instruct
+データ: ../jsonl/train_003.jsonl
+出力: ../outputs/llama32-3b-typst-qlora-003-005
+学習率: 1e-05
+エポック数: 8
+バッチサイズ: 1
+勾配累積: 16
+LoRA rank: 8
+LoRA alpha: 8
+LoRA dropout: 0.1
+==================================================
+トークナイザーを読み込み中...
+4bit量子化設定を準備中...
+モデルを読み込み中...
+
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]
+Loading checkpoint shards:  50%|█████     | 1/2 [00:02<00:02,  2.73s/it]
+Loading checkpoint shards: 100%|██████████| 2/2 [00:03<00:00,  1.61s/it]
+Loading checkpoint shards: 100%|██████████| 2/2 [00:03<00:00,  1.78s/it]
+/mnt/d/github/typst-tex-converter/venv/lib/python3.11/site-packages/peft/tuners/lora/bnb.py:348: UserWarning: Merge lora module to 4-bit linear may get different generations due to rounding errors.
+  warnings.warn(
+/mnt/d/github/typst-tex-converter/venv/lib/python3.11/site-packages/peft/tuners/tuners_utils.py:196: UserWarning: Already found a `peft_config` attribute in the model. This will lead to having multiple adapters in the model. Make sure to know what you are doing!
+  warnings.warn(
+The tokenizer has new PAD/BOS/EOS tokens that differ from the model config and generation config. The model config and generation config were aligned accordingly, being updated with the tokenizer's values. Updated tokens: {'eos_token_id': 128009}.
+既存のPEFTモデルを読み込み中: ../outputs/llama32-3b-typst-qlora-003-004
+データセットを読み込み中...
+データセットサイズ: 43
+Llama 3.2 3B QLoRA学習を開始します...
+
+  0%|          | 0/24 [00:00<?, ?it/s]
+  4%|▍         | 1/24 [00:08<03:25,  8.93s/it]
+                                              
+
+  4%|▍         | 1/24 [00:08<03:25,  8.93s/it]
+  8%|▊         | 2/24 [00:21<04:03, 11.05s/it]
+                                              
+
+  8%|▊         | 2/24 [00:21<04:03, 11.05s/it]
+ 12%|█▎        | 3/24 [00:28<03:11,  9.10s/it]
+                                              
+
+ 12%|█▎        | 3/24 [00:28<03:11,  9.10s/it]
+ 17%|█▋        | 4/24 [00:38<03:08,  9.41s/it]
+                                              
+
+ 17%|█▋        | 4/24 [00:38<03:08,  9.41s/it]
+ 21%|██        | 5/24 [00:54<03:49, 12.09s/it]
+                                              
+
+ 21%|██        | 5/24 [00:54<03:49, 12.09s/it]
+ 25%|██▌       | 6/24 [01:03<03:14, 10.83s/it]
+                                              
+
+ 25%|██▌       | 6/24 [01:03<03:14, 10.83s/it]
+ 29%|██▉       | 7/24 [01:13<02:58, 10.50s/it]
+                                              
+
+ 29%|██▉       | 7/24 [01:13<02:58, 10.50s/it]
+ 33%|███▎      | 8/24 [01:24<02:50, 10.68s/it]
+                                              
+
+ 33%|███▎      | 8/24 [01:24<02:50, 10.68s/it]
+ 38%|███▊      | 9/24 [01:37<02:53, 11.54s/it]
+                                              
+
+ 38%|███▊      | 9/24 [01:37<02:53, 11.54s/it]
+ 42%|████▏     | 10/24 [01:53<03:01, 12.95s/it]
+                                               
+
+ 42%|████▏     | 10/24 [01:53<03:01, 12.95s/it]
+ 46%|████▌     | 11/24 [02:03<02:36, 12.06s/it]
+                                               
+
+ 46%|████▌     | 11/24 [02:03<02:36, 12.06s/it]
+ 50%|█████     | 12/24 [02:11<02:09, 10.82s/it]
+                                               
+
+ 50%|█████     | 12/24 [02:11<02:09, 10.82s/it]
+ 54%|█████▍    | 13/24 [02:28<02:17, 12.48s/it]
+                                               
+
+ 54%|█████▍    | 13/24 [02:28<02:17, 12.48s/it]
+ 58%|█████▊    | 14/24 [02:38<01:58, 11.81s/it]
+                                               
+
+ 58%|█████▊    | 14/24 [02:38<01:58, 11.81s/it]
+ 62%|██████▎   | 15/24 [02:46<01:35, 10.57s/it]
+                                               
+
+ 62%|██████▎   | 15/24 [02:46<01:35, 10.57s/it]
+ 67%|██████▋   | 16/24 [02:55<01:21, 10.13s/it]
+                                               
+
+ 67%|██████▋   | 16/24 [02:55<01:21, 10.13s/it]
+ 71%|███████   | 17/24 [03:12<01:26, 12.39s/it]
+                                               
+
+ 71%|███████   | 17/24 [03:12<01:26, 12.39s/it]
+ 75%|███████▌  | 18/24 [03:20<01:05, 10.96s/it]
+                                               
+
+ 75%|███████▌  | 18/24 [03:20<01:05, 10.96s/it]
+ 79%|███████▉  | 19/24 [03:35<01:01, 12.26s/it]
+                                               
+
+ 79%|███████▉  | 19/24 [03:35<01:01, 12.26s/it]
+ 83%|████████▎ | 20/24 [03:47<00:48, 12.01s/it]
+                                               
+
+ 83%|████████▎ | 20/24 [03:47<00:48, 12.01s/it]
+ 88%|████████▊ | 21/24 [03:54<00:31, 10.49s/it]
+                                               
+
+ 88%|████████▊ | 21/24 [03:54<00:31, 10.49s/it]
+ 92%|█████████▏| 22/24 [04:04<00:21, 10.53s/it]
+                                               
+
+ 92%|█████████▏| 22/24 [04:04<00:21, 10.53s/it]
+ 96%|█████████▌| 23/24 [04:20<00:12, 12.19s/it]
+                                               
+
+ 96%|█████████▌| 23/24 [04:20<00:12, 12.19s/it]
+100%|██████████| 24/24 [04:27<00:00, 10.68s/it]
+                                               
+
+100%|██████████| 24/24 [04:27<00:00, 10.68s/it]
+                                               
+
+100%|██████████| 24/24 [04:29<00:00, 10.68s/it]
+100%|██████████| 24/24 [04:29<00:00, 11.23s/it]
+{'loss': 0.8689, 'grad_norm': 2.4534788131713867, 'learning_rate': 0.0, 'entropy': 1.6636799983680248, 'num_tokens': 1931.0, 'mean_token_accuracy': 0.8166080676019192, 'epoch': 0.37}
+{'loss': 0.7159, 'grad_norm': 2.0045809745788574, 'learning_rate': 3.3333333333333333e-06, 'entropy': 1.360199511051178, 'num_tokens': 4979.0, 'mean_token_accuracy': 0.839089784771204, 'epoch': 0.74}
+{'loss': 0.971, 'grad_norm': 3.0444469451904297, 'learning_rate': 6.666666666666667e-06, 'entropy': 1.5218180959874934, 'num_tokens': 6274.0, 'mean_token_accuracy': 0.8372980952262878, 'epoch': 1.0}
+{'loss': 0.8723, 'grad_norm': 2.9686472415924072, 'learning_rate': 1e-05, 'entropy': 1.649124514311552, 'num_tokens': 7986.0, 'mean_token_accuracy': 0.8078477643430233, 'epoch': 1.37}
+{'loss': 0.8222, 'grad_norm': 2.010223150253296, 'learning_rate': 9.944154131125643e-06, 'entropy': 1.340696133673191, 'num_tokens': 11109.0, 'mean_token_accuracy': 0.8466840200126171, 'epoch': 1.74}
+{'loss': 0.5595, 'grad_norm': 1.636250376701355, 'learning_rate': 9.777864028930705e-06, 'entropy': 1.5811757987195796, 'num_tokens': 12548.0, 'mean_token_accuracy': 0.8703107617118142, 'epoch': 2.0}
+{'loss': 0.8614, 'grad_norm': 2.162947416305542, 'learning_rate': 9.504844339512096e-06, 'entropy': 1.5236504338681698, 'num_tokens': 14567.0, 'mean_token_accuracy': 0.8450339734554291, 'epoch': 2.37}
+{'loss': 0.7367, 'grad_norm': 2.5559990406036377, 'learning_rate': 9.131193871579975e-06, 'entropy': 1.4942693077027798, 'num_tokens': 16850.0, 'mean_token_accuracy': 0.8552906177937984, 'epoch': 2.74}
+{'loss': 0.5661, 'grad_norm': 1.214106798171997, 'learning_rate': 8.665259359149132e-06, 'entropy': 1.5563250400803306, 'num_tokens': 18822.0, 'mean_token_accuracy': 0.8408078063618053, 'epoch': 3.0}
+{'loss': 0.7399, 'grad_norm': 1.7024199962615967, 'learning_rate': 8.117449009293668e-06, 'entropy': 1.5097411535680294, 'num_tokens': 21518.0, 'mean_token_accuracy': 0.8415696173906326, 'epoch': 3.37}
+{'loss': 0.6246, 'grad_norm': 2.133648633956909, 'learning_rate': 7.500000000000001e-06, 'entropy': 1.6334259510040283, 'num_tokens': 23215.0, 'mean_token_accuracy': 0.8565590307116508, 'epoch': 3.74}
+{'loss': 0.6051, 'grad_norm': 1.630359411239624, 'learning_rate': 6.8267051218319766e-06, 'entropy': 1.3900156075304204, 'num_tokens': 25096.0, 'mean_token_accuracy': 0.8524696556004611, 'epoch': 4.0}
+{'loss': 0.651, 'grad_norm': 1.628659725189209, 'learning_rate': 6.112604669781572e-06, 'entropy': 1.431691974401474, 'num_tokens': 28086.0, 'mean_token_accuracy': 0.8414380848407745, 'epoch': 4.37}
+{'loss': 0.5947, 'grad_norm': 2.0317723751068115, 'learning_rate': 5.373650467932122e-06, 'entropy': 1.5678479857742786, 'num_tokens': 30094.0, 'mean_token_accuracy': 0.849822610616684, 'epoch': 4.74}
+{'loss': 0.6412, 'grad_norm': 2.036067008972168, 'learning_rate': 4.626349532067879e-06, 'entropy': 1.61266028881073, 'num_tokens': 31370.0, 'mean_token_accuracy': 0.8640002391555093, 'epoch': 5.0}
+{'loss': 0.7383, 'grad_norm': 2.2322535514831543, 'learning_rate': 3.887395330218429e-06, 'entropy': 1.6269698292016983, 'num_tokens': 33121.0, 'mean_token_accuracy': 0.8421903848648071, 'epoch': 5.37}
+{'loss': 0.5471, 'grad_norm': 1.2223920822143555, 'learning_rate': 3.173294878168025e-06, 'entropy': 1.3944372087717056, 'num_tokens': 36291.0, 'mean_token_accuracy': 0.8702456392347813, 'epoch': 5.74}
+{'loss': 0.6088, 'grad_norm': 2.689854860305786, 'learning_rate': 2.5000000000000015e-06, 'entropy': 1.5888233997605063, 'num_tokens': 37644.0, 'mean_token_accuracy': 0.8468012809753418, 'epoch': 6.0}
+{'loss': 0.6754, 'grad_norm': 1.6777135133743286, 'learning_rate': 1.8825509907063328e-06, 'entropy': 1.4693557284772396, 'num_tokens': 40341.0, 'mean_token_accuracy': 0.8480446375906467, 'epoch': 6.37}
+{'loss': 0.5433, 'grad_norm': 1.7670634984970093, 'learning_rate': 1.3347406408508695e-06, 'entropy': 1.5368986204266548, 'num_tokens': 42695.0, 'mean_token_accuracy': 0.8589903153479099, 'epoch': 6.74}
+{'loss': 0.4758, 'grad_norm': 1.8436418771743774, 'learning_rate': 8.688061284200266e-07, 'entropy': 1.61412466656078, 'num_tokens': 43918.0, 'mean_token_accuracy': 0.8605035922744058, 'epoch': 7.0}
+{'loss': 0.4448, 'grad_norm': 1.3565788269042969, 'learning_rate': 4.951556604879049e-07, 'entropy': 1.507338646799326, 'num_tokens': 46190.0, 'mean_token_accuracy': 0.8874340280890465, 'epoch': 7.37}
+{'loss': 0.6888, 'grad_norm': 1.4733660221099854, 'learning_rate': 2.2213597106929608e-07, 'entropy': 1.5321556478738785, 'num_tokens': 48753.0, 'mean_token_accuracy': 0.8424062095582485, 'epoch': 7.74}
+{'loss': 0.6471, 'grad_norm': 2.8780908584594727, 'learning_rate': 5.584586887435739e-08, 'entropy': 1.56590566851876, 'num_tokens': 50192.0, 'mean_token_accuracy': 0.8311085430058566, 'epoch': 8.0}
+{'train_runtime': 269.5032, 'train_samples_per_second': 1.276, 'train_steps_per_second': 0.089, 'train_loss': 0.6749967684348425, 'epoch': 8.0}
+モデルを保存中...
+Llama 3.2 3B QLoRA学習完了！モデルは ../outputs/llama32-3b-typst-qlora-003-005 に保存されました。
+スキップ: Iteration 005 のテストをスキップしました（2回に1回の実行）
+チェックポイントを更新: ../outputs/llama32-3b-typst-qlora-003-005
+=== Iteration 005 の処理完了 ===
+--------------------------------------------------
+=== Iteration 006 の処理開始 ===
+継続学習: ../jsonl/train_003.jsonl (from ../outputs/llama32-3b-typst-qlora-003-005)
+学習ログ: ../logs/003-006_training_20250916_224953.log
+実行中: python3 train_llama32_3b_qlora_fixed.py             --data ../jsonl/train_003.jsonl             --out ../outputs/llama32-3b-typst-qlora-003-006             --peft_model_path ../outputs/llama32-3b-typst-qlora-003-005             --epochs 8             --batch_size 1             --grad_accum 16             --learning_rate 1e-05             --lora_r 8             --lora_alpha 8             --lora_dropout 0.1
+Llama 3.2 3Bモデル: meta-llama/Llama-3.2-3B-Instruct
+データ: ../jsonl/train_003.jsonl
+出力: ../outputs/llama32-3b-typst-qlora-003-006
+学習率: 1e-05
+エポック数: 8
+バッチサイズ: 1
+勾配累積: 16
+LoRA rank: 8
+LoRA alpha: 8
+LoRA dropout: 0.1
+==================================================
+トークナイザーを読み込み中...
+4bit量子化設定を準備中...
+モデルを読み込み中...
+
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]
+Loading checkpoint shards:  50%|█████     | 1/2 [00:02<00:02,  2.92s/it]
+Loading checkpoint shards: 100%|██████████| 2/2 [00:03<00:00,  1.74s/it]
+Loading checkpoint shards: 100%|██████████| 2/2 [00:03<00:00,  1.91s/it]
+/mnt/d/github/typst-tex-converter/venv/lib/python3.11/site-packages/peft/tuners/lora/bnb.py:348: UserWarning: Merge lora module to 4-bit linear may get different generations due to rounding errors.
+  warnings.warn(
+/mnt/d/github/typst-tex-converter/venv/lib/python3.11/site-packages/peft/tuners/tuners_utils.py:196: UserWarning: Already found a `peft_config` attribute in the model. This will lead to having multiple adapters in the model. Make sure to know what you are doing!
+  warnings.warn(
+The tokenizer has new PAD/BOS/EOS tokens that differ from the model config and generation config. The model config and generation config were aligned accordingly, being updated with the tokenizer's values. Updated tokens: {'eos_token_id': 128009}.
+既存のPEFTモデルを読み込み中: ../outputs/llama32-3b-typst-qlora-003-005
+データセットを読み込み中...
+データセットサイズ: 43
+Llama 3.2 3B QLoRA学習を開始します...
+
+  0%|          | 0/24 [00:00<?, ?it/s]
+  4%|▍         | 1/24 [00:08<03:24,  8.91s/it]
+                                              
+
+  4%|▍         | 1/24 [00:08<03:24,  8.91s/it]
+  8%|▊         | 2/24 [00:21<03:59, 10.89s/it]
+                                              
+
+  8%|▊         | 2/24 [00:21<03:59, 10.89s/it]
+ 12%|█▎        | 3/24 [00:27<03:09,  9.00s/it]
+                                              
+
+ 12%|█▎        | 3/24 [00:27<03:09,  9.00s/it]
+ 17%|█▋        | 4/24 [00:38<03:10,  9.52s/it]
+                                              
+
+ 17%|█▋        | 4/24 [00:38<03:10,  9.52s/it]
+ 21%|██        | 5/24 [00:54<03:50, 12.12s/it]
+                                              
+
+ 21%|██        | 5/24 [00:54<03:50, 12.12s/it]
+ 25%|██▌       | 6/24 [01:03<03:13, 10.73s/it]
+                                              
+
+ 25%|██▌       | 6/24 [01:03<03:13, 10.73s/it]
+ 29%|██▉       | 7/24 [01:13<03:00, 10.65s/it]
+                                              
+
+ 29%|██▉       | 7/24 [01:13<03:00, 10.65s/it]
+ 33%|███▎      | 8/24 [01:25<02:55, 10.95s/it]
+                                              
+
+ 33%|███▎      | 8/24 [01:25<02:55, 10.95s/it]
+ 38%|███▊      | 9/24 [01:38<02:56, 11.80s/it]
+                                              
+
+ 38%|███▊      | 9/24 [01:38<02:56, 11.80s/it]
+ 42%|████▏     | 10/24 [01:55<03:05, 13.23s/it]
+                                               
+
+ 42%|████▏     | 10/24 [01:55<03:05, 13.23s/it]
+ 46%|████▌     | 11/24 [02:05<02:38, 12.21s/it]
+                                               
+
+ 46%|████▌     | 11/24 [02:05<02:38, 12.21s/it]
+ 50%|█████     | 12/24 [02:13<02:12, 11.00s/it]
+                                               
+
+ 50%|█████     | 12/24 [02:13<02:12, 11.00s/it]
+ 54%|█████▍    | 13/24 [02:30<02:21, 12.83s/it]
+                                               
+
+ 54%|█████▍    | 13/24 [02:30<02:21, 12.83s/it]
+ 58%|█████▊    | 14/24 [02:40<02:00, 12.03s/it]
+                                               
+
+ 58%|█████▊    | 14/24 [02:40<02:00, 12.03s/it]
+ 62%|██████▎   | 15/24 [02:47<01:35, 10.63s/it]
+                                               
+
+ 62%|██████▎   | 15/24 [02:47<01:35, 10.63s/it]
+ 67%|██████▋   | 16/24 [02:57<01:21, 10.23s/it]
+                                               
+
+ 67%|██████▋   | 16/24 [02:57<01:21, 10.23s/it]
+ 71%|███████   | 17/24 [03:14<01:27, 12.46s/it]
+                                               
+
+ 71%|███████   | 17/24 [03:14<01:27, 12.46s/it]
+ 75%|███████▌  | 18/24 [03:22<01:05, 10.92s/it]
+                                               
+
+ 75%|███████▌  | 18/24 [03:22<01:05, 10.92s/it]
+ 79%|███████▉  | 19/24 [03:37<01:01, 12.38s/it]
+                                               
+
+ 79%|███████▉  | 19/24 [03:37<01:01, 12.38s/it]
+ 83%|████████▎ | 20/24 [03:49<00:48, 12.15s/it]
+                                               
+
+ 83%|████████▎ | 20/24 [03:49<00:48, 12.15s/it]
+ 88%|████████▊ | 21/24 [03:56<00:32, 10.68s/it]
+                                               
+
+ 88%|████████▊ | 21/24 [03:56<00:32, 10.68s/it]
+ 92%|█████████▏| 22/24 [04:07<00:21, 10.67s/it]
+                                               
+
+ 92%|█████████▏| 22/24 [04:07<00:21, 10.67s/it]
+ 96%|█████████▌| 23/24 [04:24<00:12, 12.42s/it]
+                                               
+
+ 96%|█████████▌| 23/24 [04:24<00:12, 12.42s/it]
+100%|██████████| 24/24 [04:31<00:00, 10.96s/it]
+                                               
+
+100%|██████████| 24/24 [04:31<00:00, 10.96s/it]
+                                               
+
+100%|██████████| 24/24 [04:33<00:00, 10.96s/it]
+100%|██████████| 24/24 [04:33<00:00, 11.38s/it]
+{'loss': 0.8689, 'grad_norm': 2.531637191772461, 'learning_rate': 0.0, 'entropy': 1.6639373041689396, 'num_tokens': 1931.0, 'mean_token_accuracy': 0.8166080676019192, 'epoch': 0.37}
+{'loss': 0.7159, 'grad_norm': 2.0611276626586914, 'learning_rate': 3.3333333333333333e-06, 'entropy': 1.3601956963539124, 'num_tokens': 4979.0, 'mean_token_accuracy': 0.839089784771204, 'epoch': 0.74}
+{'loss': 0.9713, 'grad_norm': 3.1234264373779297, 'learning_rate': 6.666666666666667e-06, 'entropy': 1.5215381546453997, 'num_tokens': 6274.0, 'mean_token_accuracy': 0.8372980952262878, 'epoch': 1.0}
+{'loss': 0.8724, 'grad_norm': 3.0427393913269043, 'learning_rate': 1e-05, 'entropy': 1.648574497550726, 'num_tokens': 7986.0, 'mean_token_accuracy': 0.8078477643430233, 'epoch': 1.37}
+{'loss': 0.8222, 'grad_norm': 2.0733089447021484, 'learning_rate': 9.944154131125643e-06, 'entropy': 1.3401616476476192, 'num_tokens': 11109.0, 'mean_token_accuracy': 0.8466840200126171, 'epoch': 1.74}
+{'loss': 0.5592, 'grad_norm': 1.6902408599853516, 'learning_rate': 9.777864028930705e-06, 'entropy': 1.5804279446601868, 'num_tokens': 12548.0, 'mean_token_accuracy': 0.8708719286051664, 'epoch': 2.0}
+{'loss': 0.8609, 'grad_norm': 2.242302179336548, 'learning_rate': 9.504844339512096e-06, 'entropy': 1.522920846939087, 'num_tokens': 14567.0, 'mean_token_accuracy': 0.8450339734554291, 'epoch': 2.37}
+{'loss': 0.7362, 'grad_norm': 2.631082773208618, 'learning_rate': 9.131193871579975e-06, 'entropy': 1.4932430945336819, 'num_tokens': 16850.0, 'mean_token_accuracy': 0.8552906177937984, 'epoch': 2.74}
+{'loss': 0.566, 'grad_norm': 1.2413020133972168, 'learning_rate': 8.665259359149132e-06, 'entropy': 1.5552216172218323, 'num_tokens': 18822.0, 'mean_token_accuracy': 0.8408078063618053, 'epoch': 3.0}
+{'loss': 0.7399, 'grad_norm': 1.749511957168579, 'learning_rate': 8.117449009293668e-06, 'entropy': 1.5085951089859009, 'num_tokens': 21518.0, 'mean_token_accuracy': 0.8415696173906326, 'epoch': 3.37}
+{'loss': 0.6231, 'grad_norm': 2.206432580947876, 'learning_rate': 7.500000000000001e-06, 'entropy': 1.6319712921977043, 'num_tokens': 23215.0, 'mean_token_accuracy': 0.8565590307116508, 'epoch': 3.74}
+{'loss': 0.6042, 'grad_norm': 1.6673153638839722, 'learning_rate': 6.8267051218319766e-06, 'entropy': 1.3891011530702764, 'num_tokens': 25096.0, 'mean_token_accuracy': 0.8519411141222174, 'epoch': 4.0}
+{'loss': 0.6501, 'grad_norm': 1.6811537742614746, 'learning_rate': 6.112604669781572e-06, 'entropy': 1.4305278286337852, 'num_tokens': 28086.0, 'mean_token_accuracy': 0.841074712574482, 'epoch': 4.37}
+{'loss': 0.5933, 'grad_norm': 2.0965521335601807, 'learning_rate': 5.373650467932122e-06, 'entropy': 1.5667844451963902, 'num_tokens': 30094.0, 'mean_token_accuracy': 0.849822610616684, 'epoch': 4.74}
+{'loss': 0.6399, 'grad_norm': 2.1075727939605713, 'learning_rate': 4.626349532067879e-06, 'entropy': 1.6112680543552746, 'num_tokens': 31370.0, 'mean_token_accuracy': 0.8791517561132257, 'epoch': 5.0}
+{'loss': 0.7377, 'grad_norm': 2.276223659515381, 'learning_rate': 3.887395330218429e-06, 'entropy': 1.6256702318787575, 'num_tokens': 33121.0, 'mean_token_accuracy': 0.8421903848648071, 'epoch': 5.37}
+{'loss': 0.5465, 'grad_norm': 1.2426350116729736, 'learning_rate': 3.173294878168025e-06, 'entropy': 1.3932145796716213, 'num_tokens': 36291.0, 'mean_token_accuracy': 0.8702456392347813, 'epoch': 5.74}
+{'loss': 0.6066, 'grad_norm': 2.762878894805908, 'learning_rate': 2.5000000000000015e-06, 'entropy': 1.5871775854717602, 'num_tokens': 37644.0, 'mean_token_accuracy': 0.8485838120633905, 'epoch': 6.0}
+{'loss': 0.6746, 'grad_norm': 1.7161709070205688, 'learning_rate': 1.8825509907063328e-06, 'entropy': 1.4680925086140633, 'num_tokens': 40341.0, 'mean_token_accuracy': 0.8487468883395195, 'epoch': 6.37}
+{'loss': 0.542, 'grad_norm': 1.7959067821502686, 'learning_rate': 1.3347406408508695e-06, 'entropy': 1.5354642644524574, 'num_tokens': 42695.0, 'mean_token_accuracy': 0.860884252935648, 'epoch': 6.74}
+{'loss': 0.4741, 'grad_norm': 1.9022927284240723, 'learning_rate': 8.688061284200266e-07, 'entropy': 1.6133616783402183, 'num_tokens': 43918.0, 'mean_token_accuracy': 0.8605035922744058, 'epoch': 7.0}
+{'loss': 0.4439, 'grad_norm': 1.3814573287963867, 'learning_rate': 4.951556604879049e-07, 'entropy': 1.5060172080993652, 'num_tokens': 46190.0, 'mean_token_accuracy': 0.8874340280890465, 'epoch': 7.37}
+{'loss': 0.6886, 'grad_norm': 1.5039020776748657, 'learning_rate': 2.2213597106929608e-07, 'entropy': 1.5304328389465809, 'num_tokens': 48753.0, 'mean_token_accuracy': 0.8424062095582485, 'epoch': 7.74}
+{'loss': 0.6439, 'grad_norm': 2.9351909160614014, 'learning_rate': 5.584586887435739e-08, 'entropy': 1.5647122914140874, 'num_tokens': 50192.0, 'mean_token_accuracy': 0.8311085430058566, 'epoch': 8.0}
+{'train_runtime': 273.1947, 'train_samples_per_second': 1.259, 'train_steps_per_second': 0.088, 'train_loss': 0.674228855719169, 'epoch': 8.0}
+モデルを保存中...
+Llama 3.2 3B QLoRA学習完了！モデルは ../outputs/llama32-3b-typst-qlora-003-006 に保存されました。
+テスト実行: ../outputs/llama32-3b-typst-qlora-003-006
+テストログ: ../logs/003-006_test_20250916_224953.log
+実行中: python3 inference_llama32_3b.py                 --peft_model_path ../outputs/llama32-3b-typst-qlora-003-006                 --input_file ../sample/sample_small.tex                 --output_file ../trained/003-006.md
+ベースモデル: meta-llama/Llama-3.2-3B-Instruct
+✅ 使用モデル: PEFT（LoRA適用済み）
+   PEFTモデル: ../outputs/llama32-3b-typst-qlora-003-006
+入力ファイル: ../sample/sample_small.tex
+出力ファイル: ../trained/003-006.md
+トークナイザーを読み込み中...
+4bit量子化設定を準備中...
+ベースモデルを読み込み中...
+
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]
+Loading checkpoint shards:  50%|█████     | 1/2 [00:02<00:02,  2.91s/it]
+Loading checkpoint shards: 100%|██████████| 2/2 [00:03<00:00,  1.73s/it]
+Loading checkpoint shards: 100%|██████████| 2/2 [00:03<00:00,  1.90s/it]
+The following generation flags are not valid and may be ignored: ['temperature', 'top_p']. Set `TRANSFORMERS_VERBOSITY=info` for more details.
+✅ PEFTモデルを読み込み中...
+   PEFTパス: ../outputs/llama32-3b-typst-qlora-003-006
+   PEFTモデル読み込み完了
+LaTeXファイルを読み込み中...
+LaTeXテキストを 1 チャンクに分割しました
+LaTeX→Typst変換を開始します...
+チャンク 1/1 を変換中...
+  入力テキスト長: 865 文字
+  チャットテンプレート適用成功
+  プロンプト長: 1223 文字
+  入力トークン数: 415
+  生成開始...
+  生成完了: 615 トークン
+  生成テキスト長: 1711 文字
+  プロンプト長: 1223 文字
+  生成テキスト開始: system
+
+Cutting Knowledge Date: December 2023
+Today Date: 16 Sep 2025
+
+LaTeX 形式の文章を Typst形式 へ変換してください.
+重要: TypstはLaTeXの代替となる文書組版システムです。TypeScript（プログラミング言語）ではありません。
+出力はTypst構文のみ。プログラミングコードは出力しません。user...
+  生成テキスト終了: ...u_0, u_1\right) = \left(\varepsilon_0 \varphi, \varepsilon_1 \varphi\right),$$
+
+where $0 < \varepsilon_0 < |\varepsilon_1| = -\varepsilon_1$, with $\varphi$ being a regular non-negative function.
+
+```
+  生成テキスト全体の長さ: 1711 文字
+  プロンプトの長さ: 1223 文字
+  方法1（全体使用）: 1711 文字
+  方法3（```typstマーカー）: 634 文字
+  方法3（```除去後）: 629 文字
+  最終応答: system
+
+Cutting Knowledge Date: December 2023
+Today Date: 16 Sep 2025
+
+LaTeX 形式の文章を Typst形式 へ変換してください.
+重要: TypstはLaTeXの代替となる文書組版システムです。TypeScript（プログラミング言語）ではありません。
+出力はTypst構文のみ。プログラミングコードは出力しません。user...
+  最終応答の最後: ...on_0 < |\varepsilon_1| = -\varepsilon_1$, with $\varphi$ being a regular non-negative function.
+
+```
+  抽出された応答: system
+
+Cutting Knowledge Date: December 2023
+Today Date: 16 Sep 2025
+
+LaTeX 形式の文章を Typst形式 へ変換してくださ...
+結果を ../trained/003-006.md に保存中...
+変換完了！
+完了: Iteration 006 の学習・テストが完了しました。
+チェックポイントを更新: ../outputs/llama32-3b-typst-qlora-003-006
+=== Iteration 006 の処理完了 ===
+--------------------------------------------------
+=== Iteration 007 の処理開始 ===
+継続学習: ../jsonl/train_003.jsonl (from ../outputs/llama32-3b-typst-qlora-003-006)
+学習ログ: ../logs/003-007_training_20250916_224953.log
+実行中: python3 train_llama32_3b_qlora_fixed.py             --data ../jsonl/train_003.jsonl             --out ../outputs/llama32-3b-typst-qlora-003-007             --peft_model_path ../outputs/llama32-3b-typst-qlora-003-006             --epochs 8             --batch_size 1             --grad_accum 16             --learning_rate 1e-05             --lora_r 8             --lora_alpha 8             --lora_dropout 0.1
+Llama 3.2 3Bモデル: meta-llama/Llama-3.2-3B-Instruct
+データ: ../jsonl/train_003.jsonl
+出力: ../outputs/llama32-3b-typst-qlora-003-007
+学習率: 1e-05
+エポック数: 8
+バッチサイズ: 1
+勾配累積: 16
+LoRA rank: 8
+LoRA alpha: 8
+LoRA dropout: 0.1
+==================================================
+トークナイザーを読み込み中...
+4bit量子化設定を準備中...
+モデルを読み込み中...
+
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]
+Loading checkpoint shards:  50%|█████     | 1/2 [00:02<00:02,  2.80s/it]
+Loading checkpoint shards: 100%|██████████| 2/2 [00:03<00:00,  1.65s/it]
+Loading checkpoint shards: 100%|██████████| 2/2 [00:03<00:00,  1.83s/it]
+/mnt/d/github/typst-tex-converter/venv/lib/python3.11/site-packages/peft/tuners/lora/bnb.py:348: UserWarning: Merge lora module to 4-bit linear may get different generations due to rounding errors.
+  warnings.warn(
+/mnt/d/github/typst-tex-converter/venv/lib/python3.11/site-packages/peft/tuners/tuners_utils.py:196: UserWarning: Already found a `peft_config` attribute in the model. This will lead to having multiple adapters in the model. Make sure to know what you are doing!
+  warnings.warn(
+The tokenizer has new PAD/BOS/EOS tokens that differ from the model config and generation config. The model config and generation config were aligned accordingly, being updated with the tokenizer's values. Updated tokens: {'eos_token_id': 128009}.
+既存のPEFTモデルを読み込み中: ../outputs/llama32-3b-typst-qlora-003-006
+データセットを読み込み中...
+データセットサイズ: 43
+Llama 3.2 3B QLoRA学習を開始します...
+
+  0%|          | 0/24 [00:00<?, ?it/s]
+  4%|▍         | 1/24 [00:09<03:32,  9.22s/it]
+                                              
+
+  4%|▍         | 1/24 [00:09<03:32,  9.22s/it]
+  8%|▊         | 2/24 [00:21<04:06, 11.19s/it]
+                                              
+
+  8%|▊         | 2/24 [00:21<04:06, 11.19s/it]
+ 12%|█▎        | 3/24 [00:29<03:17,  9.41s/it]
+                                              
+
+ 12%|█▎        | 3/24 [00:29<03:17,  9.41s/it]
+ 17%|█▋        | 4/24 [00:39<03:14,  9.73s/it]
+                                              
+
+ 17%|█▋        | 4/24 [00:39<03:14,  9.73s/it]
+ 21%|██        | 5/24 [00:55<03:52, 12.22s/it]
+                                              
+
+ 21%|██        | 5/24 [00:55<03:52, 12.22s/it]
+ 25%|██▌       | 6/24 [01:03<03:13, 10.75s/it]
+                                              
+
+ 25%|██▌       | 6/24 [01:03<03:13, 10.75s/it]
+ 29%|██▉       | 7/24 [01:14<03:02, 10.76s/it]
+                                              
+
+ 29%|██▉       | 7/24 [01:14<03:02, 10.76s/it]
+ 33%|███▎      | 8/24 [01:25<02:55, 10.94s/it]
+                                              
+
+ 33%|███▎      | 8/24 [01:25<02:55, 10.94s/it]
+ 38%|███▊      | 9/24 [01:39<02:56, 11.74s/it]
+                                              
+
+ 38%|███▊      | 9/24 [01:39<02:56, 11.74s/it]
+ 42%|████▏     | 10/24 [01:55<03:03, 13.08s/it]
+                                               
+
+ 42%|████▏     | 10/24 [01:55<03:03, 13.08s/it]
+ 46%|████▌     | 11/24 [02:06<02:41, 12.39s/it]
+                                               
+
+ 46%|████▌     | 11/24 [02:06<02:41, 12.39s/it]
+ 50%|█████     | 12/24 [02:14<02:13, 11.09s/it]
+                                               
+
+ 50%|█████     | 12/24 [02:14<02:13, 11.09s/it]
+ 54%|█████▍    | 13/24 [02:31<02:23, 13.04s/it]
+                                               
+
+ 54%|█████▍    | 13/24 [02:32<02:23, 13.04s/it]
+ 58%|█████▊    | 14/24 [02:43<02:04, 12.46s/it]
+                                               
+
+ 58%|█████▊    | 14/24 [02:43<02:04, 12.46s/it]
+ 62%|██████▎   | 15/24 [02:51<01:40, 11.21s/it]
+                                               
+
+ 62%|██████▎   | 15/24 [02:51<01:40, 11.21s/it]
+ 67%|██████▋   | 16/24 [03:01<01:26, 10.80s/it]
+                                               
+
+ 67%|██████▋   | 16/24 [03:01<01:26, 10.80s/it]
+ 71%|███████   | 17/24 [03:20<01:34, 13.49s/it]
+                                               
+
+ 71%|███████   | 17/24 [03:21<01:34, 13.49s/it]
+ 75%|███████▌  | 18/24 [03:29<01:11, 11.87s/it]
+                                               
+
+ 75%|███████▌  | 18/24 [03:29<01:11, 11.87s/it]
+ 79%|███████▉  | 19/24 [03:46<01:07, 13.41s/it]
+                                               
+
+ 79%|███████▉  | 19/24 [03:46<01:07, 13.41s/it]
+ 83%|████████▎ | 20/24 [03:58<00:52, 13.10s/it]
+                                               
+
+ 83%|████████▎ | 20/24 [03:58<00:52, 13.10s/it]
+ 88%|████████▊ | 21/24 [04:06<00:34, 11.50s/it]
+                                               
+
+ 88%|████████▊ | 21/24 [04:06<00:34, 11.50s/it]
+ 92%|█████████▏| 22/24 [04:17<00:22, 11.46s/it]
+                                               
+
+ 92%|█████████▏| 22/24 [04:17<00:22, 11.46s/it]
+ 96%|█████████▌| 23/24 [04:35<00:13, 13.48s/it]
+                                               
+
+ 96%|█████████▌| 23/24 [04:35<00:13, 13.48s/it]
+100%|██████████| 24/24 [04:43<00:00, 11.76s/it]
+                                               
+
+100%|██████████| 24/24 [04:43<00:00, 11.76s/it]
+                                               
+
+100%|██████████| 24/24 [04:45<00:00, 11.76s/it]
+100%|██████████| 24/24 [04:45<00:00, 11.89s/it]
+{'loss': 0.8693, 'grad_norm': 2.413853645324707, 'learning_rate': 0.0, 'entropy': 1.663901001214981, 'num_tokens': 1931.0, 'mean_token_accuracy': 0.8166080676019192, 'epoch': 0.37}
+{'loss': 0.7162, 'grad_norm': 2.003105640411377, 'learning_rate': 3.3333333333333333e-06, 'entropy': 1.3602662459015846, 'num_tokens': 4979.0, 'mean_token_accuracy': 0.839089784771204, 'epoch': 0.74}
+{'loss': 0.9721, 'grad_norm': 3.0233068466186523, 'learning_rate': 6.666666666666667e-06, 'entropy': 1.5216991684653542, 'num_tokens': 6274.0, 'mean_token_accuracy': 0.8372980952262878, 'epoch': 1.0}
+{'loss': 0.8725, 'grad_norm': 2.9842967987060547, 'learning_rate': 1e-05, 'entropy': 1.6486125029623508, 'num_tokens': 7986.0, 'mean_token_accuracy': 0.8078477643430233, 'epoch': 1.37}
+{'loss': 0.8223, 'grad_norm': 1.9891141653060913, 'learning_rate': 9.944154131125643e-06, 'entropy': 1.34024154022336, 'num_tokens': 11109.0, 'mean_token_accuracy': 0.8466840200126171, 'epoch': 1.74}
+{'loss': 0.5594, 'grad_norm': 1.6220489740371704, 'learning_rate': 9.777864028930705e-06, 'entropy': 1.58060715415261, 'num_tokens': 12548.0, 'mean_token_accuracy': 0.8703107617118142, 'epoch': 2.0}
+{'loss': 0.8609, 'grad_norm': 2.1481785774230957, 'learning_rate': 9.504844339512096e-06, 'entropy': 1.5233727656304836, 'num_tokens': 14567.0, 'mean_token_accuracy': 0.8450339734554291, 'epoch': 2.37}
+{'loss': 0.7361, 'grad_norm': 2.5319862365722656, 'learning_rate': 9.131193871579975e-06, 'entropy': 1.4939110726118088, 'num_tokens': 16850.0, 'mean_token_accuracy': 0.8552906177937984, 'epoch': 2.74}
+{'loss': 0.5659, 'grad_norm': 1.2080992460250854, 'learning_rate': 8.665259359149132e-06, 'entropy': 1.5561492063782432, 'num_tokens': 18822.0, 'mean_token_accuracy': 0.8413363478400491, 'epoch': 3.0}
+{'loss': 0.7391, 'grad_norm': 1.7068530321121216, 'learning_rate': 8.117449009293668e-06, 'entropy': 1.5091287568211555, 'num_tokens': 21518.0, 'mean_token_accuracy': 0.8415696173906326, 'epoch': 3.37}
+{'loss': 0.6236, 'grad_norm': 2.104710817337036, 'learning_rate': 7.500000000000001e-06, 'entropy': 1.6326788403093815, 'num_tokens': 23215.0, 'mean_token_accuracy': 0.8565590307116508, 'epoch': 3.74}
+{'loss': 0.6035, 'grad_norm': 1.6151399612426758, 'learning_rate': 6.8267051218319766e-06, 'entropy': 1.3897192694924094, 'num_tokens': 25096.0, 'mean_token_accuracy': 0.8540104898539457, 'epoch': 4.0}
+{'loss': 0.6498, 'grad_norm': 1.6172873973846436, 'learning_rate': 6.112604669781572e-06, 'entropy': 1.4313232749700546, 'num_tokens': 28086.0, 'mean_token_accuracy': 0.841074712574482, 'epoch': 4.37}
+{'loss': 0.5933, 'grad_norm': 2.007174491882324, 'learning_rate': 5.373650467932122e-06, 'entropy': 1.567275207489729, 'num_tokens': 30094.0, 'mean_token_accuracy': 0.849822610616684, 'epoch': 4.74}
+{'loss': 0.641, 'grad_norm': 2.0336790084838867, 'learning_rate': 4.626349532067879e-06, 'entropy': 1.6120215275070884, 'num_tokens': 31370.0, 'mean_token_accuracy': 0.8640002391555093, 'epoch': 5.0}
+{'loss': 0.7376, 'grad_norm': 2.205946683883667, 'learning_rate': 3.887395330218429e-06, 'entropy': 1.6262010261416435, 'num_tokens': 33121.0, 'mean_token_accuracy': 0.8421903848648071, 'epoch': 5.37}
+{'loss': 0.5466, 'grad_norm': 1.2052695751190186, 'learning_rate': 3.173294878168025e-06, 'entropy': 1.3941265605390072, 'num_tokens': 36291.0, 'mean_token_accuracy': 0.8702456392347813, 'epoch': 5.74}
+{'loss': 0.6071, 'grad_norm': 2.642714023590088, 'learning_rate': 2.5000000000000015e-06, 'entropy': 1.588123998858712, 'num_tokens': 37644.0, 'mean_token_accuracy': 0.8468012809753418, 'epoch': 6.0}
+{'loss': 0.6751, 'grad_norm': 1.6549328565597534, 'learning_rate': 1.8825509907063328e-06, 'entropy': 1.4689732678234577, 'num_tokens': 40341.0, 'mean_token_accuracy': 0.8487468883395195, 'epoch': 6.37}
+{'loss': 0.5431, 'grad_norm': 1.745214581489563, 'learning_rate': 1.3347406408508695e-06, 'entropy': 1.53627335652709, 'num_tokens': 42695.0, 'mean_token_accuracy': 0.8589903153479099, 'epoch': 6.74}
+{'loss': 0.4744, 'grad_norm': 1.8179851770401, 'learning_rate': 8.688061284200266e-07, 'entropy': 1.6136713407256387, 'num_tokens': 43918.0, 'mean_token_accuracy': 0.8605035922744058, 'epoch': 7.0}
+{'loss': 0.4449, 'grad_norm': 1.3376529216766357, 'learning_rate': 4.951556604879049e-07, 'entropy': 1.5067272037267685, 'num_tokens': 46190.0, 'mean_token_accuracy': 0.8874340280890465, 'epoch': 7.37}
+{'loss': 0.6879, 'grad_norm': 1.4623137712478638, 'learning_rate': 2.2213597106929608e-07, 'entropy': 1.5313324555754662, 'num_tokens': 48753.0, 'mean_token_accuracy': 0.8424062095582485, 'epoch': 7.74}
+{'loss': 0.6453, 'grad_norm': 2.8243613243103027, 'learning_rate': 5.584586887435739e-08, 'entropy': 1.5649483420632102, 'num_tokens': 50192.0, 'mean_token_accuracy': 0.8311085430058566, 'epoch': 8.0}
+{'train_runtime': 285.3318, 'train_samples_per_second': 1.206, 'train_steps_per_second': 0.084, 'train_loss': 0.6744560115039349, 'epoch': 8.0}
+モデルを保存中...
+Llama 3.2 3B QLoRA学習完了！モデルは ../outputs/llama32-3b-typst-qlora-003-007 に保存されました。
+スキップ: Iteration 007 のテストをスキップしました（2回に1回の実行）
+チェックポイントを更新: ../outputs/llama32-3b-typst-qlora-003-007
+=== Iteration 007 の処理完了 ===
+--------------------------------------------------
+=== Iteration 008 の処理開始 ===
+継続学習: ../jsonl/train_003.jsonl (from ../outputs/llama32-3b-typst-qlora-003-007)
+学習ログ: ../logs/003-008_training_20250916_224953.log
+実行中: python3 train_llama32_3b_qlora_fixed.py             --data ../jsonl/train_003.jsonl             --out ../outputs/llama32-3b-typst-qlora-003-008             --peft_model_path ../outputs/llama32-3b-typst-qlora-003-007             --epochs 8             --batch_size 1             --grad_accum 16             --learning_rate 1e-05             --lora_r 8             --lora_alpha 8             --lora_dropout 0.1
+Llama 3.2 3Bモデル: meta-llama/Llama-3.2-3B-Instruct
+データ: ../jsonl/train_003.jsonl
+出力: ../outputs/llama32-3b-typst-qlora-003-008
+学習率: 1e-05
+エポック数: 8
+バッチサイズ: 1
+勾配累積: 16
+LoRA rank: 8
+LoRA alpha: 8
+LoRA dropout: 0.1
+==================================================
+トークナイザーを読み込み中...
+4bit量子化設定を準備中...
+モデルを読み込み中...
+
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]
+Loading checkpoint shards:  50%|█████     | 1/2 [00:02<00:02,  2.80s/it]
+Loading checkpoint shards: 100%|██████████| 2/2 [00:03<00:00,  1.66s/it]
+Loading checkpoint shards: 100%|██████████| 2/2 [00:03<00:00,  1.83s/it]
+/mnt/d/github/typst-tex-converter/venv/lib/python3.11/site-packages/peft/tuners/lora/bnb.py:348: UserWarning: Merge lora module to 4-bit linear may get different generations due to rounding errors.
+  warnings.warn(
+/mnt/d/github/typst-tex-converter/venv/lib/python3.11/site-packages/peft/tuners/tuners_utils.py:196: UserWarning: Already found a `peft_config` attribute in the model. This will lead to having multiple adapters in the model. Make sure to know what you are doing!
+  warnings.warn(
+The tokenizer has new PAD/BOS/EOS tokens that differ from the model config and generation config. The model config and generation config were aligned accordingly, being updated with the tokenizer's values. Updated tokens: {'eos_token_id': 128009}.
+既存のPEFTモデルを読み込み中: ../outputs/llama32-3b-typst-qlora-003-007
+データセットを読み込み中...
+データセットサイズ: 43
+Llama 3.2 3B QLoRA学習を開始します...
+
+  0%|          | 0/24 [00:00<?, ?it/s]
+  4%|▍         | 1/24 [00:09<03:30,  9.17s/it]
+                                              
+
+  4%|▍         | 1/24 [00:09<03:30,  9.17s/it]
+  8%|▊         | 2/24 [00:21<04:04, 11.12s/it]
+                                              
+
+  8%|▊         | 2/24 [00:21<04:04, 11.12s/it]
+ 12%|█▎        | 3/24 [00:28<03:10,  9.07s/it]
+                                              
+
+ 12%|█▎        | 3/24 [00:28<03:10,  9.07s/it]
+ 17%|█▋        | 4/24 [00:38<03:09,  9.45s/it]
+                                              
+
+ 17%|█▋        | 4/24 [00:38<03:09,  9.45s/it]
+ 21%|██        | 5/24 [00:54<03:48, 12.02s/it]
+                                              
+
+ 21%|██        | 5/24 [00:54<03:48, 12.02s/it]
+ 25%|██▌       | 6/24 [01:02<03:10, 10.58s/it]
+                                              
+
+ 25%|██▌       | 6/24 [01:02<03:10, 10.58s/it]
+ 29%|██▉       | 7/24 [01:12<02:57, 10.45s/it]
+                                              
+
+ 29%|██▉       | 7/24 [01:12<02:57, 10.45s/it]
+ 33%|███▎      | 8/24 [01:23<02:47, 10.49s/it]
+                                              
+
+ 33%|███▎      | 8/24 [01:23<02:47, 10.49s/it]
+ 38%|███▊      | 9/24 [01:36<02:50, 11.34s/it]
+                                              
+
+ 38%|███▊      | 9/24 [01:36<02:50, 11.34s/it]
+ 42%|████▏     | 10/24 [01:52<02:59, 12.79s/it]
+                                               
+
+ 42%|████▏     | 10/24 [01:52<02:59, 12.79s/it]
+ 46%|████▌     | 11/24 [02:02<02:35, 11.99s/it]
+                                               
+
+ 46%|████▌     | 11/24 [02:02<02:35, 11.99s/it]
+ 50%|█████     | 12/24 [02:10<02:09, 10.78s/it]
+                                               
+
+ 50%|█████     | 12/24 [02:10<02:09, 10.78s/it]
+ 54%|█████▍    | 13/24 [02:27<02:17, 12.51s/it]
+                                               
+
+ 54%|█████▍    | 13/24 [02:27<02:17, 12.51s/it]
+ 58%|█████▊    | 14/24 [02:37<01:58, 11.82s/it]
+                                               
+
+ 58%|█████▊    | 14/24 [02:37<01:58, 11.82s/it]
+ 62%|██████▎   | 15/24 [02:44<01:33, 10.39s/it]
+                                               
+
+ 62%|██████▎   | 15/24 [02:44<01:33, 10.39s/it]
+ 67%|██████▋   | 16/24 [02:54<01:20, 10.09s/it]
+                                               
+
+ 67%|██████▋   | 16/24 [02:54<01:20, 10.09s/it]
+ 71%|███████   | 17/24 [03:12<01:27, 12.49s/it]
+                                               
+
+ 71%|███████   | 17/24 [03:12<01:27, 12.49s/it]
+ 75%|███████▌  | 18/24 [03:19<01:05, 10.92s/it]
+                                               
+
+ 75%|███████▌  | 18/24 [03:19<01:05, 10.92s/it]
+ 79%|███████▉  | 19/24 [03:34<01:01, 12.27s/it]
+                                               
+
+ 79%|███████▉  | 19/24 [03:34<01:01, 12.27s/it]
+ 83%|████████▎ | 20/24 [03:46<00:48, 12.06s/it]
+                                               
+
+ 83%|████████▎ | 20/24 [03:46<00:48, 12.06s/it]
+ 88%|████████▊ | 21/24 [03:53<00:31, 10.56s/it]
+                                               
+
+ 88%|████████▊ | 21/24 [03:53<00:31, 10.56s/it]
+ 92%|█████████▏| 22/24 [04:03<00:20, 10.49s/it]
+                                               
+
+ 92%|█████████▏| 22/24 [04:03<00:20, 10.49s/it]
+ 96%|█████████▌| 23/24 [04:20<00:12, 12.32s/it]
+                                               
+
+ 96%|█████████▌| 23/24 [04:20<00:12, 12.32s/it]
+100%|██████████| 24/24 [04:27<00:00, 10.76s/it]
+                                               
+
+100%|██████████| 24/24 [04:27<00:00, 10.76s/it]
+                                               
+
+100%|██████████| 24/24 [04:29<00:00, 10.76s/it]
+100%|██████████| 24/24 [04:29<00:00, 11.22s/it]
+{'loss': 0.8692, 'grad_norm': 2.3601391315460205, 'learning_rate': 0.0, 'entropy': 1.6643284298479557, 'num_tokens': 1931.0, 'mean_token_accuracy': 0.8166080676019192, 'epoch': 0.37}
+{'loss': 0.7163, 'grad_norm': 1.9561748504638672, 'learning_rate': 3.3333333333333333e-06, 'entropy': 1.3606057539582253, 'num_tokens': 4979.0, 'mean_token_accuracy': 0.839089784771204, 'epoch': 0.74}
+{'loss': 0.9718, 'grad_norm': 2.9390225410461426, 'learning_rate': 6.666666666666667e-06, 'entropy': 1.5218656875870444, 'num_tokens': 6274.0, 'mean_token_accuracy': 0.8372980952262878, 'epoch': 1.0}
+{'loss': 0.8728, 'grad_norm': 2.8989064693450928, 'learning_rate': 1e-05, 'entropy': 1.648757241666317, 'num_tokens': 7986.0, 'mean_token_accuracy': 0.8078477643430233, 'epoch': 1.37}
+{'loss': 0.8227, 'grad_norm': 1.942823886871338, 'learning_rate': 9.944154131125643e-06, 'entropy': 1.3404318392276764, 'num_tokens': 11109.0, 'mean_token_accuracy': 0.8466840200126171, 'epoch': 1.74}
+{'loss': 0.5596, 'grad_norm': 1.5899889469146729, 'learning_rate': 9.777864028930705e-06, 'entropy': 1.5805441737174988, 'num_tokens': 12548.0, 'mean_token_accuracy': 0.8703107617118142, 'epoch': 2.0}
+{'loss': 0.8619, 'grad_norm': 2.1059911251068115, 'learning_rate': 9.504844339512096e-06, 'entropy': 1.5232662372291088, 'num_tokens': 14567.0, 'mean_token_accuracy': 0.8450339734554291, 'epoch': 2.37}
+{'loss': 0.7373, 'grad_norm': 2.4673044681549072, 'learning_rate': 9.131193871579975e-06, 'entropy': 1.4934772029519081, 'num_tokens': 16850.0, 'mean_token_accuracy': 0.8552906177937984, 'epoch': 2.74}
+{'loss': 0.5663, 'grad_norm': 1.19696843624115, 'learning_rate': 8.665259359149132e-06, 'entropy': 1.5554713823578574, 'num_tokens': 18822.0, 'mean_token_accuracy': 0.8408078063618053, 'epoch': 3.0}
+{'loss': 0.7396, 'grad_norm': 1.6820076704025269, 'learning_rate': 8.117449009293668e-06, 'entropy': 1.5087525844573975, 'num_tokens': 21518.0, 'mean_token_accuracy': 0.8415696173906326, 'epoch': 3.37}
+{'loss': 0.6245, 'grad_norm': 2.0686044692993164, 'learning_rate': 7.500000000000001e-06, 'entropy': 1.6319978795945644, 'num_tokens': 23215.0, 'mean_token_accuracy': 0.8565590307116508, 'epoch': 3.74}
+{'loss': 0.6047, 'grad_norm': 1.601439356803894, 'learning_rate': 6.8267051218319766e-06, 'entropy': 1.3893242424184626, 'num_tokens': 25096.0, 'mean_token_accuracy': 0.8524696556004611, 'epoch': 4.0}
+{'loss': 0.6509, 'grad_norm': 1.5880117416381836, 'learning_rate': 6.112604669781572e-06, 'entropy': 1.4307484664022923, 'num_tokens': 28086.0, 'mean_token_accuracy': 0.8414380848407745, 'epoch': 4.37}
+{'loss': 0.5939, 'grad_norm': 1.9821147918701172, 'learning_rate': 5.373650467932122e-06, 'entropy': 1.5664338991045952, 'num_tokens': 30094.0, 'mean_token_accuracy': 0.849822610616684, 'epoch': 4.74}
+{'loss': 0.6411, 'grad_norm': 1.9972728490829468, 'learning_rate': 4.626349532067879e-06, 'entropy': 1.6111800074577332, 'num_tokens': 31370.0, 'mean_token_accuracy': 0.8640002391555093, 'epoch': 5.0}
+{'loss': 0.7371, 'grad_norm': 2.1934163570404053, 'learning_rate': 3.887395330218429e-06, 'entropy': 1.6255992874503136, 'num_tokens': 33121.0, 'mean_token_accuracy': 0.8421903848648071, 'epoch': 5.37}
+{'loss': 0.5469, 'grad_norm': 1.1870365142822266, 'learning_rate': 3.173294878168025e-06, 'entropy': 1.3932805992662907, 'num_tokens': 36291.0, 'mean_token_accuracy': 0.8702456392347813, 'epoch': 5.74}
+{'loss': 0.6082, 'grad_norm': 2.619187831878662, 'learning_rate': 2.5000000000000015e-06, 'entropy': 1.5870806737379595, 'num_tokens': 37644.0, 'mean_token_accuracy': 0.8485838120633905, 'epoch': 6.0}
+{'loss': 0.6753, 'grad_norm': 1.6411893367767334, 'learning_rate': 1.8825509907063328e-06, 'entropy': 1.4681535586714745, 'num_tokens': 40341.0, 'mean_token_accuracy': 0.8477388247847557, 'epoch': 6.37}
+{'loss': 0.5429, 'grad_norm': 1.7284828424453735, 'learning_rate': 1.3347406408508695e-06, 'entropy': 1.5354333892464638, 'num_tokens': 42695.0, 'mean_token_accuracy': 0.8589903153479099, 'epoch': 6.74}
+{'loss': 0.4745, 'grad_norm': 1.7966288328170776, 'learning_rate': 8.688061284200266e-07, 'entropy': 1.612505398013375, 'num_tokens': 43918.0, 'mean_token_accuracy': 0.8605035922744058, 'epoch': 7.0}
+{'loss': 0.4443, 'grad_norm': 1.3218212127685547, 'learning_rate': 4.951556604879049e-07, 'entropy': 1.5057578012347221, 'num_tokens': 46190.0, 'mean_token_accuracy': 0.8874340280890465, 'epoch': 7.37}
+{'loss': 0.6879, 'grad_norm': 1.4593199491500854, 'learning_rate': 2.2213597106929608e-07, 'entropy': 1.5307240411639214, 'num_tokens': 48753.0, 'mean_token_accuracy': 0.8424062095582485, 'epoch': 7.74}
+{'loss': 0.6459, 'grad_norm': 2.80448842048645, 'learning_rate': 5.584586887435739e-08, 'entropy': 1.564378093589436, 'num_tokens': 50192.0, 'mean_token_accuracy': 0.8311085430058566, 'epoch': 8.0}
+{'train_runtime': 269.2298, 'train_samples_per_second': 1.278, 'train_steps_per_second': 0.089, 'train_loss': 0.6748201921582222, 'epoch': 8.0}
+モデルを保存中...
+Llama 3.2 3B QLoRA学習完了！モデルは ../outputs/llama32-3b-typst-qlora-003-008 に保存されました。
+テスト実行: ../outputs/llama32-3b-typst-qlora-003-008
+テストログ: ../logs/003-008_test_20250916_224953.log
+実行中: python3 inference_llama32_3b.py                 --peft_model_path ../outputs/llama32-3b-typst-qlora-003-008                 --input_file ../sample/sample_small.tex                 --output_file ../trained/003-008.md
+ベースモデル: meta-llama/Llama-3.2-3B-Instruct
+✅ 使用モデル: PEFT（LoRA適用済み）
+   PEFTモデル: ../outputs/llama32-3b-typst-qlora-003-008
+入力ファイル: ../sample/sample_small.tex
+出力ファイル: ../trained/003-008.md
+トークナイザーを読み込み中...
+4bit量子化設定を準備中...
+ベースモデルを読み込み中...
+
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]
+Loading checkpoint shards:  50%|█████     | 1/2 [00:02<00:02,  2.85s/it]
+Loading checkpoint shards: 100%|██████████| 2/2 [00:03<00:00,  1.69s/it]
+Loading checkpoint shards: 100%|██████████| 2/2 [00:03<00:00,  1.86s/it]
+The following generation flags are not valid and may be ignored: ['temperature', 'top_p']. Set `TRANSFORMERS_VERBOSITY=info` for more details.
+✅ PEFTモデルを読み込み中...
+   PEFTパス: ../outputs/llama32-3b-typst-qlora-003-008
+   PEFTモデル読み込み完了
+LaTeXファイルを読み込み中...
+LaTeXテキストを 1 チャンクに分割しました
+LaTeX→Typst変換を開始します...
+チャンク 1/1 を変換中...
+  入力テキスト長: 865 文字
+  チャットテンプレート適用成功
+  プロンプト長: 1223 文字
+  入力トークン数: 415
+  生成開始...
+  生成完了: 615 トークン
+  生成テキスト長: 1711 文字
+  プロンプト長: 1223 文字
+  生成テキスト開始: system
+
+Cutting Knowledge Date: December 2023
+Today Date: 16 Sep 2025
+
+LaTeX 形式の文章を Typst形式 へ変換してください.
+重要: TypstはLaTeXの代替となる文書組版システムです。TypeScript（プログラミング言語）ではありません。
+出力はTypst構文のみ。プログラミングコードは出力しません。user...
+  生成テキスト終了: ...u_0, u_1\right) = \left(\varepsilon_0 \varphi, \varepsilon_1 \varphi\right),$$
+
+where $0 < \varepsilon_0 < |\varepsilon_1| = -\varepsilon_1$, with $\varphi$ being a regular non-negative function.
+
+```
+  生成テキスト全体の長さ: 1711 文字
+  プロンプトの長さ: 1223 文字
+  方法1（全体使用）: 1711 文字
+  方法3（```typstマーカー）: 634 文字
+  方法3（```除去後）: 629 文字
+  最終応答: system
+
+Cutting Knowledge Date: December 2023
+Today Date: 16 Sep 2025
+
+LaTeX 形式の文章を Typst形式 へ変換してください.
+重要: TypstはLaTeXの代替となる文書組版システムです。TypeScript（プログラミング言語）ではありません。
+出力はTypst構文のみ。プログラミングコードは出力しません。user...
+  最終応答の最後: ...on_0 < |\varepsilon_1| = -\varepsilon_1$, with $\varphi$ being a regular non-negative function.
+
+```
+  抽出された応答: system
+
+Cutting Knowledge Date: December 2023
+Today Date: 16 Sep 2025
+
+LaTeX 形式の文章を Typst形式 へ変換してくださ...
+結果を ../trained/003-008.md に保存中...
+変換完了！
+完了: Iteration 008 の学習・テストが完了しました。
+チェックポイントを更新: ../outputs/llama32-3b-typst-qlora-003-008
+=== Iteration 008 の処理完了 ===
+--------------------------------------------------
+=== Iteration 009 の処理開始 ===
+継続学習: ../jsonl/train_003.jsonl (from ../outputs/llama32-3b-typst-qlora-003-008)
+学習ログ: ../logs/003-009_training_20250916_224953.log
+実行中: python3 train_llama32_3b_qlora_fixed.py             --data ../jsonl/train_003.jsonl             --out ../outputs/llama32-3b-typst-qlora-003-009             --peft_model_path ../outputs/llama32-3b-typst-qlora-003-008             --epochs 8             --batch_size 1             --grad_accum 16             --learning_rate 1e-05             --lora_r 8             --lora_alpha 8             --lora_dropout 0.1
+Llama 3.2 3Bモデル: meta-llama/Llama-3.2-3B-Instruct
+データ: ../jsonl/train_003.jsonl
+出力: ../outputs/llama32-3b-typst-qlora-003-009
+学習率: 1e-05
+エポック数: 8
+バッチサイズ: 1
+勾配累積: 16
+LoRA rank: 8
+LoRA alpha: 8
+LoRA dropout: 0.1
+==================================================
+トークナイザーを読み込み中...
+4bit量子化設定を準備中...
+モデルを読み込み中...
+
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]
+Loading checkpoint shards:  50%|█████     | 1/2 [00:02<00:02,  2.88s/it]
+Loading checkpoint shards: 100%|██████████| 2/2 [00:03<00:00,  1.72s/it]
+Loading checkpoint shards: 100%|██████████| 2/2 [00:03<00:00,  1.89s/it]
+/mnt/d/github/typst-tex-converter/venv/lib/python3.11/site-packages/peft/tuners/lora/bnb.py:348: UserWarning: Merge lora module to 4-bit linear may get different generations due to rounding errors.
+  warnings.warn(
+/mnt/d/github/typst-tex-converter/venv/lib/python3.11/site-packages/peft/tuners/tuners_utils.py:196: UserWarning: Already found a `peft_config` attribute in the model. This will lead to having multiple adapters in the model. Make sure to know what you are doing!
+  warnings.warn(
+The tokenizer has new PAD/BOS/EOS tokens that differ from the model config and generation config. The model config and generation config were aligned accordingly, being updated with the tokenizer's values. Updated tokens: {'eos_token_id': 128009}.
+既存のPEFTモデルを読み込み中: ../outputs/llama32-3b-typst-qlora-003-008
+データセットを読み込み中...
+データセットサイズ: 43
+Llama 3.2 3B QLoRA学習を開始します...
+
+  0%|          | 0/24 [00:00<?, ?it/s]
+  4%|▍         | 1/24 [00:09<03:32,  9.22s/it]
+                                              
+
+  4%|▍         | 1/24 [00:09<03:32,  9.22s/it]
+  8%|▊         | 2/24 [00:22<04:09, 11.32s/it]
+                                              
+
+  8%|▊         | 2/24 [00:22<04:09, 11.32s/it]
+ 12%|█▎        | 3/24 [00:28<03:14,  9.27s/it]
+                                              
+
+ 12%|█▎        | 3/24 [00:28<03:14,  9.27s/it]
+ 17%|█▋        | 4/24 [00:38<03:10,  9.54s/it]
+                                              
+
+ 17%|█▋        | 4/24 [00:38<03:10,  9.54s/it]
+ 21%|██        | 5/24 [00:55<03:49, 12.10s/it]
+                                              
+
+ 21%|██        | 5/24 [00:55<03:49, 12.10s/it]
+ 25%|██▌       | 6/24 [01:03<03:12, 10.70s/it]
+                                              
+
+ 25%|██▌       | 6/24 [01:03<03:12, 10.70s/it]
+ 29%|██▉       | 7/24 [01:13<02:59, 10.56s/it]
+                                              
+
+ 29%|██▉       | 7/24 [01:13<02:59, 10.56s/it]
+ 33%|███▎      | 8/24 [01:24<02:51, 10.71s/it]
+                                              
+
+ 33%|███▎      | 8/24 [01:24<02:51, 10.71s/it]
+ 38%|███▊      | 9/24 [01:38<02:54, 11.63s/it]
+                                              
+
+ 38%|███▊      | 9/24 [01:38<02:54, 11.63s/it]
+ 42%|████▏     | 10/24 [01:54<03:02, 13.06s/it]
+                                               
+
+ 42%|████▏     | 10/24 [01:54<03:02, 13.06s/it]
+ 46%|████▌     | 11/24 [02:04<02:36, 12.06s/it]
+                                               
+
+ 46%|████▌     | 11/24 [02:04<02:36, 12.06s/it]
+ 50%|█████     | 12/24 [02:12<02:10, 10.84s/it]
+                                               
+
+ 50%|█████     | 12/24 [02:12<02:10, 10.84s/it]
+ 54%|█████▍    | 13/24 [02:29<02:18, 12.58s/it]
+                                               
+
+ 54%|█████▍    | 13/24 [02:29<02:18, 12.58s/it]
+ 58%|█████▊    | 14/24 [02:39<01:58, 11.87s/it]
+                                               
+
+ 58%|█████▊    | 14/24 [02:39<01:58, 11.87s/it]
+ 62%|██████▎   | 15/24 [02:46<01:34, 10.55s/it]
+                                               
+
+ 62%|██████▎   | 15/24 [02:46<01:34, 10.55s/it]
+ 67%|██████▋   | 16/24 [02:56<01:21, 10.18s/it]
+                                               
+
+ 67%|██████▋   | 16/24 [02:56<01:21, 10.18s/it]
+ 71%|███████   | 17/24 [03:13<01:26, 12.42s/it]
+                                               
+
+ 71%|███████   | 17/24 [03:13<01:26, 12.42s/it]
+ 75%|███████▌  | 18/24 [03:21<01:05, 10.89s/it]
+                                               
+
+ 75%|███████▌  | 18/24 [03:21<01:05, 10.89s/it]
+ 79%|███████▉  | 19/24 [03:36<01:01, 12.32s/it]
+                                               
+
+ 79%|███████▉  | 19/24 [03:36<01:01, 12.32s/it]
+ 83%|████████▎ | 20/24 [03:48<00:48, 12.07s/it]
+                                               
+
+ 83%|████████▎ | 20/24 [03:48<00:48, 12.07s/it]
+ 88%|████████▊ | 21/24 [03:55<00:31, 10.60s/it]
+                                               
+
+ 88%|████████▊ | 21/24 [03:55<00:31, 10.60s/it]
+ 92%|█████████▏| 22/24 [04:05<00:21, 10.54s/it]
+                                               
+
+ 92%|█████████▏| 22/24 [04:05<00:21, 10.54s/it]
+ 96%|█████████▌| 23/24 [04:22<00:12, 12.36s/it]
+                                               
+
+ 96%|█████████▌| 23/24 [04:22<00:12, 12.36s/it]
+100%|██████████| 24/24 [04:29<00:00, 10.81s/it]
+                                               
+
+100%|██████████| 24/24 [04:29<00:00, 10.81s/it]
+                                               
+
+100%|██████████| 24/24 [04:31<00:00, 10.81s/it]
+100%|██████████| 24/24 [04:31<00:00, 11.30s/it]
+{'loss': 0.8689, 'grad_norm': 2.5554983615875244, 'learning_rate': 0.0, 'entropy': 1.6634728200733662, 'num_tokens': 1931.0, 'mean_token_accuracy': 0.8166080676019192, 'epoch': 0.37}
+{'loss': 0.7162, 'grad_norm': 2.095914840698242, 'learning_rate': 3.3333333333333333e-06, 'entropy': 1.3597206771373749, 'num_tokens': 4979.0, 'mean_token_accuracy': 0.839089784771204, 'epoch': 0.74}
+{'loss': 0.9714, 'grad_norm': 3.1779110431671143, 'learning_rate': 6.666666666666667e-06, 'entropy': 1.5212169668891213, 'num_tokens': 6274.0, 'mean_token_accuracy': 0.8372980952262878, 'epoch': 1.0}
+{'loss': 0.8723, 'grad_norm': 3.0941269397735596, 'learning_rate': 1e-05, 'entropy': 1.6484198980033398, 'num_tokens': 7986.0, 'mean_token_accuracy': 0.8078477643430233, 'epoch': 1.37}
+{'loss': 0.8218, 'grad_norm': 2.1014297008514404, 'learning_rate': 9.944154131125643e-06, 'entropy': 1.3402699157595634, 'num_tokens': 11109.0, 'mean_token_accuracy': 0.8466840200126171, 'epoch': 1.74}
+{'loss': 0.5592, 'grad_norm': 1.7012237310409546, 'learning_rate': 9.777864028930705e-06, 'entropy': 1.5805653658780185, 'num_tokens': 12548.0, 'mean_token_accuracy': 0.8708719286051664, 'epoch': 2.0}
+{'loss': 0.8603, 'grad_norm': 2.265928268432617, 'learning_rate': 9.504844339512096e-06, 'entropy': 1.5231121890246868, 'num_tokens': 14567.0, 'mean_token_accuracy': 0.8450339734554291, 'epoch': 2.37}
+{'loss': 0.7356, 'grad_norm': 2.644774913787842, 'learning_rate': 9.131193871579975e-06, 'entropy': 1.4934245347976685, 'num_tokens': 16850.0, 'mean_token_accuracy': 0.8552906177937984, 'epoch': 2.74}
+{'loss': 0.5654, 'grad_norm': 1.2503681182861328, 'learning_rate': 8.665259359149132e-06, 'entropy': 1.5554255626418374, 'num_tokens': 18822.0, 'mean_token_accuracy': 0.8408078063618053, 'epoch': 3.0}
+{'loss': 0.7386, 'grad_norm': 1.761349081993103, 'learning_rate': 8.117449009293668e-06, 'entropy': 1.5089784301817417, 'num_tokens': 21518.0, 'mean_token_accuracy': 0.8415696173906326, 'epoch': 3.37}
+{'loss': 0.6229, 'grad_norm': 2.2052512168884277, 'learning_rate': 7.500000000000001e-06, 'entropy': 1.6320104785263538, 'num_tokens': 23215.0, 'mean_token_accuracy': 0.8565590307116508, 'epoch': 3.74}
+{'loss': 0.6034, 'grad_norm': 1.6759003400802612, 'learning_rate': 6.8267051218319766e-06, 'entropy': 1.389415209943598, 'num_tokens': 25096.0, 'mean_token_accuracy': 0.8534819483757019, 'epoch': 4.0}
+{'loss': 0.6495, 'grad_norm': 1.6849411725997925, 'learning_rate': 6.112604669781572e-06, 'entropy': 1.430901613086462, 'num_tokens': 28086.0, 'mean_token_accuracy': 0.841074712574482, 'epoch': 4.37}
+{'loss': 0.5921, 'grad_norm': 2.1024625301361084, 'learning_rate': 5.373650467932122e-06, 'entropy': 1.5665950737893581, 'num_tokens': 30094.0, 'mean_token_accuracy': 0.849822610616684, 'epoch': 4.74}
+{'loss': 0.6399, 'grad_norm': 2.129504919052124, 'learning_rate': 4.626349532067879e-06, 'entropy': 1.611371798948808, 'num_tokens': 31370.0, 'mean_token_accuracy': 0.8640002391555093, 'epoch': 5.0}
+{'loss': 0.7366, 'grad_norm': 2.29013991355896, 'learning_rate': 3.887395330218429e-06, 'entropy': 1.6254053115844727, 'num_tokens': 33121.0, 'mean_token_accuracy': 0.8421903848648071, 'epoch': 5.37}
+{'loss': 0.5459, 'grad_norm': 1.260296106338501, 'learning_rate': 3.173294878168025e-06, 'entropy': 1.3934063091874123, 'num_tokens': 36291.0, 'mean_token_accuracy': 0.8702456392347813, 'epoch': 5.74}
+{'loss': 0.6057, 'grad_norm': 2.7761762142181396, 'learning_rate': 2.5000000000000015e-06, 'entropy': 1.5871938521211797, 'num_tokens': 37644.0, 'mean_token_accuracy': 0.8485838120633905, 'epoch': 6.0}
+{'loss': 0.6738, 'grad_norm': 1.732566237449646, 'learning_rate': 1.8825509907063328e-06, 'entropy': 1.468333501368761, 'num_tokens': 40341.0, 'mean_token_accuracy': 0.8480446375906467, 'epoch': 6.37}
+{'loss': 0.5415, 'grad_norm': 1.8197418451309204, 'learning_rate': 1.3347406408508695e-06, 'entropy': 1.535426091402769, 'num_tokens': 42695.0, 'mean_token_accuracy': 0.8589903153479099, 'epoch': 6.74}
+{'loss': 0.4738, 'grad_norm': 1.9124170541763306, 'learning_rate': 8.688061284200266e-07, 'entropy': 1.612595883282748, 'num_tokens': 43918.0, 'mean_token_accuracy': 0.8605035922744058, 'epoch': 7.0}
+{'loss': 0.4438, 'grad_norm': 1.393517017364502, 'learning_rate': 4.951556604879049e-07, 'entropy': 1.5057713016867638, 'num_tokens': 46190.0, 'mean_token_accuracy': 0.8874340280890465, 'epoch': 7.37}
+{'loss': 0.6873, 'grad_norm': 1.5040861368179321, 'learning_rate': 2.2213597106929608e-07, 'entropy': 1.5305449143052101, 'num_tokens': 48753.0, 'mean_token_accuracy': 0.8424062095582485, 'epoch': 7.74}
+{'loss': 0.6438, 'grad_norm': 2.9869186878204346, 'learning_rate': 5.584586887435739e-08, 'entropy': 1.5644532279534773, 'num_tokens': 50192.0, 'mean_token_accuracy': 0.8311085430058566, 'epoch': 8.0}
+{'train_runtime': 271.1441, 'train_samples_per_second': 1.269, 'train_steps_per_second': 0.089, 'train_loss': 0.6737321217854818, 'epoch': 8.0}
+モデルを保存中...
+Llama 3.2 3B QLoRA学習完了！モデルは ../outputs/llama32-3b-typst-qlora-003-009 に保存されました。
+スキップ: Iteration 009 のテストをスキップしました（2回に1回の実行）
+チェックポイントを更新: ../outputs/llama32-3b-typst-qlora-003-009
+=== Iteration 009 の処理完了 ===
+--------------------------------------------------
+=== 汎用的継続学習完了 ===
+最終チェックポイント: ../outputs/llama32-3b-typst-qlora-003-009
+総実行回数: 10回
+=== 002-010をbaseに003-000から003-010への学習完了 ===
+終了時刻: Tue Sep 16 23:57:31 JST 2025
+================================
